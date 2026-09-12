@@ -1,58 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+        window.scrollY;
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    var documentHeight =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
 
-<title>Rizwan Ansari | QA/QC Officer</title>
+    var percentage =
+        (scrollTop / documentHeight) * 100;
 
-<meta name="description"
-content="Professional portfolio of Rizwan Ansari, QA/QC Officer with 4+ years of experience in electrical and RMU manufacturing.">
+    document.getElementById("progressBar")
+        .style.width = percentage + "%";
 
-<meta name="author" content="Rizwan Ansari">
+});
 
-<meta property="og:title" content="Rizwan Ansari | QA/QC Officer">
-<meta property="og:description"
-content="QA/QC Officer specializing in electrical RMU manufacturing, sheet metal manufacturing, powder coating and quality control.">
-<meta property="og:type" content="website">
 
-<style>
+/* REVEAL ANIMATION */
 
-/* ================================
-   RESET
-================================ */
+var revealElements =
+    document.querySelectorAll(".reveal");
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+function revealOnScroll() {
+
+    var windowHeight =
+        window.innerHeight;
+
+    revealElements.forEach(function(element) {
+
+        var position =
+            element.getBoundingClientRect().top;
+
+        if (position < windowHeight - 70) {
+
+            element.classList.add("show");
+
+        }
+
+    });
+
 }
 
-html {
-    scroll-behavior: smooth;
-}
 
-body {
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
+window.addEventListener(
+    "scroll",
+    revealOnScroll
+);
 
-    background:
-        radial-gradient(
-            circle at 80% 10%,
-            rgba(0, 183, 255, 0.12),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 10% 60%,
-            rgba(0, 110, 255, 0.08),
-            transparent 30%
-        ),
-        #050711;
+window.addEventListener(
+    "load",
+    revealOnScroll
+);
 
-    color: #ffffff;
-    line-height: 1.6;
-    overflow-x: hidden;
+
+</script>
+
+</body>
+</html>
