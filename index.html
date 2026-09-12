@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rizwan Ansari | QA/QC Officer</title>
+<title>Rizwan Ansari | QA/QC Officer | Electrical & RMU Manufacturing</title>
 
-<meta name="description" content="Rizwan Ansari - QA/QC Officer specializing in electrical RMU manufacturing, quality control, Lean Six Sigma and ISO 9001:2015.">
+<meta name="description" content="Rizwan Ansari — QA/QC Officer specializing in electrical and RMU manufacturing, quality inspection, Lean Six Sigma, 8D problem solving and ISO 9001:2015.">
+
+<meta name="theme-color" content="#06101d">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,30 +18,32 @@
 <style>
 
 /* =========================================================
-   ROOT
+   PREMIUM QA/QC PORTFOLIO V2
 ========================================================= */
 
 :root{
-    --bg:#050914;
-    --bg2:#08111f;
+    --bg:#030711;
+    --bg2:#071321;
+    --surface:rgba(255,255,255,.045);
+    --surface2:rgba(255,255,255,.075);
 
     --blue:#18c8ff;
+    --cyan:#52efff;
     --blue2:#087cff;
-    --cyan:#35e4ff;
 
-    --white:#ffffff;
-    --text:#eaf3ff;
+    --green:#43ef9a;
 
-    --muted:#8fa1b7;
-    --muted2:#64758b;
-
-    --card:rgba(255,255,255,.045);
-    --card2:rgba(255,255,255,.025);
+    --white:#fff;
+    --text:#eaf5ff;
+    --muted:#8fa5bb;
+    --muted2:#62758b;
 
     --border:rgba(255,255,255,.10);
-    --border-blue:rgba(24,200,255,.28);
+    --borderBlue:rgba(24,200,255,.28);
 
-    --nav-height:78px;
+    --shadow:0 25px 80px rgba(0,0,0,.30);
+
+    --nav:76px;
 }
 
 /* =========================================================
@@ -58,71 +62,209 @@ html{
 }
 
 body{
-    font-family:"Inter",sans-serif;
-    color:var(--text);
-    background:
-        radial-gradient(circle at 20% 20%,rgba(8,124,255,.12),transparent 30%),
-        radial-gradient(circle at 80% 10%,rgba(24,200,255,.10),transparent 28%),
-        linear-gradient(135deg,var(--bg),var(--bg2));
-    overflow-x:hidden;
     min-height:100vh;
+    overflow-x:hidden;
+
+    font-family:"Inter",sans-serif;
+
+    color:var(--text);
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(8,124,255,.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 5%,
+            rgba(24,200,255,.12),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 50% 80%,
+            rgba(8,124,255,.07),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            var(--bg),
+            var(--bg2)
+        );
+
+    transition:background .4s ease,color .4s ease;
+}
+
+body.light{
+    --bg:#eef7fc;
+    --bg2:#dcecf5;
+    --surface:rgba(255,255,255,.65);
+    --surface2:rgba(255,255,255,.9);
+
+    --text:#071321;
+    --muted:#52697d;
+    --muted2:#718598;
+
+    --border:rgba(4,35,60,.12);
+    --borderBlue:rgba(8,124,255,.30);
+
+    background:
+        radial-gradient(circle at 10% 10%,rgba(24,200,255,.20),transparent 30%),
+        linear-gradient(135deg,var(--bg),var(--bg2));
+}
+
+a{
+    color:inherit;
+}
+
+button,
+a{
+    -webkit-tap-highlight-color:transparent;
+}
+
+button{
+    font-family:inherit;
 }
 
 /* =========================================================
-   TECH GRID
+   BACKGROUND GRID
 ========================================================= */
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
+    z-index:-10;
     pointer-events:none;
-    z-index:-3;
 
     background-image:
         linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
         linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
 
-    background-size:45px 45px;
+    background-size:44px 44px;
 
     mask-image:linear-gradient(
         to bottom,
         rgba(0,0,0,.9),
-        rgba(0,0,0,.2)
+        rgba(0,0,0,.15)
     );
 }
 
-body::after{
-    content:"";
-    position:fixed;
-    width:600px;
-    height:600px;
-    border-radius:50%;
-    left:50%;
-    top:20%;
-    transform:translate(-50%,-50%);
-    background:radial-gradient(
-        circle,
-        rgba(24,200,255,.07),
-        transparent 65%
-    );
-    pointer-events:none;
-    z-index:-2;
+body.light::before{
+    background-image:
+        linear-gradient(rgba(0,40,70,.045) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,40,70,.045) 1px,transparent 1px);
 }
 
 /* =========================================================
-   LOADING SCREEN
+   FLOATING ORBS
+========================================================= */
+
+.orb{
+    position:fixed;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+
+    pointer-events:none;
+    z-index:-5;
+
+    filter:blur(80px);
+
+    opacity:.12;
+
+    animation:orbFloat 14s ease-in-out infinite alternate;
+}
+
+.orb.one{
+    top:10%;
+    left:-220px;
+    background:var(--blue2);
+}
+
+.orb.two{
+    right:-230px;
+    top:40%;
+    background:var(--cyan);
+    animation-delay:-5s;
+}
+
+.orb.three{
+    bottom:-250px;
+    left:40%;
+    background:#0066ff;
+    animation-delay:-9s;
+}
+
+@keyframes orbFloat{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(80px,-50px) scale(1.12);
+    }
+}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+#particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-4;
+}
+
+.particle{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 10px var(--cyan);
+    opacity:.35;
+
+    animation:particleMove linear infinite;
+}
+
+@keyframes particleMove{
+    from{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+
+    20%{
+        opacity:.4;
+    }
+
+    80%{
+        opacity:.3;
+    }
+
+    to{
+        transform:translateY(-20vh);
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   LOADER
 ========================================================= */
 
 #loader{
     position:fixed;
     inset:0;
-    background:#030711;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     z-index:99999;
-    transition:opacity .8s ease,visibility .8s ease;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#02050b;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
 }
 
 #loader.hide{
@@ -135,79 +277,126 @@ body::after{
 }
 
 .loader-logo{
-    width:80px;
-    height:80px;
-    border:1px solid rgba(24,200,255,.5);
-    border-radius:20px;
+    width:82px;
+    height:82px;
 
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
+
+    margin:auto;
+
+    border:1px solid rgba(24,200,255,.5);
+    border-radius:22px;
+
+    color:var(--cyan);
 
     font-family:"Space Grotesk";
     font-size:25px;
     font-weight:700;
 
-    color:var(--blue);
+    background:rgba(24,200,255,.04);
 
     box-shadow:
-        0 0 35px rgba(24,200,255,.15),
-        inset 0 0 25px rgba(24,200,255,.05);
-
-    margin:auto;
+        0 0 40px rgba(24,200,255,.16),
+        inset 0 0 30px rgba(24,200,255,.05);
 
     animation:loaderPulse 1.5s infinite;
 }
 
 .loader-text{
     margin-top:20px;
-    color:var(--muted);
-    font-size:12px;
+
+    color:#7e94a9;
+
+    font-size:10px;
     letter-spacing:4px;
     text-transform:uppercase;
 }
 
 .loader-line{
-    width:160px;
+    width:170px;
     height:2px;
-    background:rgba(255,255,255,.08);
+
     margin:20px auto 0;
+
     overflow:hidden;
+
+    background:rgba(255,255,255,.08);
 }
 
 .loader-line span{
     display:block;
     width:40%;
     height:100%;
-    background:linear-gradient(90deg,var(--blue2),var(--cyan));
+
+    background:linear-gradient(
+        90deg,
+        var(--blue2),
+        var(--cyan)
+    );
+
     animation:loaderLine 1.2s infinite;
 }
 
 @keyframes loaderPulse{
     50%{
-        transform:scale(1.05);
-        box-shadow:0 0 45px rgba(24,200,255,.28);
+        transform:scale(1.06);
+        box-shadow:0 0 55px rgba(24,200,255,.32);
     }
 }
 
 @keyframes loaderLine{
-    0%{transform:translateX(-150%)}
-    100%{transform:translateX(400%)}
+    from{
+        transform:translateX(-160%);
+    }
+
+    to{
+        transform:translateX(420%);
+    }
 }
 
 /* =========================================================
-   SCROLL PROGRESS
+   SCROLL BAR
+========================================================= */
+
+::-webkit-scrollbar{
+    width:7px;
+}
+
+::-webkit-scrollbar-track{
+    background:#030711;
+}
+
+::-webkit-scrollbar-thumb{
+    border-radius:20px;
+    background:linear-gradient(
+        var(--blue2),
+        var(--cyan)
+    );
+}
+
+/* =========================================================
+   PROGRESS
 ========================================================= */
 
 #progressBar{
     position:fixed;
     top:0;
     left:0;
+
     width:0;
     height:3px;
-    background:linear-gradient(90deg,var(--blue2),var(--cyan));
-    z-index:10001;
-    box-shadow:0 0 15px rgba(24,200,255,.8);
+
+    z-index:10010;
+
+    background:linear-gradient(
+        90deg,
+        var(--blue2),
+        var(--cyan)
+    );
+
+    box-shadow:0 0 18px var(--cyan);
 }
 
 /* =========================================================
@@ -219,39 +408,46 @@ body::after{
     position:fixed;
     top:0;
     left:0;
+
     pointer-events:none;
-    z-index:100000;
-    border-radius:50%;
+
     transform:translate(-50%,-50%);
+
+    z-index:100000;
+
+    border-radius:50%;
 }
 
 .cursor-dot{
     width:5px;
     height:5px;
+
     background:var(--cyan);
-    box-shadow:0 0 15px var(--cyan);
+    box-shadow:0 0 14px var(--cyan);
 }
 
 .cursor-ring{
     width:35px;
     height:35px;
-    border:1px solid rgba(53,228,255,.65);
+
+    border:1px solid rgba(82,239,255,.6);
+
     transition:
         width .25s ease,
         height .25s ease,
-        border-color .25s ease,
         background .25s ease;
 }
 
 body.cursor-hover .cursor-ring{
     width:55px;
     height:55px;
-    border-color:rgba(53,228,255,.9);
-    background:rgba(53,228,255,.06);
+
+    background:rgba(82,239,255,.06);
+    border-color:var(--cyan);
 }
 
 /* =========================================================
-   NAVIGATION
+   NAV
 ========================================================= */
 
 nav{
@@ -260,25 +456,34 @@ nav{
     left:0;
     right:0;
 
-    height:var(--nav-height);
+    height:var(--nav);
 
-    z-index:1000;
+    z-index:5000;
 
     display:flex;
     align-items:center;
 
-    background:rgba(5,9,20,.68);
-    border-bottom:1px solid rgba(255,255,255,.07);
+    border-bottom:1px solid var(--border);
 
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+    background:rgba(3,7,17,.58);
 
-    transition:.3s ease;
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    transition:.35s ease;
+}
+
+body.light nav{
+    background:rgba(238,247,252,.72);
 }
 
 nav.scrolled{
-    background:rgba(5,9,20,.9);
-    box-shadow:0 10px 40px rgba(0,0,0,.25);
+    background:rgba(3,7,17,.91);
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+
+body.light nav.scrolled{
+    background:rgba(238,247,252,.94);
 }
 
 .nav-inner{
@@ -291,59 +496,59 @@ nav.scrolled{
 }
 
 .logo{
-    text-decoration:none;
-    color:white;
-
-    width:45px;
-    height:45px;
-
-    border-radius:12px;
+    width:46px;
+    height:46px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
+    text-decoration:none;
+
     font-family:"Space Grotesk";
     font-weight:700;
 
-    border:1px solid rgba(24,200,255,.35);
+    border:1px solid rgba(24,200,255,.38);
+    border-radius:13px;
 
     background:linear-gradient(
         135deg,
-        rgba(24,200,255,.12),
+        rgba(24,200,255,.14),
         rgba(8,124,255,.04)
     );
 
-    box-shadow:0 0 25px rgba(24,200,255,.08);
+    color:var(--text);
 
     transition:.3s ease;
 }
 
 .logo:hover{
-    transform:translateY(-2px) rotate(2deg);
-    box-shadow:0 0 30px rgba(24,200,255,.25);
+    transform:translateY(-2px) rotate(3deg);
+    box-shadow:0 0 35px rgba(24,200,255,.22);
 }
 
 .nav-links{
     display:flex;
     align-items:center;
-    gap:30px;
+    gap:27px;
 }
 
 .nav-links a{
     position:relative;
 
     color:var(--muted);
+
     text-decoration:none;
 
-    font-size:13px;
-    font-weight:500;
+    font-size:12px;
+    font-weight:600;
 
     transition:.3s ease;
 }
 
 .nav-links a::after{
     content:"";
+
     position:absolute;
     left:50%;
     bottom:-9px;
@@ -351,17 +556,18 @@ nav.scrolled{
     width:0;
     height:2px;
 
-    background:var(--cyan);
-    box-shadow:0 0 10px var(--cyan);
-
     transform:translateX(-50%);
+
+    background:var(--cyan);
+
+    box-shadow:0 0 10px var(--cyan);
 
     transition:.3s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active{
-    color:white;
+    color:var(--text);
 }
 
 .nav-links a:hover::after,
@@ -369,21 +575,42 @@ nav.scrolled{
     width:100%;
 }
 
-.menu-btn{
-    display:none;
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
 
+.theme-btn,
+.menu-btn{
     width:42px;
     height:42px;
 
-    border:1px solid var(--border);
-    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    background:var(--card);
-    color:white;
+    border:1px solid var(--border);
+    border-radius:11px;
+
+    background:var(--surface);
+
+    color:var(--text);
 
     cursor:pointer;
 
-    font-size:20px;
+    transition:.3s ease;
+}
+
+.theme-btn:hover,
+.menu-btn:hover{
+    border-color:var(--borderBlue);
+    background:rgba(24,200,255,.08);
+}
+
+.menu-btn{
+    display:none;
+    font-size:18px;
 }
 
 /* =========================================================
@@ -397,12 +624,12 @@ nav.scrolled{
 
 section{
     position:relative;
-    padding:110px 0;
+    padding:115px 0;
     scroll-margin-top:80px;
 }
 
 .section-head{
-    margin-bottom:55px;
+    margin-bottom:52px;
 }
 
 .section-label{
@@ -410,27 +637,36 @@ section{
     align-items:center;
     gap:10px;
 
-    font-size:11px;
-    letter-spacing:3px;
-    text-transform:uppercase;
+    margin-bottom:14px;
 
     color:var(--blue);
-    margin-bottom:15px;
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:3px;
+    text-transform:uppercase;
 }
 
 .section-label::before{
     content:"";
+
     width:28px;
     height:1px;
+
     background:var(--blue);
+
     box-shadow:0 0 10px var(--blue);
 }
 
 .section-title{
     font-family:"Space Grotesk";
-    font-size:clamp(32px,5vw,52px);
-    line-height:1;
-    letter-spacing:-2px;
+
+    font-size:clamp(35px,5vw,58px);
+
+    line-height:.98;
+
+    letter-spacing:-2.5px;
 }
 
 .section-title span{
@@ -438,11 +674,14 @@ section{
 }
 
 .section-description{
-    margin-top:18px;
     max-width:700px;
+
+    margin-top:18px;
+
     color:var(--muted);
-    line-height:1.8;
-    font-size:15px;
+
+    font-size:14px;
+    line-height:1.9;
 }
 
 /* =========================================================
@@ -451,16 +690,22 @@ section{
 
 .hero{
     min-height:100vh;
+
     display:flex;
     align-items:center;
-    padding-top:120px;
+
+    padding-top:130px;
+
     overflow:hidden;
 }
 
 .hero-grid{
     display:grid;
-    grid-template-columns:1.15fr .85fr;
+
+    grid-template-columns:1.12fr .88fr;
+
     gap:70px;
+
     align-items:center;
 }
 
@@ -469,82 +714,108 @@ section{
     align-items:center;
     gap:10px;
 
-    padding:9px 15px;
+    padding:9px 14px;
 
-    border-radius:50px;
+    margin-bottom:26px;
 
     border:1px solid rgba(24,200,255,.2);
+    border-radius:50px;
+
     background:rgba(24,200,255,.045);
 
-    color:#a9dff0;
+    color:#a8dcec;
 
-    font-size:11px;
-    letter-spacing:.5px;
+    font-size:10px;
+    font-weight:600;
 
-    margin-bottom:25px;
+    letter-spacing:.4px;
 }
 
 .status-dot{
     width:7px;
     height:7px;
+
     border-radius:50%;
-    background:#45ef9b;
-    box-shadow:0 0 12px #45ef9b;
+
+    background:var(--green);
+
+    box-shadow:0 0 13px var(--green);
+
     animation:statusPulse 1.5s infinite;
 }
 
 @keyframes statusPulse{
     50%{
-        transform:scale(1.35);
-        opacity:.5;
+        transform:scale(1.5);
+        opacity:.45;
     }
 }
 
 .hero h1{
     font-family:"Space Grotesk";
-    font-size:clamp(60px,9vw,112px);
-    line-height:.82;
-    letter-spacing:-6px;
-    margin-bottom:25px;
+
+    font-size:clamp(64px,9vw,115px);
+
+    line-height:.79;
+
+    letter-spacing:-7px;
+
+    margin-bottom:27px;
 }
 
 .hero h1 .first{
     display:block;
-    color:white;
+    color:var(--text);
 }
 
 .hero h1 .last{
     display:block;
+
     color:transparent;
-    -webkit-text-stroke:1px rgba(255,255,255,.75);
-    text-shadow:0 0 30px rgba(24,200,255,.06);
+
+    -webkit-text-stroke:1px rgba(255,255,255,.72);
+
+    text-shadow:
+        0 0 35px rgba(24,200,255,.08);
+}
+
+body.light .hero h1 .last{
+    -webkit-text-stroke:1px rgba(7,19,33,.65);
 }
 
 .hero-role{
-    font-size:clamp(18px,3vw,29px);
-    font-weight:600;
-
-    color:var(--blue);
-
     min-height:38px;
 
     display:flex;
     align-items:center;
+
     gap:10px;
+
+    color:var(--blue);
+
+    font-size:clamp(18px,2.8vw,28px);
+    font-weight:700;
 }
 
 .hero-role::before{
     content:"";
+
     width:35px;
     height:2px;
-    background:linear-gradient(90deg,var(--blue),transparent);
+
+    background:linear-gradient(
+        90deg,
+        var(--blue),
+        transparent
+    );
 }
 
 .typing-cursor{
-    display:inline-block;
     width:2px;
-    height:25px;
+    height:24px;
+
     background:var(--cyan);
+
     animation:blink .8s infinite;
 }
 
@@ -553,70 +824,82 @@ section{
 }
 
 .hero-tagline{
+    margin-top:20px;
+
     font-family:"Space Grotesk";
+
     font-size:20px;
-    margin-top:22px;
-    color:white;
+    font-weight:600;
+
+    color:var(--text);
 }
 
 .hero-description{
+    max-width:640px;
+
+    margin-top:16px;
+
     color:var(--muted);
-    line-height:1.8;
-    max-width:650px;
-    margin-top:18px;
-    font-size:15px;
+
+    font-size:14px;
+
+    line-height:1.9;
 }
 
 .hero-buttons{
     display:flex;
-    gap:13px;
     flex-wrap:wrap;
-    margin-top:32px;
+    gap:12px;
+
+    margin-top:31px;
 }
 
 .btn{
     position:relative;
-    overflow:hidden;
 
     display:inline-flex;
     align-items:center;
     justify-content:center;
     gap:9px;
 
-    padding:14px 20px;
+    min-height:45px;
+
+    padding:12px 19px;
 
     border-radius:10px;
 
     text-decoration:none;
 
-    font-size:13px;
-    font-weight:600;
+    font-size:12px;
+    font-weight:700;
 
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        border-color .25s ease;
+    overflow:hidden;
 
     cursor:pointer;
+
+    transition:.3s ease;
 }
 
 .btn::before{
     content:"";
+
     position:absolute;
     top:0;
-    left:-120%;
+    left:-130%;
+
     width:70%;
     height:100%;
+
+    transform:skewX(-20deg);
 
     background:linear-gradient(
         90deg,
         transparent,
-        rgba(255,255,255,.25),
+        rgba(255,255,255,.3),
         transparent
     );
 
-    transform:skewX(-20deg);
-    transition:.6s ease;
+    transition:.65s ease;
 }
 
 .btn:hover::before{
@@ -624,7 +907,8 @@ section{
 }
 
 .btn-primary{
-    color:#02101b;
+    color:#02101a;
+
     background:linear-gradient(
         135deg,
         var(--cyan),
@@ -632,74 +916,91 @@ section{
     );
 
     box-shadow:
-        0 10px 30px rgba(24,200,255,.18);
+        0 12px 35px rgba(24,200,255,.18);
 }
 
 .btn-primary:hover{
     transform:translateY(-3px);
+
     box-shadow:
-        0 15px 40px rgba(24,200,255,.28);
+        0 18px 45px rgba(24,200,255,.28);
 }
 
 .btn-outline{
-    color:white;
+    color:var(--text);
+
     border:1px solid var(--border);
-    background:rgba(255,255,255,.03);
+
+    background:var(--surface);
 }
 
 .btn-outline:hover{
     transform:translateY(-3px);
-    border-color:var(--border-blue);
-    background:rgba(24,200,255,.06);
+
+    border-color:var(--borderBlue);
+
+    background:rgba(24,200,255,.07);
 }
 
-.hero-scroll{
-    position:absolute;
-    bottom:30px;
-    left:50%;
-    transform:translateX(-50%);
-
+.hero-mini-stats{
     display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:8px;
+    flex-wrap:wrap;
+    gap:10px;
+
+    margin-top:28px;
+}
+
+.mini-stat{
+    padding:10px 13px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    background:rgba(255,255,255,.025);
+}
+
+.mini-stat strong{
+    display:block;
+
+    font-family:"Space Grotesk";
+
+    font-size:17px;
+}
+
+.mini-stat span{
+    display:block;
+
+    margin-top:2px;
 
     color:var(--muted2);
 
     font-size:9px;
-    letter-spacing:3px;
+
     text-transform:uppercase;
-}
-
-.scroll-line{
-    width:1px;
-    height:45px;
-    background:linear-gradient(
-        var(--blue),
-        transparent
-    );
-
-    animation:scrollLine 1.5s infinite;
-}
-
-@keyframes scrollLine{
-    50%{transform:translateY(8px)}
+    letter-spacing:1px;
 }
 
 /* =========================================================
-   PROFILE
+   HERO VISUAL
 ========================================================= */
+
+.hero-visual{
+    position:relative;
+}
 
 .profile-wrap{
     position:relative;
-    width:min(390px,80vw);
+
+    width:min(400px,80vw);
+
     aspect-ratio:1;
+
     margin:auto;
 }
 
 .profile-ring{
     position:absolute;
-    inset:-14px;
+    inset:-15px;
 
     border-radius:50%;
 
@@ -712,13 +1013,16 @@ section{
         transparent 320deg
     );
 
-    animation:spinRing 8s linear infinite;
+    filter:drop-shadow(
+        0 0 20px rgba(24,200,255,.32)
+    );
 
-    filter:drop-shadow(0 0 18px rgba(24,200,255,.3));
+    animation:spin 9s linear infinite;
 }
 
 .profile-ring::after{
     content:"";
+
     position:absolute;
     inset:2px;
 
@@ -727,88 +1031,136 @@ section{
     background:var(--bg);
 }
 
-@keyframes spinRing{
-    to{transform:rotate(360deg)}
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 .profile-card{
     position:absolute;
     inset:0;
 
-    border-radius:50%;
-
     overflow:hidden;
 
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:50%;
 
-    background:
-        radial-gradient(
-            circle at 30% 20%,
-            rgba(24,200,255,.15),
-            transparent 45%
-        ),
-        rgba(255,255,255,.04);
+    background:rgba(255,255,255,.04);
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.45),
-        0 0 50px rgba(24,200,255,.08);
-
-    transform-style:preserve-3d;
+        0 35px 100px rgba(0,0,0,.5),
+        0 0 60px rgba(24,200,255,.08);
 }
 
 .profile-card img{
     width:100%;
     height:100%;
+
     object-fit:cover;
 
     display:block;
 
-    filter:saturate(.9) contrast(1.04);
+    filter:saturate(.9) contrast(1.05);
 
     transition:.6s ease;
 }
 
 .profile-card:hover img{
-    transform:scale(1.05);
+    transform:scale(1.06);
 }
 
 .profile-badge{
     position:absolute;
-    bottom:25px;
+
+    bottom:24px;
     left:50%;
+
     transform:translateX(-50%);
 
     padding:10px 17px;
 
+    white-space:nowrap;
+
+    border:1px solid rgba(24,200,255,.3);
     border-radius:50px;
 
-    background:rgba(5,9,20,.78);
-    border:1px solid rgba(24,200,255,.25);
+    background:rgba(3,7,17,.76);
 
     backdrop-filter:blur(15px);
 
     color:white;
 
-    font-size:10px;
+    font-size:9px;
+    font-weight:700;
+
     letter-spacing:1px;
-    white-space:nowrap;
+}
+
+.floating-card{
+    position:absolute;
+
+    padding:13px 15px;
+
+    border:1px solid rgba(24,200,255,.2);
+    border-radius:13px;
+
+    background:rgba(3,7,17,.72);
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+    animation:floatCard 4s ease-in-out infinite;
+}
+
+.floating-card strong{
+    display:block;
+
+    font-family:"Space Grotesk";
+
+    font-size:19px;
+}
+
+.floating-card span{
+    display:block;
+
+    margin-top:3px;
+
+    color:#8ba1b6;
+
+    font-size:8px;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.floating-card.one{
+    top:12%;
+    right:-5%;
+}
+
+.floating-card.two{
+    bottom:13%;
+    left:-8%;
+
+    animation-delay:-2s;
+}
+
+@keyframes floatCard{
+    50%{
+        transform:translateY(-10px);
+    }
 }
 
 /* =========================================================
-   ABOUT
+   GLASS
 ========================================================= */
 
-.about-grid{
-    display:grid;
-    grid-template-columns:.85fr 1.15fr;
-    gap:25px;
-}
-
-.glass-card{
+.glass{
     position:relative;
-    overflow:hidden;
 
-    padding:30px;
+    overflow:hidden;
 
     border:1px solid var(--border);
     border-radius:18px;
@@ -820,7 +1172,7 @@ section{
             rgba(255,255,255,.018)
         );
 
-    box-shadow:0 20px 60px rgba(0,0,0,.15);
+    box-shadow:var(--shadow);
 
     transition:
         transform .35s ease,
@@ -828,10 +1180,17 @@ section{
         box-shadow .35s ease;
 }
 
-.glass-card::before{
+body.light .glass{
+    background:rgba(255,255,255,.60);
+}
+
+.glass::before{
     content:"";
+
     position:absolute;
     inset:0;
+
+    pointer-events:none;
 
     background:
         linear-gradient(
@@ -842,22 +1201,42 @@ section{
         );
 
     transform:translateX(-100%);
+
     transition:.8s ease;
 }
 
-.glass-card:hover::before{
+.glass:hover::before{
     transform:translateX(100%);
 }
 
-.glass-card:hover{
-    border-color:rgba(24,200,255,.22);
-    box-shadow:0 25px 70px rgba(0,0,0,.25);
+.glass:hover{
+    border-color:rgba(24,200,255,.24);
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.35),
+        0 0 35px rgba(24,200,255,.05);
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-grid{
+    display:grid;
+
+    grid-template-columns:.85fr 1.15fr;
+
+    gap:22px;
+}
+
+.about-info{
+    padding:30px;
 }
 
 .info-list{
     display:flex;
     flex-direction:column;
-    gap:20px;
+    gap:18px;
 }
 
 .info-item{
@@ -865,8 +1244,9 @@ section{
     justify-content:space-between;
     gap:20px;
 
-    padding-bottom:17px;
-    border-bottom:1px solid rgba(255,255,255,.07);
+    padding-bottom:16px;
+
+    border-bottom:1px solid var(--border);
 }
 
 .info-item:last-child{
@@ -876,92 +1256,337 @@ section{
 
 .info-label{
     color:var(--muted2);
-    font-size:11px;
+
+    font-size:9px;
+    font-weight:700;
+
     text-transform:uppercase;
-    letter-spacing:1px;
+    letter-spacing:1.2px;
 }
 
 .info-value{
     text-align:right;
-    font-size:13px;
-    color:white;
+
+    color:var(--text);
+
+    font-size:12px;
+    font-weight:600;
 }
 
 .about-text{
+    padding:31px;
+
     color:var(--muted);
-    line-height:1.9;
-    font-size:15px;
+
+    font-size:14px;
+
+    line-height:1.95;
 }
 
 .about-text strong{
-    color:white;
+    color:var(--text);
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard{
+    margin-top:22px;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:14px;
+}
+
+.dashboard-card{
+    position:relative;
+
+    padding:25px 20px;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    background:var(--surface);
+
+    overflow:hidden;
+}
+
+.dashboard-card::after{
+    content:"";
+
+    position:absolute;
+
+    left:10%;
+    right:10%;
+    bottom:0;
+
+    height:2px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        var(--cyan),
+        transparent
+    );
+
+    opacity:.6;
+}
+
+.dashboard-number{
+    font-family:"Space Grotesk";
+
+    font-size:34px;
+    font-weight:700;
+}
+
+.dashboard-label{
+    margin-top:7px;
+
+    color:var(--muted);
+
+    font-size:9px;
+    font-weight:700;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+/* =========================================================
+   QUALITY PROCESS
+========================================================= */
+
+.process-grid{
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:7px;
+
+    align-items:stretch;
+}
+
+.process-step{
+    position:relative;
+
+    min-height:170px;
+
+    padding:20px 12px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    background:var(--surface);
+
+    transition:.35s ease;
+}
+
+.process-step:hover{
+    transform:translateY(-8px);
+
+    border-color:var(--borderBlue);
+
+    background:rgba(24,200,255,.06);
+}
+
+.process-number{
+    width:38px;
+    height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:16px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(24,200,255,.25);
+
+    color:var(--cyan);
+
+    font-family:"Space Grotesk";
+    font-size:12px;
+    font-weight:700;
+}
+
+.process-step h3{
+    font-family:"Space Grotesk";
+
+    font-size:12px;
+}
+
+.process-step p{
+    margin-top:8px;
+
+    color:var(--muted2);
+
+    font-size:9px;
+
+    line-height:1.5;
 }
 
 /* =========================================================
    EXPERIENCE
 ========================================================= */
 
-.experience-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:22px;
+.timeline{
+    position:relative;
+
+    max-width:1000px;
+
+    margin:auto;
 }
 
-.exp-card{
-    min-height:300px;
+.timeline::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    bottom:0;
+    left:50%;
+
+    width:1px;
+
+    transform:translateX(-50%);
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            var(--blue),
+            var(--cyan),
+            transparent
+        );
 }
 
-.exp-top{
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:20px;
+.timeline-item{
+    position:relative;
+
+    width:50%;
+
+    padding:0 40px 55px;
 }
 
-.exp-number{
+.timeline-item:nth-child(odd){
+    left:0;
+    text-align:right;
+}
+
+.timeline-item:nth-child(even){
+    left:50%;
+}
+
+.timeline-dot{
+    position:absolute;
+
+    top:20px;
+
+    width:13px;
+    height:13px;
+
+    border:3px solid var(--bg);
+
+    border-radius:50%;
+
+    background:var(--cyan);
+
+    box-shadow:0 0 20px var(--cyan);
+
+    z-index:2;
+}
+
+.timeline-item:nth-child(odd) .timeline-dot{
+    right:-7px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot{
+    left:-6px;
+}
+
+.timeline-card{
+    padding:28px;
+
+    text-align:left;
+}
+
+.timeline-item:nth-child(odd) .timeline-card{
+    text-align:left;
+}
+
+.timeline-date{
+    color:var(--blue);
+
+    font-size:9px;
+    font-weight:800;
+
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.timeline-card h3{
+    margin-top:11px;
+
     font-family:"Space Grotesk";
-    color:rgba(24,200,255,.3);
-    font-size:40px;
+
+    font-size:21px;
+}
+
+.timeline-company{
+    margin-top:6px;
+
+    color:var(--blue);
+
+    font-size:12px;
     font-weight:700;
 }
 
-.exp-card h3{
-    font-family:"Space Grotesk";
-    font-size:23px;
-    margin-top:35px;
-}
+.timeline-card p{
+    margin-top:16px;
 
-.exp-company{
-    color:var(--blue);
-    margin-top:8px;
-    font-size:13px;
-    font-weight:600;
-}
-
-.exp-card p{
-    margin-top:20px;
     color:var(--muted);
+
+    font-size:12px;
+
     line-height:1.8;
-    font-size:14px;
 }
 
-.exp-tags{
+.tags{
     display:flex;
     flex-wrap:wrap;
-    gap:8px;
-    margin-top:22px;
+    gap:7px;
+
+    margin-top:18px;
+}
+
+.timeline-item:nth-child(odd) .tags{
+    justify-content:flex-start;
 }
 
 .tag{
-    padding:7px 10px;
+    padding:6px 9px;
+
+    border:1px solid rgba(24,200,255,.15);
     border-radius:6px;
 
-    border:1px solid rgba(24,200,255,.14);
     background:rgba(24,200,255,.035);
 
     color:#9bdcf0;
 
-    font-size:10px;
+    font-size:8px;
+    font-weight:700;
 }
 
 /* =========================================================
@@ -970,76 +1595,112 @@ section{
 
 .skills-grid{
     display:grid;
+
     grid-template-columns:repeat(4,1fr);
-    gap:16px;
+
+    gap:15px;
 }
 
-.skill-card{
-    min-height:170px;
+.skill{
+    min-height:180px;
+
     padding:25px;
 }
 
 .skill-icon{
-    width:42px;
-    height:42px;
+    width:43px;
+    height:43px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:10px;
+    margin-bottom:21px;
 
     border:1px solid rgba(24,200,255,.18);
-    background:rgba(24,200,255,.06);
+    border-radius:11px;
+
+    background:rgba(24,200,255,.055);
 
     color:var(--cyan);
 
     font-size:17px;
-
-    margin-bottom:22px;
 }
 
-.skill-card h3{
+.skill h3{
     font-family:"Space Grotesk";
+
     font-size:15px;
 }
 
-.skill-card p{
+.skill p{
     margin-top:9px;
+
     color:var(--muted2);
-    line-height:1.6;
-    font-size:12px;
+
+    font-size:11px;
+
+    line-height:1.65;
 }
 
 /* =========================================================
-   STATS
+   SKILL METER
 ========================================================= */
 
-.stats-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-top:30px;
+.skill-meter{
+    margin-top:18px;
 }
 
-.stat{
-    padding:28px;
-    text-align:center;
-}
+.meter-head{
+    display:flex;
+    justify-content:space-between;
 
-.stat-number{
-    font-family:"Space Grotesk";
-    font-size:34px;
-    color:white;
+    color:var(--muted2);
+
+    font-size:8px;
     font-weight:700;
+
+    text-transform:uppercase;
 }
 
-.stat-label{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:8px;
-    text-transform:uppercase;
-    letter-spacing:1px;
+.meter{
+    height:3px;
+
+    margin-top:7px;
+
+    overflow:hidden;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,.08);
+}
+
+.meter span{
+    display:block;
+
+    height:100%;
+
+    border-radius:10px;
+
+    background:linear-gradient(
+        90deg,
+        var(--blue2),
+        var(--cyan)
+    );
+
+    transform-origin:left;
+
+    animation:meterLoad 1.4s ease forwards;
+}
+
+@keyframes meterLoad{
+    from{
+        transform:scaleX(0);
+    }
+
+    to{
+        transform:scaleX(1);
+    }
 }
 
 /* =========================================================
@@ -1048,64 +1709,183 @@ section{
 
 .expertise-grid{
     display:grid;
+
     grid-template-columns:repeat(5,1fr);
-    gap:14px;
+
+    gap:13px;
 }
 
 .expertise{
-    padding:22px;
+    padding:24px 15px;
+
     text-align:center;
 
+    border:1px solid var(--border);
     border-radius:14px;
 
-    border:1px solid var(--border);
-    background:var(--card);
+    background:var(--surface);
 
-    transition:.3s ease;
+    transition:.35s ease;
 }
 
 .expertise:hover{
-    transform:translateY(-6px);
-    border-color:rgba(24,200,255,.25);
+    transform:translateY(-8px);
+
+    border-color:var(--borderBlue);
+
+    background:rgba(24,200,255,.06);
 }
 
 .expertise span{
     display:block;
+
+    margin-bottom:9px;
+
     color:var(--blue);
-    font-size:10px;
+
+    font-size:9px;
+    font-weight:800;
+
     letter-spacing:1px;
-    margin-bottom:10px;
 }
 
 .expertise strong{
     font-family:"Space Grotesk";
-    font-size:14px;
+
+    font-size:12px;
 }
 
 /* =========================================================
-   CERTIFICATIONS
+   CASE STUDIES
+========================================================= */
+
+.case-grid{
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+}
+
+.case-card{
+    padding:30px;
+}
+
+.case-top{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:flex-start;
+
+    gap:20px;
+}
+
+.case-number{
+    color:rgba(24,200,255,.28);
+
+    font-family:"Space Grotesk";
+
+    font-size:43px;
+    font-weight:700;
+}
+
+.case-badge{
+    padding:7px 10px;
+
+    border:1px solid rgba(67,239,154,.2);
+    border-radius:50px;
+
+    background:rgba(67,239,154,.045);
+
+    color:#71edb0;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:1px;
+}
+
+.case-card h3{
+    margin-top:25px;
+
+    font-family:"Space Grotesk";
+
+    font-size:22px;
+}
+
+.case-card > p{
+    margin-top:14px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+.case-flow{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:8px;
+
+    margin-top:23px;
+}
+
+.case-flow div{
+    padding:12px 8px;
+
+    text-align:center;
+
+    border-radius:9px;
+
+    background:rgba(255,255,255,.025);
+
+    border:1px solid var(--border);
+}
+
+.case-flow span{
+    display:block;
+
+    color:var(--muted2);
+
+    font-size:7px;
+    font-weight:800;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.case-flow strong{
+    display:block;
+
+    margin-top:5px;
+
+    font-size:10px;
+}
+
+/* =========================================================
+   CERTIFICATES
 ========================================================= */
 
 .certifications-grid{
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
+
     gap:20px;
 }
 
 .cert-card{
     position:relative;
+
     overflow:hidden;
 
+    border:1px solid var(--border);
     border-radius:18px;
 
-    border:1px solid var(--border);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.018)
-        );
+    background:var(--surface);
 
     cursor:pointer;
 
@@ -1117,17 +1897,21 @@ section{
 
 .cert-card:hover{
     transform:translateY(-10px);
+
     border-color:rgba(24,200,255,.35);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.4),
+        0 30px 80px rgba(0,0,0,.42),
         0 0 35px rgba(24,200,255,.08);
 }
 
 .cert-image-wrap{
     position:relative;
+
     aspect-ratio:1.42/1;
+
     overflow:hidden;
+
     background:#fff;
 }
 
@@ -1135,9 +1919,9 @@ section{
     width:100%;
     height:100%;
 
-    object-fit:cover;
-
     display:block;
+
+    object-fit:cover;
 
     transition:
         transform .6s ease,
@@ -1145,8 +1929,9 @@ section{
 }
 
 .cert-card:hover img{
-    transform:scale(1.05);
-    filter:brightness(.72);
+    transform:scale(1.06);
+
+    filter:brightness(.68);
 }
 
 .cert-overlay{
@@ -1154,36 +1939,37 @@ section{
     inset:0;
 
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
 
-    background:rgba(3,7,17,.45);
+    background:rgba(3,7,17,.42);
 
     opacity:0;
 
     transition:.35s ease;
 }
 
-.cert-card:hover .cert-overlay{
+.cert-card:hover .cert-overlay,
+.cert-card:focus-visible .cert-overlay{
     opacity:1;
 }
 
 .view-cert{
-    padding:12px 17px;
-
-    border-radius:50px;
-
-    color:white;
+    padding:11px 17px;
 
     border:1px solid rgba(255,255,255,.3);
+    border-radius:50px;
+
     background:rgba(0,0,0,.45);
 
     backdrop-filter:blur(10px);
 
-    font-size:11px;
-    font-weight:600;
+    color:white;
 
-    letter-spacing:.5px;
+    font-size:9px;
+    font-weight:800;
+
+    letter-spacing:1px;
 }
 
 .cert-info{
@@ -1192,18 +1978,22 @@ section{
 
 .cert-info h3{
     font-family:"Space Grotesk";
-    font-size:16px;
+
+    font-size:15px;
 }
 
 .cert-info p{
     margin-top:7px;
+
     color:var(--muted2);
-    font-size:11px;
+
+    font-size:10px;
+
     line-height:1.5;
 }
 
 /* =========================================================
-   CERTIFICATE FULLSCREEN VIEWER
+   VIEWER
 ========================================================= */
 
 #certificateViewer{
@@ -1216,25 +2006,23 @@ section{
     align-items:center;
     justify-content:center;
 
-    padding:30px;
+    padding:25px;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(24,200,255,.08),
+            rgba(24,200,255,.09),
             transparent 45%
         ),
-        rgba(1,4,10,.94);
+        rgba(1,4,10,.96);
 
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
 
     opacity:0;
     visibility:hidden;
 
-    transition:
-        opacity .4s ease,
-        visibility .4s ease;
+    transition:.4s ease;
 }
 
 #certificateViewer.open{
@@ -1246,16 +2034,15 @@ section{
     position:relative;
 
     width:min(1200px,94vw);
-    height:min(88vh,900px);
+    height:min(87vh,900px);
 
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
 
-    transform:scale(.88) translateY(25px);
+    transform:scale(.9) translateY(20px);
 
-    transition:
-        transform .5s cubic-bezier(.2,.8,.2,1);
+    transition:.5s cubic-bezier(.2,.8,.2,1);
 }
 
 #certificateViewer.open .viewer-content{
@@ -1268,99 +2055,103 @@ section{
 
     object-fit:contain;
 
-    border-radius:8px;
-
-    box-shadow:
-        0 40px 120px rgba(0,0,0,.7),
-        0 0 50px rgba(24,200,255,.08);
+    border-radius:7px;
 
     background:white;
+
+    box-shadow:
+        0 40px 120px rgba(0,0,0,.75),
+        0 0 50px rgba(24,200,255,.08);
+
+    transition:.35s ease;
 }
 
-.viewer-close{
+.viewer-close,
+.viewer-arrow{
     position:fixed;
-    top:25px;
-    right:25px;
 
-    width:48px;
-    height:48px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
+    border:1px solid rgba(255,255,255,.16);
     border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.18);
 
     background:rgba(255,255,255,.07);
 
     color:white;
 
-    font-size:22px;
-
     cursor:pointer;
 
-    z-index:5;
+    z-index:10;
 
     transition:.3s ease;
+}
+
+.viewer-close{
+    top:22px;
+    right:22px;
+
+    width:48px;
+    height:48px;
+
+    font-size:22px;
 }
 
 .viewer-close:hover{
     transform:rotate(90deg);
-    background:rgba(24,200,255,.12);
+
     border-color:rgba(24,200,255,.4);
+
+    background:rgba(24,200,255,.1);
 }
 
 .viewer-arrow{
-    position:fixed;
-
     top:50%;
+
+    width:53px;
+    height:53px;
+
     transform:translateY(-50%);
 
-    width:52px;
-    height:52px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.15);
-
-    background:rgba(255,255,255,.06);
-
-    color:white;
-
-    font-size:24px;
-
-    cursor:pointer;
-
-    transition:.3s ease;
-
-    z-index:5;
+    font-size:25px;
 }
 
 .viewer-arrow:hover{
-    background:rgba(24,200,255,.12);
+    background:rgba(24,200,255,.1);
+
     border-color:rgba(24,200,255,.4);
-    box-shadow:0 0 25px rgba(24,200,255,.15);
+
+    box-shadow:0 0 30px rgba(24,200,255,.12);
 }
 
 .viewer-prev{
-    left:25px;
+    left:22px;
 }
 
 .viewer-next{
-    right:25px;
+    right:22px;
 }
 
 .viewer-title{
     position:fixed;
 
+    bottom:20px;
     left:50%;
-    bottom:25px;
+
+    max-width:80vw;
 
     transform:translateX(-50%);
 
     padding:10px 17px;
 
-    border-radius:50px;
+    overflow:hidden;
 
-    border:1px solid rgba(255,255,255,.1);
+    white-space:nowrap;
+    text-overflow:ellipsis;
+
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:50px;
 
     background:rgba(0,0,0,.5);
 
@@ -1368,9 +2159,10 @@ section{
 
     color:#dbeeff;
 
-    font-size:11px;
+    font-size:9px;
+    font-weight:700;
 
-    white-space:nowrap;
+    letter-spacing:.5px;
 }
 
 /* =========================================================
@@ -1379,9 +2171,14 @@ section{
 
 .education-card{
     display:grid;
-    grid-template-columns:auto 1fr;
-    gap:25px;
+
+    grid-template-columns:auto 1fr auto;
+
     align-items:center;
+
+    gap:25px;
+
+    padding:30px;
 }
 
 .edu-icon{
@@ -1392,25 +2189,44 @@ section{
     align-items:center;
     justify-content:center;
 
-    border-radius:16px;
-
     border:1px solid rgba(24,200,255,.2);
-    background:rgba(24,200,255,.06);
+    border-radius:17px;
 
-    color:var(--cyan);
+    background:rgba(24,200,255,.055);
 
-    font-size:28px;
+    font-size:27px;
 }
 
 .education-card h3{
     font-family:"Space Grotesk";
+
     font-size:22px;
 }
 
 .education-card p{
     margin-top:8px;
+
     color:var(--muted);
-    font-size:14px;
+
+    font-size:12px;
+    line-height:1.6;
+}
+
+.edu-badge{
+    padding:9px 12px;
+
+    border:1px solid rgba(24,200,255,.17);
+    border-radius:50px;
+
+    color:var(--blue);
+
+    background:rgba(24,200,255,.045);
+
+    font-size:8px;
+    font-weight:800;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
 }
 
 /* =========================================================
@@ -1419,59 +2235,109 @@ section{
 
 .contact-box{
     position:relative;
+
     overflow:hidden;
 
-    padding:55px;
-
-    border-radius:25px;
+    padding:65px 30px;
 
     text-align:center;
 
-    border:1px solid rgba(24,200,255,.2);
+    border:1px solid rgba(24,200,255,.22);
+    border-radius:27px;
 
     background:
         radial-gradient(
             circle at 50% 0%,
-            rgba(24,200,255,.12),
+            rgba(24,200,255,.14),
             transparent 55%
         ),
-        rgba(255,255,255,.035);
+        var(--surface);
 
-    box-shadow:0 30px 100px rgba(0,0,0,.25);
+    box-shadow:0 35px 110px rgba(0,0,0,.3);
+}
+
+.contact-box::before{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    top:-170px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    border:1px solid rgba(24,200,255,.12);
+
+    box-shadow:
+        0 0 0 35px rgba(24,200,255,.025),
+        0 0 0 70px rgba(24,200,255,.015);
+
+    pointer-events:none;
 }
 
 .contact-box h2{
+    position:relative;
+
     font-family:"Space Grotesk";
-    font-size:clamp(32px,5vw,55px);
-    letter-spacing:-2px;
+
+    font-size:clamp(35px,5vw,58px);
+
+    line-height:.98;
+
+    letter-spacing:-2.5px;
+}
+
+.contact-box h2 span{
+    color:var(--blue);
 }
 
 .contact-box p{
+    position:relative;
+
     max-width:650px;
-    margin:18px auto 0;
+
+    margin:20px auto 0;
 
     color:var(--muted);
+
+    font-size:13px;
+
     line-height:1.8;
 }
 
 .email{
+    position:relative;
+
     display:inline-block;
 
-    margin-top:25px;
+    margin-top:24px;
 
     color:var(--cyan);
 
-    font-size:15px;
-    font-weight:600;
+    font-size:14px;
+    font-weight:700;
 
     text-decoration:none;
 }
 
+.email:hover{
+    text-decoration:underline;
+}
+
 .contact-buttons{
+    position:relative;
+
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
-    gap:12px;
+
+    gap:11px;
+
     margin-top:28px;
 }
 
@@ -1482,37 +2348,42 @@ section{
 footer{
     padding:30px 0;
 
-    border-top:1px solid rgba(255,255,255,.06);
+    border-top:1px solid var(--border);
 
     color:var(--muted2);
 
     text-align:center;
 
-    font-size:11px;
+    font-size:9px;
+
+    letter-spacing:.4px;
 }
 
 /* =========================================================
-   BACK TO TOP
+   BACK TOP
 ========================================================= */
 
 #backTop{
     position:fixed;
 
-    right:22px;
-    bottom:22px;
+    right:20px;
+    bottom:20px;
 
     width:45px;
     height:45px;
 
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid rgba(24,200,255,.22);
     border-radius:12px;
 
-    border:1px solid rgba(24,200,255,.2);
-
-    background:rgba(5,9,20,.8);
-
-    color:var(--cyan);
+    background:rgba(3,7,17,.82);
 
     backdrop-filter:blur(15px);
+
+    color:var(--cyan);
 
     cursor:pointer;
 
@@ -1538,12 +2409,14 @@ footer{
 }
 
 /* =========================================================
-   REVEAL ANIMATION
+   REVEAL
 ========================================================= */
 
 .reveal{
     opacity:0;
+
     transform:translateY(35px);
+
     transition:
         opacity .8s ease,
         transform .8s cubic-bezier(.2,.8,.2,1);
@@ -1560,10 +2433,10 @@ footer{
 .delay-4{transition-delay:.32s}
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
-@media(max-width:1000px){
+@media(max-width:1050px){
 
     .hero-grid{
         grid-template-columns:1fr;
@@ -1578,7 +2451,17 @@ footer{
         order:2;
     }
 
-    .hero-buttons{
+    .hero-description{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-buttons,
+    .hero-mini-stats{
+        justify-content:center;
+    }
+
+    .hero-role{
         justify-content:center;
     }
 
@@ -1587,17 +2470,12 @@ footer{
         margin-right:auto;
     }
 
-    .hero-description{
-        margin-left:auto;
-        margin-right:auto;
+    .dashboard{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .hero-role{
-        justify-content:center;
-    }
-
-    .about-grid{
-        grid-template-columns:1fr;
+    .process-grid{
+        grid-template-columns:repeat(4,1fr);
     }
 
     .skills-grid{
@@ -1616,13 +2494,16 @@ footer{
 @media(max-width:800px){
 
     :root{
-        --nav-height:70px;
+        --nav:70px;
     }
 
     .menu-btn{
         display:flex;
-        align-items:center;
-        justify-content:center;
+    }
+
+    .nav-actions{
+        margin-left:auto;
+        margin-right:9px;
     }
 
     .nav-links{
@@ -1636,18 +2517,22 @@ footer{
         flex-direction:column;
         align-items:stretch;
 
-        gap:0;
+        gap:3px;
 
         max-height:0;
+
         overflow:hidden;
 
         opacity:0;
         pointer-events:none;
 
+        padding:0;
+
         border:1px solid transparent;
         border-radius:15px;
 
-        background:rgba(5,9,20,.96);
+        background:rgba(3,7,17,.97);
+
         backdrop-filter:blur(20px);
 
         transition:
@@ -1657,59 +2542,128 @@ footer{
             border-color .3s ease;
     }
 
+    body.light .nav-links{
+        background:rgba(238,247,252,.97);
+    }
+
     .nav-links.open{
-        max-height:500px;
+        max-height:520px;
+
         opacity:1;
         pointer-events:auto;
+
         padding:8px;
-        border-color:rgba(255,255,255,.08);
+
+        border-color:var(--border);
     }
 
     .nav-links a{
-        padding:14px;
+        padding:13px;
+
         border-radius:8px;
     }
 
     .nav-links a:hover{
-        background:rgba(255,255,255,.04);
+        background:rgba(24,200,255,.06);
     }
 
     .nav-links a::after{
         display:none;
     }
 
-    .experience-grid{
+    .about-grid{
         grid-template-columns:1fr;
     }
 
-    .stats-grid{
+    .timeline::before{
+        left:9px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even),
+    .timeline-item:nth-child(odd){
+        width:100%;
+        left:0;
+
+        padding-left:40px;
+        padding-right:0;
+
+        text-align:left;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-card{
+        text-align:left;
+    }
+
+    .timeline-dot,
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot{
+        left:3px;
+        right:auto;
+    }
+
+    .process-grid{
         grid-template-columns:repeat(2,1fr);
+    }
+
+    .case-grid{
+        grid-template-columns:1fr;
+    }
+
+    .education-card{
+        grid-template-columns:auto 1fr;
+    }
+
+    .edu-badge{
+        grid-column:2;
+        width:max-content;
     }
 }
 
 @media(max-width:600px){
 
     section{
-        padding:80px 0;
+        padding:82px 0;
     }
 
     .hero{
         min-height:auto;
-        padding-top:130px;
-        padding-bottom:90px;
+
+        padding-top:125px;
+        padding-bottom:95px;
     }
 
     .hero h1{
-        font-size:clamp(52px,18vw,85px);
-        letter-spacing:-4px;
+        font-size:clamp(53px,18vw,84px);
+
+        letter-spacing:-5px;
     }
 
     .profile-wrap{
         width:280px;
     }
 
-    .skills-grid,
-    .certifications-grid{
+    .floating-card.one{
+        right:-4%;
+    }
+
+    .floating-card.two{
+        left:-3%;
+    }
+
+    .dashboard{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .dashboard-number{
+        font-size:27px;
+    }
+
+    .process-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .skills-grid{
         grid-template-columns:1fr;
     }
 
@@ -1717,8 +2671,51 @@ footer{
         grid-template-columns:1fr 1fr;
     }
 
+    .certifications-grid{
+        grid-template-columns:1fr;
+    }
+
+    .case-flow{
+        grid-template-columns:1fr;
+    }
+
+    .education-card{
+        grid-template-columns:1fr;
+
+        text-align:center;
+    }
+
+    .edu-icon{
+        margin:auto;
+    }
+
+    .edu-badge{
+        grid-column:auto;
+
+        margin:auto;
+    }
+
     .contact-box{
-        padding:35px 20px;
+        padding:48px 19px;
+    }
+
+    .email{
+        max-width:90%;
+
+        overflow-wrap:anywhere;
+    }
+
+    .viewer-close{
+        top:11px;
+        right:11px;
+    }
+
+    .viewer-prev{
+        left:9px;
+    }
+
+    .viewer-next{
+        right:9px;
     }
 
     .viewer-arrow{
@@ -1726,29 +2723,17 @@ footer{
         height:42px;
     }
 
-    .viewer-prev{
-        left:10px;
-    }
-
-    .viewer-next{
-        right:10px;
-    }
-
-    .viewer-close{
-        top:12px;
-        right:12px;
-    }
-
     .viewer-title{
-        bottom:12px;
-        max-width:80vw;
-        overflow:hidden;
-        text-overflow:ellipsis;
+        bottom:10px;
+    }
+
+    .floating-card{
+        transform:scale(.88);
     }
 }
 
 /* =========================================================
-   ACCESSIBILITY / REDUCED MOTION
+   ACCESSIBILITY
 ========================================================= */
 
 :focus-visible{
@@ -1762,7 +2747,6 @@ footer{
     .cursor-ring{
         display:none;
     }
-
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -1776,14 +2760,14 @@ footer{
         scroll-behavior:auto !important;
     }
 
-    .cursor-dot,
-    .cursor-ring{
-        display:none;
-    }
-
     .reveal{
         opacity:1;
         transform:none;
+    }
+
+    .cursor-dot,
+    .cursor-ring{
+        display:none;
     }
 }
 
@@ -1791,6 +2775,17 @@ footer{
 </head>
 
 <body>
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="orb one"></div>
+<div class="orb two"></div>
+<div class="orb three"></div>
+
+<div id="particles"></div>
+
 
 <!-- =====================================================
      LOADER
@@ -1805,7 +2800,7 @@ footer{
         </div>
 
         <div class="loader-text">
-            Loading Portfolio
+            QA/QC Portfolio
         </div>
 
         <div class="loader-line">
@@ -1816,10 +2811,9 @@ footer{
 
 </div>
 
-<!-- SCROLL PROGRESS -->
+
 <div id="progressBar"></div>
 
-<!-- CUSTOM CURSOR -->
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
 
@@ -1836,21 +2830,34 @@ footer{
             RA.
         </a>
 
-        <button
-            class="menu-btn magnetic"
-            id="menuBtn"
-            aria-label="Open navigation menu"
-            aria-expanded="false">
-            ☰
-        </button>
+        <div class="nav-actions">
+
+            <button
+                class="theme-btn magnetic"
+                id="themeBtn"
+                aria-label="Toggle theme">
+                ☾
+            </button>
+
+            <button
+                class="menu-btn magnetic"
+                id="menuBtn"
+                aria-label="Open menu"
+                aria-expanded="false">
+                ☰
+            </button>
+
+        </div>
 
         <div class="nav-links" id="navLinks">
 
             <a href="#home" class="active">Home</a>
             <a href="#about">About</a>
+            <a href="#process">Process</a>
             <a href="#experience">Experience</a>
             <a href="#skills">Skills</a>
-            <a href="#certifications">Certifications</a>
+            <a href="#cases">Case Studies</a>
+            <a href="#certifications">Certificates</a>
             <a href="#education">Education</a>
             <a href="#contact">Contact</a>
 
@@ -1884,8 +2891,11 @@ footer{
                 </h1>
 
                 <div class="hero-role">
+
                     <span id="typingRole"></span>
+
                     <span class="typing-cursor"></span>
+
                 </div>
 
                 <div class="hero-tagline">
@@ -1893,19 +2903,24 @@ footer{
                 </div>
 
                 <p class="hero-description">
+
                     QA/QC Officer specializing in electrical and RMU
                     manufacturing, quality inspection, process improvement,
                     Lean Six Sigma and quality assurance systems.
+
                 </p>
 
                 <div class="hero-buttons">
 
-                    <a href="#experience" class="btn btn-primary magnetic">
-                        View My Experience
-                        <span>→</span>
+                    <a
+                        href="#experience"
+                        class="btn btn-primary magnetic">
+                        Explore My Journey →
                     </a>
 
-                    <a href="#contact" class="btn btn-outline magnetic">
+                    <a
+                        href="#contact"
+                        class="btn btn-outline magnetic">
                         Contact Me
                     </a>
 
@@ -1915,6 +2930,31 @@ footer{
                         download>
                         Download CV ↓
                     </a>
+
+                </div>
+
+
+                <div class="hero-mini-stats">
+
+                    <div class="mini-stat">
+                        <strong>4+</strong>
+                        <span>Years Experience</span>
+                    </div>
+
+                    <div class="mini-stat">
+                        <strong>RMU</strong>
+                        <span>Manufacturing</span>
+                    </div>
+
+                    <div class="mini-stat">
+                        <strong>ISO</strong>
+                        <span>9001:2015</span>
+                    </div>
+
+                    <div class="mini-stat">
+                        <strong>8D</strong>
+                        <span>Problem Solving</span>
+                    </div>
 
                 </div>
 
@@ -1931,11 +2971,31 @@ footer{
 
                         <img
                             src="profile.jpg"
-                            alt="Rizwan Ansari">
+                            alt="Rizwan Ansari — QA/QC Officer">
 
                         <div class="profile-badge">
                             QA / QC • ELECTRICAL • MANUFACTURING
                         </div>
+
+                    </div>
+
+                    <div class="floating-card one">
+
+                        <strong>4+</strong>
+
+                        <span>
+                            Years Experience
+                        </span>
+
+                    </div>
+
+                    <div class="floating-card two">
+
+                        <strong>RMU</strong>
+
+                        <span>
+                            Quality Focus
+                        </span>
 
                     </div>
 
@@ -1944,15 +3004,6 @@ footer{
             </div>
 
         </div>
-
-    </div>
-
-
-    <div class="hero-scroll">
-
-        Scroll
-
-        <span class="scroll-line"></span>
 
     </div>
 
@@ -1970,7 +3021,7 @@ footer{
         <div class="section-head reveal">
 
             <div class="section-label">
-                About Me
+                Professional Profile
             </div>
 
             <h2 class="section-title">
@@ -1978,12 +3029,18 @@ footer{
                 <span>Process-focused.</span>
             </h2>
 
+            <p class="section-description">
+                A practical QA/QC professional focused on manufacturing
+                quality, inspection, defect prevention and continuous
+                improvement.
+            </p>
+
         </div>
 
 
         <div class="about-grid">
 
-            <div class="glass-card reveal tilt">
+            <div class="glass about-info reveal tilt">
 
                 <div class="info-list">
 
@@ -2022,38 +3079,168 @@ footer{
             </div>
 
 
-            <div class="glass-card reveal delay-1">
+            <div class="glass about-text reveal delay-1">
 
-                <p class="about-text">
+                I am a <strong>QA/QC Officer</strong> with practical
+                experience in manufacturing quality, electrical inspection
+                and RMU production environments.
 
-                    I am a <strong>QA/QC Officer</strong> with practical
-                    experience in manufacturing quality, electrical
-                    inspection and RMU production environments.
+                <br><br>
 
-                    <br><br>
+                My work focuses on maintaining product quality,
+                identifying non-conformities, supporting root-cause analysis,
+                improving processes and ensuring compliance with quality
+                requirements.
 
-                    My work focuses on maintaining product quality,
-                    identifying non-conformities, supporting root-cause
-                    analysis, improving processes and ensuring compliance
-                    with quality requirements.
+                <br><br>
 
-                    <br><br>
+                I have developed knowledge in
+                <strong>Lean Six Sigma, 7 QC Tools, 8D problem solving,
+                quality auditing and ISO 9001:2015</strong>.
 
-                    I have developed knowledge in
-                    <strong>Lean Six Sigma, 7 QC Tools, problem solving,
-                    quality auditing and ISO 9001:2015</strong>.
+                <br><br>
 
-                    <br><br>
+                My professional approach is simple:
 
-                    My professional approach is simple:
+                <strong>
+                    prevent defects, improve processes and deliver
+                    reliable quality.
+                </strong>
 
-                    <strong>
-                        prevent defects, improve processes and deliver
-                        reliable quality.
-                    </strong>
+            </div>
 
-                </p>
+        </div>
 
+
+        <!-- DASHBOARD -->
+
+        <div class="dashboard">
+
+            <div class="dashboard-card reveal">
+
+                <div
+                    class="dashboard-number counter"
+                    data-target="4">
+                    0
+                </div>
+
+                <div class="dashboard-label">
+                    Years Experience
+                </div>
+
+            </div>
+
+            <div class="dashboard-card reveal delay-1">
+
+                <div class="dashboard-number">
+                    RMU
+                </div>
+
+                <div class="dashboard-label">
+                    Manufacturing Focus
+                </div>
+
+            </div>
+
+            <div class="dashboard-card reveal delay-2">
+
+                <div class="dashboard-number">
+                    8D
+                </div>
+
+                <div class="dashboard-label">
+                    Problem Solving
+                </div>
+
+            </div>
+
+            <div class="dashboard-card reveal delay-3">
+
+                <div class="dashboard-number">
+                    ISO
+                </div>
+
+                <div class="dashboard-label">
+                    9001:2015
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     QUALITY PROCESS
+===================================================== -->
+
+<section id="process">
+
+    <div class="container">
+
+        <div class="section-head reveal">
+
+            <div class="section-label">
+                Quality Workflow
+            </div>
+
+            <h2 class="section-title">
+                My Quality <span>Process.</span>
+            </h2>
+
+            <p class="section-description">
+                A structured approach from incoming inspection through
+                corrective action and final quality release.
+            </p>
+
+        </div>
+
+
+        <div class="process-grid">
+
+            <div class="process-step reveal">
+                <div class="process-number">01</div>
+                <h3>Incoming</h3>
+                <p>Material verification and inspection.</p>
+            </div>
+
+            <div class="process-step reveal delay-1">
+                <div class="process-number">02</div>
+                <h3>In-Process</h3>
+                <p>Manufacturing quality monitoring.</p>
+            </div>
+
+            <div class="process-step reveal delay-2">
+                <div class="process-number">03</div>
+                <h3>Inspection</h3>
+                <p>Product and process verification.</p>
+            </div>
+
+            <div class="process-step reveal delay-3">
+                <div class="process-number">04</div>
+                <h3>NCR</h3>
+                <p>Identify and document non-conformity.</p>
+            </div>
+
+            <div class="process-step reveal delay-4">
+                <div class="process-number">05</div>
+                <h3>RCA</h3>
+                <p>Find the underlying root cause.</p>
+            </div>
+
+            <div class="process-step reveal">
+                <div class="process-number">06</div>
+                <h3>CAPA</h3>
+                <p>Corrective and preventive action.</p>
+            </div>
+
+            <div class="process-step reveal delay-1">
+                <div class="process-number">07</div>
+                <h3>Release</h3>
+                <p>Final quality verification.</p>
             </div>
 
         </div>
@@ -2074,7 +3261,7 @@ footer{
         <div class="section-head reveal">
 
             <div class="section-label">
-                Experience
+                Career
             </div>
 
             <h2 class="section-title">
@@ -2083,91 +3270,119 @@ footer{
 
             <p class="section-description">
                 Experience across quality control, inspection and
-                manufacturing environments with a focus on continuous
-                improvement.
+                manufacturing environments.
             </p>
 
         </div>
 
 
-        <div class="experience-grid">
+        <div class="timeline">
 
-            <div class="glass-card exp-card reveal tilt">
 
-                <div class="exp-top">
+            <div class="timeline-item reveal">
 
-                    <div>
-                        <div class="section-label">
-                            Current Role
-                        </div>
+                <div class="timeline-dot"></div>
+
+                <div class="glass timeline-card">
+
+                    <div class="timeline-date">
+                        Current Role
                     </div>
 
-                    <div class="exp-number">
-                        01
+                    <h3>
+                        QA/QC Officer
+                    </h3>
+
+                    <div class="timeline-company">
+                        Alfanar — Riyadh
                     </div>
 
-                </div>
+                    <p>
+                        Responsible for quality inspection, manufacturing
+                        quality control, identifying non-conformities,
+                        inspection activities and supporting continuous
+                        improvement within the production environment.
+                    </p>
 
-                <h3>
-                    QA/QC Officer
-                </h3>
+                    <div class="tags">
+                        <span class="tag">QA/QC</span>
+                        <span class="tag">RMU</span>
+                        <span class="tag">Inspection</span>
+                        <span class="tag">Manufacturing</span>
+                    </div>
 
-                <div class="exp-company">
-                    Alfanar — Riyadh
-                </div>
-
-                <p>
-                    Responsible for quality inspection, manufacturing
-                    quality control, identifying non-conformities,
-                    inspection activities and supporting continuous
-                    improvement within the production environment.
-                </p>
-
-                <div class="exp-tags">
-                    <span class="tag">QA/QC</span>
-                    <span class="tag">Inspection</span>
-                    <span class="tag">RMU</span>
-                    <span class="tag">Manufacturing</span>
                 </div>
 
             </div>
 
 
-            <div class="glass-card exp-card reveal delay-1 tilt">
+            <div class="timeline-item reveal delay-1">
 
-                <div class="exp-top">
+                <div class="timeline-dot"></div>
 
-                    <div>
-                        <div class="section-label">
-                            Manufacturing
-                        </div>
+                <div class="glass timeline-card">
+
+                    <div class="timeline-date">
+                        Manufacturing
                     </div>
 
-                    <div class="exp-number">
-                        02
+                    <h3>
+                        Quality Control & Inspection
+                    </h3>
+
+                    <div class="timeline-company">
+                        Manufacturing Environment
+                    </div>
+
+                    <p>
+                        Practical involvement in sheet metal manufacturing,
+                        powder coating, quality inspection, process monitoring,
+                        supplier coordination and quality assurance activities.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">Sheet Metal</span>
+                        <span class="tag">Powder Coating</span>
+                        <span class="tag">Supplier Quality</span>
+                        <span class="tag">QC</span>
                     </div>
 
                 </div>
 
-                <h3>
-                    Quality Control & Inspection
-                </h3>
+            </div>
 
-                <div class="exp-company">
-                    Manufacturing Environment
-                </div>
 
-                <p>
-                    Practical involvement in sheet metal manufacturing,
-                    powder coating, quality inspection, process monitoring,
-                    supplier coordination and quality assurance activities.
-                </p>
+            <div class="timeline-item reveal delay-2">
 
-                <div class="exp-tags">
-                    <span class="tag">Sheet Metal</span>
-                    <span class="tag">Powder Coating</span>
-                    <span class="tag">Supplier Quality</span>
-                    <span class="tag">QC</span>
+                <div class="timeline-dot"></div>
+
+                <div class="glass timeline-card">
+
+                    <div class="timeline-date">
+                        Professional Development
+                    </div>
+
+                    <h3>
+                        Quality Systems & Improvement
+                    </h3>
+
+                    <div class="timeline-company">
+                        Continuous Learning
+                    </div>
+
+                    <p>
+                        Expanded professional knowledge through Lean Six Sigma,
+                        7 QC Tools, 8D problem solving, Gauge R&R and
+                        ISO 9001:2015 quality management training.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">8D</span>
+                        <span class="tag">Lean Six Sigma</span>
+                        <span class="tag">7 QC Tools</span>
+                        <span class="tag">ISO 9001</span>
+                    </div>
+
                 </div>
 
             </div>
@@ -2190,11 +3405,11 @@ footer{
         <div class="section-head reveal">
 
             <div class="section-label">
-                Core Skills
+                Technical Capabilities
             </div>
 
             <h2 class="section-title">
-                Technical <span>Capabilities.</span>
+                Skills that <span>Deliver.</span>
             </h2>
 
         </div>
@@ -2202,105 +3417,236 @@ footer{
 
         <div class="skills-grid">
 
-            <div class="glass-card skill-card reveal tilt">
+
+            <div class="glass skill reveal tilt">
+
                 <div class="skill-icon">✓</div>
-                <h3>QA/QC Inspection</h3>
-                <p>Inspection, verification and quality control activities.</p>
+
+                <h3>
+                    QA/QC Inspection
+                </h3>
+
+                <p>
+                    Inspection, verification and manufacturing quality
+                    control activities.
+                </p>
+
+                <div class="skill-meter">
+
+                    <div class="meter-head">
+                        <span>Core Skill</span>
+                        <span>95%</span>
+                    </div>
+
+                    <div class="meter">
+                        <span style="width:95%"></span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="glass-card skill-card reveal delay-1 tilt">
+
+            <div class="glass skill reveal delay-1 tilt">
+
                 <div class="skill-icon">⚡</div>
-                <h3>Electrical RMU</h3>
-                <p>Quality control within electrical RMU manufacturing.</p>
+
+                <h3>
+                    Electrical RMU
+                </h3>
+
+                <p>
+                    Quality control within electrical RMU manufacturing
+                    environments.
+                </p>
+
+                <div class="skill-meter">
+
+                    <div class="meter-head">
+                        <span>Specialization</span>
+                        <span>92%</span>
+                    </div>
+
+                    <div class="meter">
+                        <span style="width:92%"></span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="glass-card skill-card reveal delay-2 tilt">
+
+            <div class="glass skill reveal delay-2 tilt">
+
                 <div class="skill-icon">▣</div>
-                <h3>Sheet Metal Manufacturing</h3>
-                <p>Manufacturing process and product quality inspection.</p>
+
+                <h3>
+                    Sheet Metal
+                </h3>
+
+                <p>
+                    Manufacturing process and product quality inspection.
+                </p>
+
+                <div class="skill-meter">
+
+                    <div class="meter-head">
+                        <span>Capability</span>
+                        <span>88%</span>
+                    </div>
+
+                    <div class="meter">
+                        <span style="width:88%"></span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="glass-card skill-card reveal delay-3 tilt">
+
+            <div class="glass skill reveal delay-3 tilt">
+
                 <div class="skill-icon">◇</div>
-                <h3>Powder Coating</h3>
-                <p>Visual and process quality checks for finished products.</p>
+
+                <h3>
+                    Powder Coating
+                </h3>
+
+                <p>
+                    Visual and process quality checks for finished products.
+                </p>
+
+                <div class="skill-meter">
+
+                    <div class="meter-head">
+                        <span>Capability</span>
+                        <span>85%</span>
+                    </div>
+
+                    <div class="meter">
+                        <span style="width:85%"></span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="glass-card skill-card reveal tilt">
+
+            <div class="glass skill reveal tilt">
+
                 <div class="skill-icon">⌕</div>
-                <h3>Quality Auditing</h3>
-                <p>Quality system awareness and audit support.</p>
+
+                <h3>
+                    Quality Auditing
+                </h3>
+
+                <p>
+                    Quality system awareness and audit support.
+                </p>
+
+                <div class="skill-meter">
+
+                    <div class="meter-head">
+                        <span>Knowledge</span>
+                        <span>82%</span>
+                    </div>
+
+                    <div class="meter">
+                        <span style="width:82%"></span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="glass-card skill-card reveal delay-1 tilt">
+
+            <div class="glass skill reveal delay-1 tilt">
+
                 <div class="skill-icon">↔</div>
-                <h3>Supplier Coordination</h3>
-                <p>Supplier quality communication and follow-up.</p>
+
+                <h3>
+                    Supplier Quality
+                </h3>
+
+                <p>
+                    Supplier quality communication, inspection and follow-up.
+                </p>
+
+                <div class="skill-meter">
+
+                    <div class="meter-head">
+                        <span>Capability</span>
+                        <span>84%</span>
+                    </div>
+
+                    <div class="meter">
+                        <span style="width:84%"></span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="glass-card skill-card reveal delay-2 tilt">
+
+            <div class="glass skill reveal delay-2 tilt">
+
                 <div class="skill-icon">⚙</div>
-                <h3>Quality Control Processes</h3>
-                <p>Process monitoring, inspection and defect prevention.</p>
+
+                <h3>
+                    Quality Processes
+                </h3>
+
+                <p>
+                    Process monitoring, inspection and defect prevention.
+                </p>
+
+                <div class="skill-meter">
+
+                    <div class="meter-head">
+                        <span>Core Skill</span>
+                        <span>90%</span>
+                    </div>
+
+                    <div class="meter">
+                        <span style="width:90%"></span>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="glass-card skill-card reveal delay-3 tilt">
+
+            <div class="glass skill reveal delay-3 tilt">
+
                 <div class="skill-icon">◎</div>
-                <h3>Manufacturing Quality Assurance</h3>
-                <p>Quality assurance throughout manufacturing operations.</p>
+
+                <h3>
+                    Manufacturing QA
+                </h3>
+
+                <p>
+                    Quality assurance throughout manufacturing operations.
+                </p>
+
+                <div class="skill-meter">
+
+                    <div class="meter-head">
+                        <span>Core Skill</span>
+                        <span>91%</span>
+                    </div>
+
+                    <div class="meter">
+                        <span style="width:91%"></span>
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
 
-        <div class="stats-grid">
-
-            <div class="glass-card stat reveal">
-                <div class="stat-number">4+</div>
-                <div class="stat-label">Years Experience</div>
-            </div>
-
-            <div class="glass-card stat reveal delay-1">
-                <div class="stat-number">QA</div>
-                <div class="stat-label">Quality Assurance</div>
-            </div>
-
-            <div class="glass-card stat reveal delay-2">
-                <div class="stat-number">RMU</div>
-                <div class="stat-label">Manufacturing Focus</div>
-            </div>
-
-            <div class="glass-card stat reveal delay-3">
-                <div class="stat-number">QC</div>
-                <div class="stat-label">Quality Control</div>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     EXPERTISE
-===================================================== -->
-
-<section>
-
-    <div class="container">
-
-        <div class="section-head reveal">
-
-            <div class="section-label">
-                Areas of Expertise
-            </div>
-
-            <h2 class="section-title">
-                Where I <span>Add Value.</span>
-            </h2>
-
-        </div>
+        <div style="height:30px"></div>
 
 
         <div class="expertise-grid">
@@ -2338,6 +3684,145 @@ footer{
 
 
 <!-- =====================================================
+     CASE STUDIES
+===================================================== -->
+
+<section id="cases">
+
+    <div class="container">
+
+        <div class="section-head reveal">
+
+            <div class="section-label">
+                Quality Thinking
+            </div>
+
+            <h2 class="section-title">
+                Professional <span>Case Studies.</span>
+            </h2>
+
+            <p class="section-description">
+                A visual representation of the structured approach used
+                when investigating manufacturing quality issues.
+            </p>
+
+        </div>
+
+
+        <div class="case-grid">
+
+
+            <div class="glass case-card reveal tilt">
+
+                <div class="case-top">
+
+                    <div class="case-number">
+                        01
+                    </div>
+
+                    <div class="case-badge">
+                        QUALITY CONTROL
+                    </div>
+
+                </div>
+
+                <h3>
+                    RMU Manufacturing Quality
+                </h3>
+
+                <p>
+                    A structured approach to identifying manufacturing
+                    non-conformities, understanding their causes and
+                    supporting corrective action.
+                </p>
+
+                <div class="case-flow">
+
+                    <div>
+                        <span>Challenge</span>
+                        <strong>Identify Defect</strong>
+                    </div>
+
+                    <div>
+                        <span>Analysis</span>
+                        <strong>Find Root Cause</strong>
+                    </div>
+
+                    <div>
+                        <span>Action</span>
+                        <strong>Prevent Recurrence</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="glass case-card reveal delay-1 tilt">
+
+                <div class="case-top">
+
+                    <div class="case-number">
+                        02
+                    </div>
+
+                    <div class="case-badge">
+                        CONTINUOUS IMPROVEMENT
+                    </div>
+
+                </div>
+
+                <h3>
+                    8D Problem Solving
+                </h3>
+
+                <p>
+                    Applying structured problem-solving principles to
+                    investigate issues, establish corrective actions and
+                    strengthen manufacturing quality.
+                </p>
+
+                <div class="case-flow">
+
+                    <div>
+                        <span>Detect</span>
+                        <strong>Non-Conformity</strong>
+                    </div>
+
+                    <div>
+                        <span>Investigate</span>
+                        <strong>RCA / 8D</strong>
+                    </div>
+
+                    <div>
+                        <span>Improve</span>
+                        <strong>CAPA</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <p
+            style="
+            margin-top:18px;
+            color:var(--muted2);
+            font-size:9px;
+            text-align:center;
+            ">
+            * Case-study descriptions are intentionally presented at a
+            general level to protect confidential company information.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
      CERTIFICATIONS
 ===================================================== -->
 
@@ -2348,16 +3833,16 @@ footer{
         <div class="section-head reveal">
 
             <div class="section-label">
-                Certifications
+                Professional Credentials
             </div>
 
             <h2 class="section-title">
-                Professional <span>Credentials.</span>
+                Certifications <span>& Training.</span>
             </h2>
 
             <p class="section-description">
-                Click any certificate to open it in the fullscreen
-                certificate viewer.
+                Explore the professional certifications and quality-related
+                training completed by Rizwan Ansari.
             </p>
 
         </div>
@@ -2366,14 +3851,11 @@ footer{
         <div class="certifications-grid">
 
 
-            <!-- CERTIFICATE 1 -->
-
             <article
                 class="cert-card reveal tilt"
                 data-cert="0"
                 tabindex="0"
-                role="button"
-                aria-label="Open Seven Basic Tools of Quality Expert certificate">
+                role="button">
 
                 <div class="cert-image-wrap">
 
@@ -2405,14 +3887,11 @@ footer{
             </article>
 
 
-            <!-- CERTIFICATE 2 -->
-
             <article
                 class="cert-card reveal delay-1 tilt"
                 data-cert="1"
                 tabindex="0"
-                role="button"
-                aria-label="Open 8D Problem Solving Specialist certificate">
+                role="button">
 
                 <div class="cert-image-wrap">
 
@@ -2444,14 +3923,11 @@ footer{
             </article>
 
 
-            <!-- CERTIFICATE 3 -->
-
             <article
                 class="cert-card reveal delay-2 tilt"
                 data-cert="2"
                 tabindex="0"
-                role="button"
-                aria-label="Open Gauge R&R certificate">
+                role="button">
 
                 <div class="cert-image-wrap">
 
@@ -2483,14 +3959,11 @@ footer{
             </article>
 
 
-            <!-- CERTIFICATE 4 -->
-
             <article
                 class="cert-card reveal delay-3 tilt"
                 data-cert="3"
                 tabindex="0"
-                role="button"
-                aria-label="Open Lean Six Sigma Yellow Belt certificate">
+                role="button">
 
                 <div class="cert-image-wrap">
 
@@ -2522,14 +3995,11 @@ footer{
             </article>
 
 
-            <!-- CERTIFICATE 5 -->
-
             <article
                 class="cert-card reveal delay-4 tilt"
                 data-cert="4"
                 tabindex="0"
-                role="button"
-                aria-label="Open Lean Six Sigma Green Belt certificate">
+                role="button">
 
                 <div class="cert-image-wrap">
 
@@ -2561,14 +4031,11 @@ footer{
             </article>
 
 
-            <!-- CERTIFICATE 6 -->
-
             <article
                 class="cert-card reveal tilt"
                 data-cert="5"
                 tabindex="0"
-                role="button"
-                aria-label="Open ISO 9001:2015 certificate">
+                role="button">
 
                 <div class="cert-image-wrap">
 
@@ -2599,7 +4066,6 @@ footer{
 
             </article>
 
-
         </div>
 
     </div>
@@ -2618,14 +4084,14 @@ footer{
     aria-label="Certificate viewer">
 
     <button
-        class="viewer-close magnetic"
+        class="viewer-close"
         id="viewerClose"
         aria-label="Close certificate viewer">
         ×
     </button>
 
     <button
-        class="viewer-arrow viewer-prev magnetic"
+        class="viewer-arrow viewer-prev"
         id="viewerPrev"
         aria-label="Previous certificate">
         ‹
@@ -2642,7 +4108,7 @@ footer{
     </div>
 
     <button
-        class="viewer-arrow viewer-next magnetic"
+        class="viewer-arrow viewer-next"
         id="viewerNext"
         aria-label="Next certificate">
         ›
@@ -2667,17 +4133,17 @@ footer{
         <div class="section-head reveal">
 
             <div class="section-label">
-                Education
+                Academic Foundation
             </div>
 
             <h2 class="section-title">
-                Academic <span>Foundation.</span>
+                Education <span>Background.</span>
             </h2>
 
         </div>
 
 
-        <div class="glass-card education-card reveal tilt">
+        <div class="glass education-card reveal tilt">
 
             <div class="edu-icon">
                 🎓
@@ -2694,6 +4160,10 @@ footer{
                     manufacturing, electrical quality and inspection.
                 </p>
 
+            </div>
+
+            <div class="edu-badge">
+                Technical Education
             </div>
 
         </div>
@@ -2714,7 +4184,7 @@ footer{
         <div class="contact-box reveal">
 
             <div class="section-label">
-                Get In Touch
+                Professional Connection
             </div>
 
             <h2>
@@ -2731,18 +4201,14 @@ footer{
             <a
                 href="mailto:rizwanansari60568@gmail.com"
                 class="email magnetic">
-
                 rizwanansari60568@gmail.com
-
             </a>
-
 
             <div class="contact-buttons">
 
                 <a
                     href="mailto:rizwanansari60568@gmail.com"
                     class="btn btn-primary magnetic">
-
                     Email Me →
                 </a>
 
@@ -2750,14 +4216,12 @@ footer{
                     href="Rizwan-Ansari-CV.pdf"
                     class="btn btn-outline magnetic"
                     download>
-
                     Download CV ↓
                 </a>
 
                 <a
                     href="#home"
                     class="btn btn-outline magnetic">
-
                     Back to Top ↑
                 </a>
 
@@ -2782,21 +4246,17 @@ footer{
 </footer>
 
 
-<!-- BACK TO TOP -->
-
 <button
     id="backTop"
     aria-label="Back to top">
-
     ↑
-
 </button>
 
 
 <script>
 
 /* =========================================================
-   BASIC
+   YEAR
 ========================================================= */
 
 document.getElementById("year").textContent =
@@ -2807,20 +4267,62 @@ document.getElementById("year").textContent =
    LOADER
 ========================================================= */
 
-window.addEventListener("load", function(){
+window.addEventListener("load",function(){
 
     setTimeout(function(){
 
-        document.getElementById("loader")
+        document
+            .getElementById("loader")
             .classList.add("hide");
 
-    },700);
+    },650);
 
 });
 
 
 /* =========================================================
-   NAVIGATION
+   PARTICLES
+========================================================= */
+
+const particleContainer =
+    document.getElementById("particles");
+
+if(
+    !window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches
+){
+
+    for(let i=0;i<35;i++){
+
+        const particle =
+            document.createElement("span");
+
+        particle.className="particle";
+
+        particle.style.left =
+            Math.random()*100 + "%";
+
+        particle.style.animationDuration =
+            (8 + Math.random()*14) + "s";
+
+        particle.style.animationDelay =
+            (-Math.random()*18) + "s";
+
+        particle.style.opacity =
+            (.12 + Math.random()*.35);
+
+        particleContainer.appendChild(
+            particle
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
 ========================================================= */
 
 const menuBtn =
@@ -2831,41 +4333,85 @@ const navLinks =
 
 menuBtn.addEventListener("click",function(){
 
-    const opened =
+    const open =
         navLinks.classList.toggle("open");
 
     menuBtn.setAttribute(
         "aria-expanded",
-        opened
+        open
     );
 
     menuBtn.textContent =
-        opened ? "×" : "☰";
+        open ? "×" : "☰";
 
 });
 
 
-document.querySelectorAll(".nav-links a")
-.forEach(function(link){
+document.querySelectorAll(
+    ".nav-links a"
+).forEach(function(link){
 
-    link.addEventListener("click",function(){
+    link.addEventListener(
+        "click",
+        function(){
 
-        navLinks.classList.remove("open");
+            navLinks.classList.remove("open");
 
-        menuBtn.setAttribute(
-            "aria-expanded",
-            "false"
-        );
+            menuBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
 
-        menuBtn.textContent="☰";
+            menuBtn.textContent="☰";
 
-    });
+        }
+    );
 
 });
 
 
 /* =========================================================
-   NAV SCROLL
+   THEME
+========================================================= */
+
+const themeBtn =
+    document.getElementById("themeBtn");
+
+const savedTheme =
+    localStorage.getItem("rizwan-theme");
+
+if(savedTheme === "light"){
+
+    document.body.classList.add("light");
+
+    themeBtn.textContent="☀";
+
+}
+
+
+themeBtn.addEventListener(
+    "click",
+    function(){
+
+        document.body.classList.toggle("light");
+
+        const light =
+            document.body.classList.contains("light");
+
+        localStorage.setItem(
+            "rizwan-theme",
+            light ? "light" : "dark"
+        );
+
+        themeBtn.textContent =
+            light ? "☀" : "☾";
+
+    }
+);
+
+
+/* =========================================================
+   SCROLL
 ========================================================= */
 
 const navbar =
@@ -2883,20 +4429,20 @@ function handleScroll(){
     const scrollTop =
         window.scrollY;
 
-    const documentHeight =
+    const maxScroll =
         document.documentElement.scrollHeight -
         window.innerHeight;
 
     const progress =
-        documentHeight > 0
-        ? (scrollTop / documentHeight) * 100
+        maxScroll > 0
+        ? scrollTop / maxScroll * 100
         : 0;
 
     progressBar.style.width =
         progress + "%";
 
 
-    if(scrollTop > 50){
+    if(scrollTop > 40){
 
         navbar.classList.add("scrolled");
 
@@ -2919,6 +4465,7 @@ function handleScroll(){
 
 }
 
+
 window.addEventListener(
     "scroll",
     handleScroll,
@@ -2928,40 +4475,47 @@ window.addEventListener(
 handleScroll();
 
 
-backTop.addEventListener("click",function(){
+backTop.addEventListener(
+    "click",
+    function(){
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
 
-});
+    }
+);
 
 
 /* =========================================================
-   ACTIVE NAVIGATION
+   ACTIVE NAV
 ========================================================= */
 
 const sections =
-    document.querySelectorAll("section[id]");
+    document.querySelectorAll(
+        "section[id]"
+    );
 
 const navItems =
-    document.querySelectorAll(".nav-links a");
+    document.querySelectorAll(
+        ".nav-links a"
+    );
 
 
 function updateActiveNav(){
 
-    let current = "";
+    let current="";
 
     sections.forEach(function(section){
 
         const top =
-            section.offsetTop - 160;
+            section.offsetTop - 180;
 
         if(window.scrollY >= top){
 
             current =
-                section.getAttribute("id");
+                section.id;
 
         }
 
@@ -2985,6 +4539,7 @@ function updateActiveNav(){
 
 }
 
+
 window.addEventListener(
     "scroll",
     updateActiveNav,
@@ -2993,40 +4548,40 @@ window.addEventListener(
 
 
 /* =========================================================
-   SMOOTH ANCHOR SCROLL
+   SMOOTH SCROLL
 ========================================================= */
 
-document.querySelectorAll('a[href^="#"]')
-.forEach(function(anchor){
+document.querySelectorAll(
+    'a[href^="#"]'
+).forEach(function(anchor){
 
-    anchor.addEventListener("click",function(e){
+    anchor.addEventListener(
+        "click",
+        function(e){
 
-        const target =
-            document.querySelector(
-                this.getAttribute("href")
-            );
+            const target =
+                document.querySelector(
+                    this.getAttribute("href")
+                );
 
-        if(!target) return;
+            if(!target) return;
 
-        e.preventDefault();
+            e.preventDefault();
 
-        const navHeight =
-            navbar.offsetHeight;
+            const top =
+                target.getBoundingClientRect().top +
+                window.scrollY -
+                navbar.offsetHeight;
 
-        const targetTop =
-            target.getBoundingClientRect().top +
-            window.scrollY -
-            navHeight +
-            1;
+            window.scrollTo({
 
-        window.scrollTo({
+                top:top,
+                behavior:"smooth"
 
-            top:targetTop,
-            behavior:"smooth"
+            });
 
-        });
-
-    });
+        }
+    );
 
 });
 
@@ -3047,7 +4602,9 @@ const revealObserver =
 
                 if(entry.isIntersecting){
 
-                    entry.target.classList.add("visible");
+                    entry.target.classList.add(
+                        "visible"
+                    );
 
                     revealObserver.unobserve(
                         entry.target
@@ -3059,7 +4616,7 @@ const revealObserver =
 
         },
         {
-            threshold:.12
+            threshold:.10
         }
     );
 
@@ -3072,7 +4629,7 @@ revealElements.forEach(function(element){
 
 
 /* =========================================================
-   TYPING EFFECT
+   TYPING
 ========================================================= */
 
 const roles = [
@@ -3080,36 +4637,37 @@ const roles = [
     "QA/QC OFFICER",
     "QUALITY ASSURANCE",
     "RMU MANUFACTURING",
-    "QUALITY CONTROL"
+    "QUALITY CONTROL",
+    "QUALITY IMPROVEMENT"
 
 ];
 
 const typingElement =
     document.getElementById("typingRole");
 
-let roleIndex = 0;
-let characterIndex = 0;
-let deleting = false;
+let roleIndex=0;
+let charIndex=0;
+let deleting=false;
 
 
 function typeRole(){
 
-    const currentRole =
+    const role =
         roles[roleIndex];
 
     if(!deleting){
 
-        characterIndex++;
+        charIndex++;
 
         typingElement.textContent =
-            currentRole.substring(
+            role.substring(
                 0,
-                characterIndex
+                charIndex
             );
 
-        if(characterIndex >= currentRole.length){
+        if(charIndex >= role.length){
 
-            deleting = true;
+            deleting=true;
 
             setTimeout(
                 typeRole,
@@ -3122,25 +4680,26 @@ function typeRole(){
 
         setTimeout(
             typeRole,
-            70
+            65
         );
 
     }else{
 
-        characterIndex--;
+        charIndex--;
 
         typingElement.textContent =
-            currentRole.substring(
+            role.substring(
                 0,
-                characterIndex
+                charIndex
             );
 
-        if(characterIndex <= 0){
+        if(charIndex <= 0){
 
-            deleting = false;
+            deleting=false;
 
             roleIndex =
-                (roleIndex + 1) % roles.length;
+                (roleIndex + 1) %
+                roles.length;
 
             setTimeout(
                 typeRole,
@@ -3153,7 +4712,7 @@ function typeRole(){
 
         setTimeout(
             typeRole,
-            40
+            35
         );
 
     }
@@ -3178,7 +4737,89 @@ if(
 
 
 /* =========================================================
-   CUSTOM CURSOR
+   COUNTER
+========================================================= */
+
+const counters =
+    document.querySelectorAll(".counter");
+
+
+const counterObserver =
+    new IntersectionObserver(
+        function(entries){
+
+            entries.forEach(function(entry){
+
+                if(!entry.isIntersecting){
+                    return;
+                }
+
+                const element =
+                    entry.target;
+
+                const target =
+                    Number(
+                        element.dataset.target
+                    );
+
+                let current=0;
+
+                const duration=1000;
+
+                const start =
+                    performance.now();
+
+
+                function updateCounter(time){
+
+                    const progress =
+                        Math.min(
+                            (time-start) /
+                            duration,
+                            1
+                        );
+
+                    current =
+                        Math.floor(
+                            progress * target
+                        );
+
+                    element.textContent =
+                        current + "+";
+
+                    if(progress < 1){
+
+                        requestAnimationFrame(
+                            updateCounter
+                        );
+
+                    }
+
+                }
+
+                requestAnimationFrame(
+                    updateCounter
+                );
+
+                counterObserver.unobserve(
+                    element
+                );
+
+            });
+
+        }
+    );
+
+
+counters.forEach(function(counter){
+
+    counterObserver.observe(counter);
+
+});
+
+
+/* =========================================================
+   CURSOR
 ========================================================= */
 
 const cursorDot =
@@ -3195,25 +4836,25 @@ if(
     ).matches
 ){
 
-    let mouseX = 0;
-    let mouseY = 0;
+    let mouseX=0;
+    let mouseY=0;
 
-    let ringX = 0;
-    let ringY = 0;
+    let ringX=0;
+    let ringY=0;
 
 
     window.addEventListener(
         "mousemove",
         function(e){
 
-            mouseX = e.clientX;
-            mouseY = e.clientY;
+            mouseX=e.clientX;
+            mouseY=e.clientY;
 
             cursorDot.style.left =
-                mouseX + "px";
+                mouseX+"px";
 
             cursorDot.style.top =
-                mouseY + "px";
+                mouseY+"px";
 
         }
     );
@@ -3222,16 +4863,16 @@ if(
     function animateCursor(){
 
         ringX +=
-            (mouseX - ringX) * .15;
+            (mouseX-ringX)*.15;
 
         ringY +=
-            (mouseY - ringY) * .15;
+            (mouseY-ringY)*.15;
 
         cursorRing.style.left =
-            ringX + "px";
+            ringX+"px";
 
         cursorRing.style.top =
-            ringY + "px";
+            ringY+"px";
 
         requestAnimationFrame(
             animateCursor
@@ -3243,24 +4884,29 @@ if(
 
 
     document.querySelectorAll(
-        "a,button,.cert-card,.glass-card,.expertise"
+        "a,button,.cert-card,.glass,.expertise,.process-step"
     ).forEach(function(element){
 
         element.addEventListener(
             "mouseenter",
             function(){
+
                 document.body.classList.add(
                     "cursor-hover"
                 );
+
             }
         );
+
 
         element.addEventListener(
             "mouseleave",
             function(){
+
                 document.body.classList.remove(
                     "cursor-hover"
                 );
+
             }
         );
 
@@ -3270,12 +4916,8 @@ if(
 
 
 /* =========================================================
-   SUBTLE 3D TILT
+   3D TILT
 ========================================================= */
-
-const tiltElements =
-    document.querySelectorAll(".tilt");
-
 
 if(
     window.matchMedia("(pointer:fine)").matches &&
@@ -3284,7 +4926,9 @@ if(
     ).matches
 ){
 
-    tiltElements.forEach(function(card){
+    document.querySelectorAll(
+        ".tilt"
+    ).forEach(function(card){
 
         card.addEventListener(
             "mousemove",
@@ -3299,17 +4943,13 @@ if(
                 const y =
                     e.clientY - rect.top;
 
-                const centerX =
-                    rect.width / 2;
-
-                const centerY =
-                    rect.height / 2;
-
                 const rotateX =
-                    ((y - centerY) / centerY) * -3;
+                    ((y - rect.height/2) /
+                    (rect.height/2)) * -3;
 
                 const rotateY =
-                    ((x - centerX) / centerX) * 3;
+                    ((x - rect.width/2) /
+                    (rect.width/2)) * 3;
 
                 card.style.transform =
                     `perspective(900px)
@@ -3325,8 +4965,7 @@ if(
             "mouseleave",
             function(){
 
-                card.style.transform =
-                    "";
+                card.style.transform="";
 
             }
         );
@@ -3337,7 +4976,7 @@ if(
 
 
 /* =========================================================
-   MAGNETIC BUTTONS
+   MAGNETIC
 ========================================================= */
 
 if(
@@ -3347,39 +4986,42 @@ if(
     ).matches
 ){
 
-    document.querySelectorAll(".magnetic")
-    .forEach(function(button){
+    document.querySelectorAll(
+        ".magnetic"
+    ).forEach(function(element){
 
-        button.addEventListener(
+        element.addEventListener(
             "mousemove",
             function(e){
 
                 const rect =
-                    button.getBoundingClientRect();
+                    element.getBoundingClientRect();
 
                 const x =
                     e.clientX -
                     rect.left -
-                    rect.width / 2;
+                    rect.width/2;
 
                 const y =
                     e.clientY -
                     rect.top -
-                    rect.height / 2;
+                    rect.height/2;
 
-                button.style.transform =
-                    `translate(${x * .12}px,
-                               ${y * .12}px)`;
+                element.style.transform =
+                    `translate(
+                        ${x*.10}px,
+                        ${y*.10}px
+                    )`;
 
             }
         );
 
 
-        button.addEventListener(
+        element.addEventListener(
             "mouseleave",
             function(){
 
-                button.style.transform="";
+                element.style.transform="";
 
             }
         );
@@ -3390,7 +5032,7 @@ if(
 
 
 /* =========================================================
-   CERTIFICATE VIEWER
+   CERTIFICATE DATA
 ========================================================= */
 
 const certificates = [
@@ -3458,7 +5100,7 @@ const viewerNext =
         "viewerNext"
     );
 
-let currentCertificate = 0;
+let currentCertificate=0;
 
 
 function showCertificate(index){
@@ -3467,39 +5109,31 @@ function showCertificate(index){
         (index + certificates.length) %
         certificates.length;
 
-    const certificate =
+    const cert =
         certificates[currentCertificate];
 
     viewerImage.style.opacity="0";
-    viewerImage.style.transform=
-        "scale(.96)";
 
     setTimeout(function(){
 
         viewerImage.src =
-            certificate.image;
+            cert.image;
 
         viewerImage.alt =
-            certificate.title;
+            cert.title;
 
         viewerTitle.textContent =
-            certificate.title +
+            cert.title +
             "  •  " +
-            (currentCertificate + 1) +
+            (currentCertificate+1) +
             " / " +
             certificates.length;
 
-        viewerImage.onload =
-            function(){
+        viewerImage.onload=function(){
 
-                viewerImage.style.transition =
-                    "opacity .35s ease, transform .35s ease";
+            viewerImage.style.opacity="1";
 
-                viewerImage.style.opacity="1";
-                viewerImage.style.transform=
-                    "scale(1)";
-
-            };
+        };
 
     },80);
 
@@ -3526,8 +5160,9 @@ function closeCertificate(){
 }
 
 
-document.querySelectorAll(".cert-card")
-.forEach(function(card){
+document.querySelectorAll(
+    ".cert-card"
+).forEach(function(card){
 
     card.addEventListener(
         "click",
@@ -3548,8 +5183,8 @@ document.querySelectorAll(".cert-card")
         function(e){
 
             if(
-                e.key === "Enter" ||
-                e.key === " "
+                e.key==="Enter" ||
+                e.key===" "
             ){
 
                 e.preventDefault();
@@ -3579,7 +5214,7 @@ viewerPrev.addEventListener(
     function(){
 
         showCertificate(
-            currentCertificate - 1
+            currentCertificate-1
         );
 
     }
@@ -3591,7 +5226,7 @@ viewerNext.addEventListener(
     function(){
 
         showCertificate(
-            currentCertificate + 1
+            currentCertificate+1
         );
 
     }
@@ -3599,14 +5234,14 @@ viewerNext.addEventListener(
 
 
 /* =========================================================
-   CLICK OUTSIDE IMAGE
+   VIEWER BACKGROUND CLICK
 ========================================================= */
 
 viewer.addEventListener(
     "click",
     function(e){
 
-        if(e.target === viewer){
+        if(e.target===viewer){
 
             closeCertificate();
 
@@ -3617,7 +5252,7 @@ viewer.addEventListener(
 
 
 /* =========================================================
-   KEYBOARD CERTIFICATE CONTROLS
+   KEYBOARD
 ========================================================= */
 
 document.addEventListener(
@@ -3628,27 +5263,24 @@ document.addEventListener(
             return;
         }
 
-
-        if(e.key === "Escape"){
+        if(e.key==="Escape"){
 
             closeCertificate();
 
         }
 
-
-        if(e.key === "ArrowLeft"){
+        if(e.key==="ArrowLeft"){
 
             showCertificate(
-                currentCertificate - 1
+                currentCertificate-1
             );
 
         }
 
-
-        if(e.key === "ArrowRight"){
+        if(e.key==="ArrowRight"){
 
             showCertificate(
-                currentCertificate + 1
+                currentCertificate+1
             );
 
         }
@@ -3658,12 +5290,10 @@ document.addEventListener(
 
 
 /* =========================================================
-   TOUCH SWIPE CERTIFICATE VIEWER
+   TOUCH SWIPE
 ========================================================= */
 
-let touchStartX = 0;
-let touchEndX = 0;
-
+let touchStartX=0;
 
 viewer.addEventListener(
     "touchstart",
@@ -3681,28 +5311,26 @@ viewer.addEventListener(
     "touchend",
     function(e){
 
-        touchEndX =
+        const touchEndX =
             e.changedTouches[0].screenX;
 
         const difference =
-            touchEndX - touchStartX;
+            touchEndX-touchStartX;
 
-
-        if(Math.abs(difference) < 50){
+        if(Math.abs(difference)<50){
             return;
         }
 
-
-        if(difference < 0){
+        if(difference<0){
 
             showCertificate(
-                currentCertificate + 1
+                currentCertificate+1
             );
 
         }else{
 
             showCertificate(
-                currentCertificate - 1
+                currentCertificate-1
             );
 
         }
