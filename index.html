@@ -10,7 +10,6 @@
 <meta name="description"
 content="Professional portfolio of Rizwan Ansari, QA/QC Officer specializing in electrical and RMU manufacturing, quality control, Lean Six Sigma and ISO 9001:2015.">
 
-<!-- PREMIUM FONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -34,30 +33,21 @@ html {
 }
 
 :root {
-
     --bg: #050914;
     --bg2: #08111f;
 
     --blue: #18c8ff;
     --blue2: #087cff;
-
     --cyan: #35e4ff;
 
     --white: #ffffff;
-
     --text: #eaf3ff;
 
     --muted: #8fa1b7;
-
     --muted2: #64758b;
 
     --card: rgba(255,255,255,0.045);
-
-    --card2: rgba(255,255,255,0.025);
-
     --border: rgba(255,255,255,0.10);
-
-    --border-blue: rgba(24,200,255,0.25);
 }
 
 
@@ -105,6 +95,25 @@ body {
     line-height: 1.6;
 
     overflow-x: hidden;
+
+    animation: pageEnter 1s ease both;
+}
+
+
+/* =========================================================
+   PAGE ENTRANCE
+========================================================= */
+
+@keyframes pageEnter {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
 }
 
 
@@ -138,11 +147,27 @@ body::before {
     pointer-events: none;
 
     z-index: -2;
+
+    animation:
+        gridMove 25s linear infinite;
+}
+
+
+@keyframes gridMove {
+
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 55px 55px;
+    }
+
 }
 
 
 /* =========================================================
-   GLOW
+   FLOATING GLOW
 ========================================================= */
 
 body::after {
@@ -162,13 +187,37 @@ body::after {
     background:
         radial-gradient(
             circle,
-            rgba(24,200,255,0.06),
+            rgba(24,200,255,0.08),
             transparent 70%
         );
 
     pointer-events: none;
 
     z-index: -1;
+
+    animation:
+        floatingGlow 8s ease-in-out infinite alternate;
+}
+
+
+@keyframes floatingGlow {
+
+    0% {
+        transform:
+            translate(0,0)
+            scale(1);
+
+        opacity: .45;
+    }
+
+    100% {
+        transform:
+            translate(-80px,60px)
+            scale(1.25);
+
+        opacity: .9;
+    }
+
 }
 
 
@@ -197,7 +246,7 @@ body::after {
 
 
 /* =========================================================
-   PROGRESS BAR
+   SCROLL PROGRESS
 ========================================================= */
 
 #progressBar {
@@ -222,7 +271,42 @@ body::after {
     z-index: 99999;
 
     box-shadow:
-        0 0 15px rgba(24,200,255,0.8);
+        0 0 15px rgba(24,200,255,.8);
+}
+
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+.cursor-glow {
+
+    position: fixed;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(24,200,255,.10),
+            transparent 65%
+        );
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index: 9998;
+
+    opacity: 0;
+
+    transition: opacity .3s ease;
+
+    mix-blend-mode: screen;
 }
 
 
@@ -248,13 +332,16 @@ nav {
     justify-content: space-between;
 
     background:
-        rgba(3,7,15,0.78);
+        rgba(3,7,15,.78);
 
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
 
     border-bottom:
-        1px solid rgba(255,255,255,0.07);
+        1px solid rgba(255,255,255,.07);
 
     z-index: 9999;
 }
@@ -274,6 +361,7 @@ nav {
 
     color: white;
 }
+
 
 .logo span {
     color: var(--blue);
@@ -323,16 +411,21 @@ nav {
     background: var(--blue);
 
     transition: .3s;
+
+    box-shadow:
+        0 0 10px var(--blue);
 }
 
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
 
     color: white;
 }
 
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
 
     width: 100%;
 }
@@ -404,13 +497,21 @@ section {
         sans-serif;
 
     font-size:
-        clamp(38px, 5vw, 64px);
+        clamp(38px,5vw,64px);
 
     line-height: 1;
 
     letter-spacing: -3px;
 
     color: white;
+
+    transition:
+        transform .5s ease;
+}
+
+
+.section-title:hover h2 {
+    transform: translateX(6px);
 }
 
 
@@ -441,6 +542,8 @@ section {
     padding-top: 150px;
 
     position: relative;
+
+    overflow: hidden;
 }
 
 
@@ -459,11 +562,62 @@ section {
     background:
         radial-gradient(
             circle,
-            rgba(8,124,255,0.13),
+            rgba(8,124,255,.13),
             transparent 70%
         );
 
     pointer-events: none;
+}
+
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: -100px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(24,200,255,.45),
+            transparent
+        );
+
+    animation:
+        heroScan 7s linear infinite;
+
+    pointer-events: none;
+}
+
+
+@keyframes heroScan {
+
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
 }
 
 
@@ -485,6 +639,10 @@ section {
 }
 
 
+/* =========================================================
+   STATUS
+========================================================= */
+
 .status {
 
     display: inline-flex;
@@ -497,10 +655,10 @@ section {
         9px 16px;
 
     border:
-        1px solid rgba(24,200,255,0.22);
+        1px solid rgba(24,200,255,.22);
 
     background:
-        rgba(24,200,255,0.055);
+        rgba(24,200,255,.055);
 
     border-radius: 50px;
 
@@ -513,7 +671,10 @@ section {
     margin-bottom: 28px;
 
     box-shadow:
-        0 0 30px rgba(24,200,255,0.04);
+        0 0 30px rgba(24,200,255,.04);
+
+    animation:
+        heroReveal .9s cubic-bezier(.16,1,.3,1) .15s both;
 }
 
 
@@ -528,11 +689,30 @@ section {
 
     box-shadow:
         0 0 15px #1eea91;
+
+    animation:
+        statusPulse 2s infinite;
+}
+
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.35);
+        opacity: .6;
+    }
+
 }
 
 
 /* =========================================================
-   HERO NAME
+   HERO TEXT
 ========================================================= */
 
 .hero h1 {
@@ -542,7 +722,7 @@ section {
         sans-serif;
 
     font-size:
-        clamp(58px, 9vw, 120px);
+        clamp(58px,9vw,120px);
 
     line-height: .84;
 
@@ -551,6 +731,9 @@ section {
     font-weight: 900;
 
     margin-bottom: 30px;
+
+    animation:
+        heroReveal 1s cubic-bezier(.16,1,.3,1) .25s both;
 }
 
 
@@ -561,13 +744,22 @@ section {
     color: transparent;
 
     -webkit-text-stroke:
-        1px rgba(255,255,255,0.42);
+        1px rgba(255,255,255,.42);
+
+    transition:
+        color .4s ease,
+        -webkit-text-stroke .4s ease;
 }
 
 
-/* =========================================================
-   ROLE
-========================================================= */
+.hero h1:hover span {
+
+    color: rgba(24,200,255,.08);
+
+    -webkit-text-stroke:
+        1px rgba(24,200,255,.7);
+}
+
 
 .hero-role {
 
@@ -576,7 +768,7 @@ section {
         sans-serif;
 
     font-size:
-        clamp(21px, 3vw, 34px);
+        clamp(21px,3vw,34px);
 
     color: var(--blue);
 
@@ -585,6 +777,9 @@ section {
     letter-spacing: 2px;
 
     margin-bottom: 17px;
+
+    animation:
+        heroReveal .9s cubic-bezier(.16,1,.3,1) .4s both;
 }
 
 
@@ -595,13 +790,16 @@ section {
         sans-serif;
 
     font-size:
-        clamp(22px, 3vw, 34px);
+        clamp(22px,3vw,34px);
 
     font-weight: 700;
 
     color: white;
 
     margin-bottom: 20px;
+
+    animation:
+        heroReveal .9s cubic-bezier(.16,1,.3,1) .5s both;
 }
 
 
@@ -616,11 +814,41 @@ section {
     line-height: 1.9;
 
     margin-bottom: 35px;
+
+    animation:
+        heroReveal .9s cubic-bezier(.16,1,.3,1) .6s both;
+}
+
+
+@keyframes heroReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(35px);
+
+        filter:
+            blur(8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+        filter:
+            blur(0);
+    }
+
 }
 
 
 /* =========================================================
-   PROFILE PHOTO
+   PHOTO
 ========================================================= */
 
 .photo-wrapper {
@@ -628,6 +856,10 @@ section {
     position: relative;
 
     flex-shrink: 0;
+
+    animation:
+        photoFloat 6s ease-in-out infinite,
+        heroReveal 1s cubic-bezier(.16,1,.3,1) .35s both;
 }
 
 
@@ -642,9 +874,12 @@ section {
     border-radius: 35px;
 
     border:
-        1px solid rgba(24,200,255,0.18);
+        1px solid rgba(24,200,255,.18);
 
     pointer-events: none;
+
+    animation:
+        photoBorder 4s ease-in-out infinite alternate;
 }
 
 
@@ -663,13 +898,53 @@ section {
     background:
         radial-gradient(
             circle,
-            rgba(24,200,255,0.25),
+            rgba(24,200,255,.25),
             transparent 70%
         );
 
-    filter: blur(15px);
+    filter:
+        blur(15px);
 
     pointer-events: none;
+}
+
+
+@keyframes photoFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(.5deg);
+    }
+
+}
+
+
+@keyframes photoBorder {
+
+    from {
+
+        transform:
+            scale(1);
+
+        opacity: .5;
+    }
+
+    to {
+
+        transform:
+            scale(1.025);
+
+        opacity: 1;
+    }
+
 }
 
 
@@ -686,18 +961,35 @@ section {
     border-radius: 28px;
 
     border:
-        1px solid rgba(24,200,255,0.35);
+        1px solid rgba(24,200,255,.35);
 
     box-shadow:
 
-        0 0 60px rgba(24,200,255,0.10),
+        0 0 60px rgba(24,200,255,.10),
 
-        0 35px 100px rgba(0,0,0,0.55);
+        0 35px 100px rgba(0,0,0,.55);
 
     background:
         rgba(255,255,255,.03);
 
     display: block;
+
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease;
+}
+
+
+.photo-wrapper:hover .profile-photo {
+
+    transform:
+        scale(1.025);
+
+    box-shadow:
+
+        0 0 80px rgba(24,200,255,.20),
+
+        0 40px 110px rgba(0,0,0,.6);
 }
 
 
@@ -712,6 +1004,9 @@ section {
     flex-wrap: wrap;
 
     gap: 13px;
+
+    animation:
+        heroReveal .9s cubic-bezier(.16,1,.3,1) .7s both;
 }
 
 
@@ -734,9 +1029,53 @@ section {
 
     font-weight: 800;
 
-    transition: .3s;
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease,
+        color .3s ease;
 
     cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+
+    isolation: isolate;
+}
+
+
+.btn::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.25),
+            transparent
+        );
+
+    transform:
+        skewX(-20deg);
+
+    transition: .7s;
+
+    z-index: -1;
+}
+
+
+.btn:hover::before {
+    left: 140%;
 }
 
 
@@ -752,17 +1091,17 @@ section {
     color: white;
 
     box-shadow:
-        0 10px 40px rgba(24,200,255,0.17);
+        0 10px 40px rgba(24,200,255,.17);
 }
 
 
 .btn-primary:hover {
 
     transform:
-        translateY(-3px);
+        translateY(-4px);
 
     box-shadow:
-        0 15px 50px rgba(24,200,255,0.32);
+        0 15px 50px rgba(24,200,255,.35);
 }
 
 
@@ -774,22 +1113,22 @@ section {
         1px solid var(--border);
 
     background:
-        rgba(255,255,255,0.035);
+        rgba(255,255,255,.035);
 }
 
 
 .btn-outline:hover {
 
     border-color:
-        rgba(24,200,255,0.6);
+        rgba(24,200,255,.6);
 
     color: var(--blue);
 
     transform:
-        translateY(-3px);
+        translateY(-4px);
 
     background:
-        rgba(24,200,255,0.04);
+        rgba(24,200,255,.05);
 }
 
 
@@ -846,10 +1185,25 @@ section {
 
     border-radius: 24px;
 
-    backdrop-filter: blur(18px);
+    backdrop-filter:
+        blur(18px);
 
     box-shadow:
         0 30px 80px rgba(0,0,0,.25);
+
+    transition:
+        transform .4s ease,
+        border-color .4s ease;
+}
+
+
+.about-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(24,200,255,.35);
 }
 
 
@@ -884,13 +1238,11 @@ section {
 
 
 .info-row:last-child {
-
     border-bottom: none;
 }
 
 
 .info-row span:first-child {
-
     color: var(--muted2);
 }
 
@@ -943,6 +1295,63 @@ section {
 }
 
 
+.experience::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: -1px;
+
+    top: 0;
+
+    width: 2px;
+
+    height: 80px;
+
+    background:
+        linear-gradient(
+            transparent,
+            var(--blue),
+            transparent
+        );
+
+    box-shadow:
+        0 0 18px var(--blue);
+
+    animation:
+        timelineScan 4s linear infinite;
+}
+
+
+@keyframes timelineScan {
+
+    0% {
+        transform:
+            translateY(0);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translateY(450px);
+
+        opacity: 0;
+    }
+
+}
+
+
 .experience-card {
 
     padding: 35px;
@@ -961,14 +1370,21 @@ section {
 
     margin-bottom: 25px;
 
-    transition: .35s;
+    transition:
+        transform .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease;
+
+    transform-style:
+        preserve-3d;
 }
 
 
 .experience-card:hover {
 
     transform:
-        translateX(8px);
+        translateX(8px)
+        translateY(-3px);
 
     border-color:
         rgba(24,200,255,.35);
@@ -1002,9 +1418,11 @@ section {
 
 .experience-card p {
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    line-height: 1.85;
+    line-height:
+        1.85;
 }
 
 
@@ -1041,11 +1459,20 @@ section {
             rgba(255,255,255,.018)
         );
 
-    transition: .35s;
+    transition:
+        transform .15s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
 
     position: relative;
 
     overflow: hidden;
+
+    transform-style:
+        preserve-3d;
+
+    will-change:
+        transform;
 }
 
 
@@ -1078,9 +1505,6 @@ section {
 
 .skill-card:hover {
 
-    transform:
-        translateY(-7px);
-
     border-color:
         rgba(24,200,255,.40);
 
@@ -1090,7 +1514,6 @@ section {
 
 
 .skill-card:hover::before {
-
     opacity: 1;
 }
 
@@ -1151,14 +1574,19 @@ section {
     background:
         rgba(255,255,255,.032);
 
-    transition: .3s;
+    transition:
+        transform .3s ease,
+        border-color .3s ease;
+
+    transform-style:
+        preserve-3d;
 }
 
 
 .stat:hover {
 
     transform:
-        translateY(-5px);
+        translateY(-7px);
 
     border-color:
         rgba(24,200,255,.30);
@@ -1220,14 +1648,23 @@ section {
     background:
         var(--card);
 
-    transition: .3s;
+    transition:
+        transform .35s ease,
+        border-color .35s ease;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transform-style:
+        preserve-3d;
 }
 
 
 .expertise:hover {
 
     transform:
-        translateY(-5px);
+        translateY(-7px);
 
     border-color:
         rgba(24,200,255,.35);
@@ -1267,7 +1704,7 @@ section {
         linear-gradient(
             180deg,
             transparent,
-            rgba(24,200,255,0.025),
+            rgba(24,200,255,.025),
             transparent
         );
 }
@@ -1304,7 +1741,13 @@ section {
 
     overflow: hidden;
 
-    transition: .35s;
+    transition:
+        transform .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+
+    transform-style:
+        preserve-3d;
 }
 
 
@@ -1339,19 +1782,29 @@ section {
 
     background:
         rgba(24,200,255,.05);
+
+    transition:
+        transform .4s ease;
 }
 
 
 .cert-card:hover {
 
     transform:
-        translateY(-6px);
+        translateY(-7px);
 
     border-color:
         rgba(24,200,255,.45);
 
     box-shadow:
         0 20px 70px rgba(0,0,0,.25);
+}
+
+
+.cert-card:hover::after {
+
+    transform:
+        rotate(360deg);
 }
 
 
@@ -1444,6 +1897,20 @@ section {
             rgba(24,200,255,.08),
             rgba(255,255,255,.025)
         );
+
+    transition:
+        transform .4s ease,
+        border-color .4s ease;
+}
+
+
+.education-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(24,200,255,.35);
 }
 
 
@@ -1493,6 +1960,20 @@ section {
 
     box-shadow:
         0 30px 100px rgba(0,0,0,.22);
+
+    transition:
+        transform .5s ease,
+        border-color .5s ease;
+}
+
+
+.contact-box:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(24,200,255,.4);
 }
 
 
@@ -1539,6 +2020,9 @@ section {
     text-decoration: none;
 
     margin-bottom: 25px;
+
+    transition:
+        transform .3s ease;
 }
 
 
@@ -1546,6 +2030,9 @@ section {
 
     text-decoration:
         underline;
+
+    transform:
+        scale(1.03);
 }
 
 
@@ -1581,11 +2068,15 @@ footer {
     opacity: 0;
 
     transform:
-        translateY(25px);
+        translateY(30px);
+
+    filter:
+        blur(4px);
 
     transition:
         opacity .8s ease,
-        transform .8s ease;
+        transform .8s cubic-bezier(.16,1,.3,1),
+        filter .8s ease;
 }
 
 
@@ -1595,26 +2086,25 @@ footer {
 
     transform:
         translateY(0);
+
+    filter:
+        blur(0);
 }
 
 
 /* =========================================================
-   MOBILE TABLET
+   MOBILE / TABLET
 ========================================================= */
 
-@media(max-width: 1000px) {
+@media(max-width:1000px) {
 
     .nav-links {
-
         gap: 17px;
     }
 
-
     .hero-layout {
-
         gap: 40px;
     }
-
 
     .profile-photo {
 
@@ -1623,20 +2113,17 @@ footer {
         height: 350px;
     }
 
-
     .skills-grid {
 
         grid-template-columns:
             repeat(2,1fr);
     }
 
-
     .stats {
 
         grid-template-columns:
             repeat(2,1fr);
     }
-
 
     .expertise-grid {
 
@@ -1651,7 +2138,7 @@ footer {
    MOBILE
 ========================================================= */
 
-@media(max-width: 800px) {
+@media(max-width:800px) {
 
     nav {
 
@@ -1680,14 +2167,28 @@ footer {
 
         display: none;
 
+        opacity: 0;
+
+        transform:
+            translateY(-15px);
+
         border-bottom:
             1px solid var(--border);
+
+        transition:
+            opacity .3s ease,
+            transform .3s ease;
     }
 
 
     .nav-links.active {
 
         display: flex;
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
     }
 
 
@@ -1704,8 +2205,35 @@ footer {
 
 
     .nav-links a::after {
-
         display: none;
+    }
+
+
+    .nav-links li {
+
+        animation:
+            mobileNav .4s ease both;
+    }
+
+
+    @keyframes mobileNav {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+                translateX(-15px);
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform:
+                translateX(0);
+        }
+
     }
 
 
@@ -1752,7 +2280,7 @@ footer {
     .profile-photo {
 
         width:
-            min(280px, 78vw);
+            min(280px,78vw);
 
         height:
             350px;
@@ -1798,19 +2326,15 @@ footer {
    SMALL MOBILE
 ========================================================= */
 
-@media(max-width: 600px) {
+@media(max-width:600px) {
 
     .logo {
-
-        font-size:
-            23px;
+        font-size: 23px;
     }
 
 
     .hero-description {
-
-        font-size:
-            15px;
+        font-size: 15px;
     }
 
 
@@ -1880,13 +2404,57 @@ footer {
             left;
     }
 
+
+    .experience {
+
+        padding-left:
+            25px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+========================================================= */
+
+@media(prefers-reduced-motion:reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
+
+
+<!-- =========================================================
+     CURSOR GLOW
+========================================================= -->
+
+<div
+    class="cursor-glow"
+    id="cursorGlow">
+</div>
 
 
 <!-- =========================================================
@@ -1917,7 +2485,9 @@ footer {
     </button>
 
 
-    <ul class="nav-links" id="navLinks">
+    <ul
+        class="nav-links"
+        id="navLinks">
 
         <li>
             <a href="#home" onclick="closeMenu()">
@@ -1970,14 +2540,16 @@ footer {
      HERO
 ========================================================= -->
 
-<section class="hero" id="home">
+<section
+    class="hero"
+    id="home">
 
     <div class="container">
 
         <div class="hero-layout">
 
 
-            <div class="hero-content reveal">
+            <div class="hero-content">
 
 
                 <div class="status">
@@ -2064,11 +2636,7 @@ footer {
             </div>
 
 
-            <!-- =================================================
-                 PROFILE PHOTO
-            ================================================== -->
-
-            <div class="photo-wrapper reveal">
+            <div class="photo-wrapper">
 
                 <img
                     src="profile.jpg"
@@ -2119,7 +2687,6 @@ footer {
 
             <div class="about-text reveal">
 
-
                 <p>
 
                     I am
@@ -2154,12 +2721,10 @@ footer {
 
                 </p>
 
-
             </div>
 
 
             <div class="about-card reveal">
-
 
                 <h3>
                     Professional Profile
@@ -2168,71 +2733,50 @@ footer {
 
                 <div class="info-row">
 
-                    <span>
-                        Role
-                    </span>
+                    <span>Role</span>
 
-                    <span>
-                        QA/QC Officer
-                    </span>
+                    <span>QA/QC Officer</span>
 
                 </div>
 
 
                 <div class="info-row">
 
-                    <span>
-                        Experience
-                    </span>
+                    <span>Experience</span>
 
-                    <span>
-                        4+ Years
-                    </span>
+                    <span>4+ Years</span>
 
                 </div>
 
 
                 <div class="info-row">
 
-                    <span>
-                        Industry
-                    </span>
+                    <span>Industry</span>
 
-                    <span>
-                        Electrical / RMU
-                    </span>
+                    <span>Electrical / RMU</span>
 
                 </div>
 
 
                 <div class="info-row">
 
-                    <span>
-                        Education
-                    </span>
+                    <span>Education</span>
 
-                    <span>
-                        Diploma
-                    </span>
+                    <span>Diploma</span>
 
                 </div>
 
 
                 <div class="info-row">
 
-                    <span>
-                        Location
-                    </span>
+                    <span>Location</span>
 
-                    <span>
-                        Riyadh, Saudi Arabia
-                    </span>
+                    <span>Riyadh, Saudi Arabia</span>
 
                 </div>
 
 
             </div>
-
 
         </div>
 
@@ -2366,106 +2910,50 @@ footer {
 
 
             <div class="skill-card reveal">
-
-                <div class="skill-number">
-                    01
-                </div>
-
-                <h3>
-                    QA/QC Inspection
-                </h3>
-
+                <div class="skill-number">01</div>
+                <h3>QA/QC Inspection</h3>
             </div>
 
 
             <div class="skill-card reveal">
-
-                <div class="skill-number">
-                    02
-                </div>
-
-                <h3>
-                    Electrical RMU
-                </h3>
-
+                <div class="skill-number">02</div>
+                <h3>Electrical RMU</h3>
             </div>
 
 
             <div class="skill-card reveal">
-
-                <div class="skill-number">
-                    03
-                </div>
-
-                <h3>
-                    Sheet Metal Manufacturing
-                </h3>
-
+                <div class="skill-number">03</div>
+                <h3>Sheet Metal Manufacturing</h3>
             </div>
 
 
             <div class="skill-card reveal">
-
-                <div class="skill-number">
-                    04
-                </div>
-
-                <h3>
-                    Powder Coating
-                </h3>
-
+                <div class="skill-number">04</div>
+                <h3>Powder Coating</h3>
             </div>
 
 
             <div class="skill-card reveal">
-
-                <div class="skill-number">
-                    05
-                </div>
-
-                <h3>
-                    Quality Auditing
-                </h3>
-
+                <div class="skill-number">05</div>
+                <h3>Quality Auditing</h3>
             </div>
 
 
             <div class="skill-card reveal">
-
-                <div class="skill-number">
-                    06
-                </div>
-
-                <h3>
-                    Supplier Coordination
-                </h3>
-
+                <div class="skill-number">06</div>
+                <h3>Supplier Coordination</h3>
             </div>
 
 
             <div class="skill-card reveal">
-
-                <div class="skill-number">
-                    07
-                </div>
-
-                <h3>
-                    Quality Control Processes
-                </h3>
-
+                <div class="skill-number">07</div>
+                <h3>Quality Control Processes</h3>
             </div>
 
 
             <div class="skill-card reveal">
-
-                <div class="skill-number">
-                    08
-                </div>
-
-                <h3>
-                    Manufacturing Quality Assurance
-                </h3>
-
+                <div class="skill-number">08</div>
+                <h3>Manufacturing Quality Assurance</h3>
             </div>
 
 
@@ -2477,7 +2965,7 @@ footer {
 
 
 <!-- =========================================================
-     PROFESSIONAL STATS
+     STATS
 ========================================================= -->
 
 <section>
@@ -2504,8 +2992,12 @@ footer {
 
             <div class="stat reveal">
 
-                <div class="stat-number">
+                <div
+                    class="stat-number"
+                    data-count="4">
+
                     4+
+
                 </div>
 
                 <div class="stat-label">
@@ -2562,7 +3054,7 @@ footer {
 
 
 <!-- =========================================================
-     AREAS OF EXPERTISE
+     EXPERTISE
 ========================================================= -->
 
 <section>
@@ -2697,8 +3189,6 @@ footer {
         <div class="certifications-grid">
 
 
-            <!-- CERTIFICATE 01 -->
-
             <div class="cert-card reveal">
 
                 <div class="cert-number">
@@ -2721,8 +3211,6 @@ footer {
 
             </div>
 
-
-            <!-- CERTIFICATE 02 -->
 
             <div class="cert-card reveal">
 
@@ -2748,8 +3236,6 @@ footer {
             </div>
 
 
-            <!-- CERTIFICATE 03 -->
-
             <div class="cert-card reveal">
 
                 <div class="cert-number">
@@ -2773,8 +3259,6 @@ footer {
             </div>
 
 
-            <!-- CERTIFICATE 04 -->
-
             <div class="cert-card reveal">
 
                 <div class="cert-number">
@@ -2797,8 +3281,6 @@ footer {
 
             </div>
 
-
-            <!-- CERTIFICATE 05 -->
 
             <div class="cert-card reveal">
 
@@ -3008,62 +3490,211 @@ function closeMenu() {
    SCROLL PROGRESS
 ========================================================= */
 
+const progressBar =
+    document.getElementById("progressBar");
+
+
 window.addEventListener(
     "scroll",
     function() {
 
-        var scrollTop =
+        const scrollTop =
             window.scrollY;
 
-        var documentHeight =
+        const documentHeight =
             document.documentElement.scrollHeight -
             window.innerHeight;
 
-        var percentage =
-            (scrollTop / documentHeight) * 100;
+        const percentage =
+            documentHeight > 0
+                ? (scrollTop / documentHeight) * 100
+                : 0;
 
-        document
-            .getElementById("progressBar")
-            .style.width =
+        progressBar.style.width =
             percentage + "%";
+
+    },
+    { passive: true }
+);
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+
+const revealObserver =
+    new IntersectionObserver(
+        function(entries) {
+
+            entries.forEach(
+                function(entry) {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        const parent =
+                            entry.target.parentElement;
+
+                        const siblings =
+                            parent
+                                ? [
+                                    ...parent.querySelectorAll(
+                                        ".reveal"
+                                    )
+                                ]
+                                : [];
+
+                        const index =
+                            siblings.indexOf(
+                                entry.target
+                            );
+
+
+                        entry.target.style.transitionDelay =
+                            Math.min(
+                                index * 80,
+                                400
+                            ) + "ms";
+
+
+                        entry.target.classList.add(
+                            "show"
+                        );
+
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: .12,
+
+            rootMargin:
+                "0px 0px -50px 0px"
+        }
+    );
+
+
+revealElements.forEach(
+    function(element) {
+
+        revealObserver.observe(element);
 
     }
 );
 
 
 /* =========================================================
-   REVEAL ANIMATION
+   ACTIVE NAVIGATION
 ========================================================= */
 
-var revealElements =
-    document.querySelectorAll(".reveal");
+const sections =
+    document.querySelectorAll(
+        "section[id]"
+    );
 
 
-function revealOnScroll() {
-
-    var windowHeight =
-        window.innerHeight;
-
-
-    revealElements.forEach(
-        function(element) {
-
-            var position =
-                element
-                .getBoundingClientRect()
-                .top;
+const navLinks =
+    document.querySelectorAll(
+        ".nav-links a"
+    );
 
 
-            if (
-                position <
-                windowHeight - 70
-            ) {
+const sectionObserver =
+    new IntersectionObserver(
+        function(entries) {
 
-                element
-                    .classList
-                    .add("show");
+            entries.forEach(
+                function(entry) {
 
-            }
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        navLinks.forEach(
+                            function(link) {
+
+                                link.classList.remove(
+                                    "active"
+                                );
+
+
+                                if (
+                                    link.getAttribute(
+                                        "href"
+                                    ) ===
+                                    "#" +
+                                    entry.target.id
+                                ) {
+
+                                    link.classList.add(
+                                        "active"
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: .35
+        }
+    );
+
+
+sections.forEach(
+    function(section) {
+
+        sectionObserver.observe(section);
+
+    }
+);
+
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+const cursorGlow =
+    document.getElementById(
+        "cursorGlow"
+    );
+
+
+if (
+    window.matchMedia(
+        "(pointer:fine)"
+    ).matches
+) {
+
+    window.addEventListener(
+        "mousemove",
+        function(event) {
+
+            cursorGlow.style.opacity = "1";
+
+            cursorGlow.style.left =
+                event.clientX + "px";
+
+            cursorGlow.style.top =
+                event.clientY + "px";
 
         }
     );
@@ -3071,15 +3702,334 @@ function revealOnScroll() {
 }
 
 
-window.addEventListener(
-    "scroll",
-    revealOnScroll
+/* =========================================================
+   3D CARD TILT
+========================================================= */
+
+if (
+    window.matchMedia(
+        "(pointer:fine)"
+    ).matches
+) {
+
+    const cards =
+        document.querySelectorAll(
+            ".skill-card, .cert-card, .expertise, .stat"
+        );
+
+
+    cards.forEach(
+        function(card) {
+
+            card.addEventListener(
+                "mousemove",
+                function(event) {
+
+                    const rect =
+                        card.getBoundingClientRect();
+
+
+                    const x =
+                        event.clientX -
+                        rect.left;
+
+
+                    const y =
+                        event.clientY -
+                        rect.top;
+
+
+                    const centerX =
+                        rect.width / 2;
+
+
+                    const centerY =
+                        rect.height / 2;
+
+
+                    const rotateX =
+                        ((y - centerY) /
+                            centerY) *
+                        -3;
+
+
+                    const rotateY =
+                        ((x - centerX) /
+                            centerX) *
+                        3;
+
+
+                    card.style.transform =
+                        `
+                        perspective(900px)
+                        rotateX(${rotateX}deg)
+                        rotateY(${rotateY}deg)
+                        translateY(-5px)
+                        `;
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                function() {
+
+                    card.style.transform = "";
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   STAT COUNTER
+========================================================= */
+
+const statNumbers =
+    document.querySelectorAll(
+        ".stat-number[data-count]"
+    );
+
+
+const counterObserver =
+    new IntersectionObserver(
+        function(entries) {
+
+            entries.forEach(
+                function(entry) {
+
+                    if (
+                        !entry.isIntersecting
+                    )
+                        return;
+
+
+                    const element =
+                        entry.target;
+
+
+                    const target =
+                        parseInt(
+                            element.dataset.count
+                        );
+
+
+                    let current = 0;
+
+                    const duration = 1200;
+
+                    const start =
+                        performance.now();
+
+
+                    function updateCounter(now) {
+
+                        const progress =
+                            Math.min(
+                                (now - start) /
+                                    duration,
+                                1
+                            );
+
+
+                        const eased =
+                            1 -
+                            Math.pow(
+                                1 - progress,
+                                3
+                            );
+
+
+                        current =
+                            Math.floor(
+                                target * eased
+                            );
+
+
+                        element.textContent =
+                            current + "+";
+
+
+                        if (
+                            progress < 1
+                        ) {
+
+                            requestAnimationFrame(
+                                updateCounter
+                            );
+
+                        }
+
+                    }
+
+
+                    requestAnimationFrame(
+                        updateCounter
+                    );
+
+
+                    counterObserver.unobserve(
+                        element
+                    );
+
+                }
+            );
+
+        },
+        {
+            threshold: .7
+        }
+    );
+
+
+statNumbers.forEach(
+    function(number) {
+
+        counterObserver.observe(number);
+
+    }
 );
 
 
-window.addEventListener(
-    "load",
-    revealOnScroll
+/* =========================================================
+   BUTTON RIPPLE
+========================================================= */
+
+document
+    .querySelectorAll(".btn")
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function(event) {
+
+                    const ripple =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    const rect =
+                        this.getBoundingClientRect();
+
+
+                    const size =
+                        Math.max(
+                            rect.width,
+                            rect.height
+                        );
+
+
+                    ripple.style.position =
+                        "absolute";
+
+
+                    ripple.style.width =
+                        size + "px";
+
+
+                    ripple.style.height =
+                        size + "px";
+
+
+                    ripple.style.left =
+                        event.clientX -
+                        rect.left -
+                        size / 2 +
+                        "px";
+
+
+                    ripple.style.top =
+                        event.clientY -
+                        rect.top -
+                        size / 2 +
+                        "px";
+
+
+                    ripple.style.borderRadius =
+                        "50%";
+
+
+                    ripple.style.background =
+                        "rgba(255,255,255,.18)";
+
+
+                    ripple.style.transform =
+                        "scale(0)";
+
+
+                    ripple.style.pointerEvents =
+                        "none";
+
+
+                    ripple.animate(
+                        [
+                            {
+                                transform:
+                                    "scale(0)",
+
+                                opacity: 1
+                            },
+
+                            {
+                                transform:
+                                    "scale(2)",
+
+                                opacity: 0
+                            }
+                        ],
+                        {
+                            duration: 600,
+
+                            easing:
+                                "ease-out"
+                        }
+                    );
+
+
+                    this.appendChild(
+                        ripple
+                    );
+
+
+                    setTimeout(
+                        function() {
+
+                            ripple.remove();
+
+                        },
+                        650
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   CLOSE MOBILE MENU WITH ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeMenu();
+
+        }
+
+    }
 );
 
 
