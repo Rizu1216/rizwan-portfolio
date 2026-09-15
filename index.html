@@ -1,4158 +1,5222 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Rizwan Ansari — QA/QC Officer</title>
-
-<meta name="description"
-content="Rizwan Ansari — QA/QC Officer specializing in electrical and RMU manufacturing, quality assurance, inspection and continuous improvement.">
-
-<meta name="theme-color" content="#080808">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#080808;
-    color:#f5f5f5;
-    font-family:"DM Sans",sans-serif;
-    overflow-x:hidden;
-}
-
-body.no-scroll{
-    overflow:hidden;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-button{
-    font-family:inherit;
-}
-
-::selection{
-    background:#fff;
-    color:#080808;
-}
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root{
-    --white:#f5f5f5;
-    --grey:#999;
-    --dark-grey:#5d5d5d;
-    --line:#242424;
-    --soft:#111;
-    --accent:#d8ff45;
-
-    --max:1320px;
-}
-
-
-/* =========================================================
-   CUSTOM CURSOR
-========================================================= */
-
-.cursor{
-    position:fixed;
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#fff;
-    pointer-events:none;
-    z-index:99999;
-    transform:translate(-50%,-50%);
-    mix-blend-mode:difference;
-}
-
-.cursor-circle{
-    position:fixed;
-    width:38px;
-    height:38px;
-    border:1px solid rgba(255,255,255,.55);
-    border-radius:50%;
-    pointer-events:none;
-    z-index:99998;
-    transform:translate(-50%,-50%);
-    transition:
-        width .3s ease,
-        height .3s ease,
-        background .3s ease;
-    mix-blend-mode:difference;
-}
-
-body.hovering .cursor-circle{
-    width:70px;
-    height:70px;
-    background:rgba(255,255,255,.08);
-}
-
-@media(pointer:coarse){
-    .cursor,
-    .cursor-circle{
-        display:none;
-    }
-}
-
-
-/* =========================================================
-   PAGE LOADER
-========================================================= */
-
-.loader{
-    position:fixed;
-    inset:0;
-    z-index:100000;
-    background:#080808;
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    padding:35px;
-    transition:
-        transform 1s cubic-bezier(.76,0,.24,1);
-}
-
-.loader.hide{
-    transform:translateY(-100%);
-}
-
-.loader-name{
-    font-family:"Space Grotesk";
-    font-size:13px;
-    font-weight:600;
-}
-
-.loader-percent{
-    font-family:"Space Grotesk";
-    font-size:13px;
-    color:#888;
-}
-
-
-/* =========================================================
-   NOISE
-========================================================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:9990;
-    opacity:.035;
-
-    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-nav{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:5000;
-
-    height:82px;
-
-    display:flex;
-    align-items:center;
-
-    border-bottom:1px solid transparent;
-
-    transition:
-        background .4s ease,
-        border-color .4s ease;
-}
-
-nav.scrolled{
-    background:rgba(8,8,8,.86);
-    backdrop-filter:blur(18px);
-    border-color:#202020;
-}
-
-.nav-inner{
-    width:min(var(--max),calc(100% - 70px));
-    margin:auto;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-family:"Space Grotesk";
-    font-size:16px;
-    font-weight:600;
-    letter-spacing:-.5px;
-}
-
-.logo span{
-    color:#777;
-}
-
-.nav-links{
-    display:flex;
-    gap:28px;
-    align-items:center;
-}
-
-.nav-links a{
-    position:relative;
-    color:#888;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    transition:.3s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active{
-    color:#fff;
-}
-
-.nav-links a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-7px;
-    width:0;
-    height:1px;
-    background:#fff;
-    transition:.3s ease;
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after{
-    width:100%;
-}
-
-.nav-right{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.availability{
-    display:flex;
-    align-items:center;
-    gap:7px;
-
-    color:#888;
-    font-size:9px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-.availability-dot{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:var(--accent);
-    box-shadow:0 0 10px rgba(216,255,69,.6);
-}
-
-.menu{
-    display:none;
-
-    width:42px;
-    height:42px;
-
-    border:1px solid #292929;
-    background:#101010;
-
-    color:#fff;
-
-    cursor:pointer;
-}
-
-
-/* =========================================================
-   MOBILE NAV
-========================================================= */
-
-@media(max-width:850px){
-
-    .nav-inner{
-        width:calc(100% - 38px);
-    }
-
-    .availability{
-        display:none;
-    }
-
-    .menu{
-        display:block;
-    }
-
-    .nav-links{
-        position:absolute;
-        top:82px;
-        left:15px;
-        right:15px;
-
-        display:flex;
-        flex-direction:column;
-        align-items:stretch;
-        gap:0;
-
-        padding:8px;
-
-        background:#101010;
-        border:1px solid #252525;
-
-        opacity:0;
-        visibility:hidden;
-        transform:translateY(-10px);
-
-        transition:.3s ease;
-    }
-
-    .nav-links.open{
-        opacity:1;
-        visibility:visible;
-        transform:translateY(0);
-    }
-
-    .nav-links a{
-        padding:17px 14px;
-        border-bottom:1px solid #202020;
-    }
-
-    .nav-links a:last-child{
-        border-bottom:0;
-    }
-
-    .nav-links a::after{
-        display:none;
-    }
-
-}
-
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-.container{
-    width:min(var(--max),calc(100% - 70px));
-    margin:auto;
-}
-
-section{
-    position:relative;
-}
-
-.eyebrow{
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    color:#777;
-
-    font-size:9px;
-    font-weight:600;
-
-    text-transform:uppercase;
-    letter-spacing:2.5px;
-}
-
-.eyebrow::before{
-    content:"";
-    width:28px;
-    height:1px;
-    background:#555;
-}
-
-.section-number{
-    position:absolute;
-    top:45px;
-    right:35px;
-
-    color:#333;
-
-    font-family:"Space Grotesk";
-    font-size:11px;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-    min-height:100vh;
-    padding-top:82px;
-
-    display:flex;
-    align-items:center;
-
-    overflow:hidden;
-}
-
-.hero-inner{
-    width:min(var(--max),calc(100% - 70px));
-    margin:auto;
-
-    position:relative;
-
-    padding:100px 0 90px;
-}
-
-.hero-topline{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    margin-bottom:65px;
-}
-
-.hero-location{
-    color:#777;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-}
-
-.hero-year{
-    color:#555;
-    font-family:"Space Grotesk";
-    font-size:10px;
-}
-
-.hero-title{
-    position:relative;
-    z-index:3;
-}
-
-.hero-title .small{
-    display:block;
-
-    margin-left:8px;
-    margin-bottom:5px;
-
-    color:#888;
-
-    font-size:11px;
-    font-weight:500;
-
-    text-transform:uppercase;
-    letter-spacing:2px;
-}
-
-.hero-title h1{
-    font-family:"Space Grotesk";
-    font-size:clamp(75px,13vw,190px);
-    line-height:.78;
-    letter-spacing:-9px;
-    font-weight:500;
-}
-
-.hero-title h1 .outline{
-    color:transparent;
-    -webkit-text-stroke:1px #777;
-}
-
-.hero-description{
-    position:relative;
-    z-index:5;
-
-    width:360px;
-
-    margin-left:48%;
-
-    margin-top:-10px;
-}
-
-.hero-description p{
-    color:#999;
-    font-size:13px;
-    line-height:1.8;
-}
-
-.hero-role{
-    margin-top:18px;
-
-    color:#fff;
-
-    font-size:11px;
-    font-weight:600;
-
-    text-transform:uppercase;
-    letter-spacing:2px;
-}
-
-.hero-image{
-    position:absolute;
-
-    right:5%;
-    top:185px;
-
-    width:330px;
-    height:455px;
-
-    overflow:hidden;
-
-    z-index:2;
-
-    background:#161616;
-}
-
-.hero-image::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            transparent 50%,
-            rgba(8,8,8,.5)
-        );
-
-    pointer-events:none;
-}
-
-.hero-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    object-position:center;
-
-    filter:grayscale(100%);
-    opacity:.88;
-
-    transform:scale(1.04);
-
-    transition:
-        transform 1.2s cubic-bezier(.2,.8,.2,1),
-        filter .7s ease;
-}
-
-.hero-image:hover img{
-    transform:scale(1.1);
-    filter:grayscale(0%);
-}
-
-.image-caption{
-    position:absolute;
-    bottom:18px;
-    left:18px;
-    z-index:3;
-
-    color:#fff;
-
-    font-size:8px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-}
-
-.hero-bottom{
-    margin-top:150px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-}
-
-.hero-statement{
-    max-width:620px;
-
-    font-family:"Space Grotesk";
-    font-size:clamp(22px,3vw,38px);
-    line-height:1.1;
-    letter-spacing:-1.4px;
-}
-
-.hero-statement span{
-    color:#666;
-}
-
-.scroll-indicator{
-    display:flex;
-    align-items:center;
-    gap:12px;
-
-    color:#666;
-
-    font-size:8px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-}
-
-.scroll-line{
-    width:55px;
-    height:1px;
-    background:#444;
-}
-
-@media(max-width:900px){
-
-    .hero-title h1{
-        font-size:clamp(70px,15vw,130px);
-    }
-
-    .hero-image{
-        position:relative;
-        top:auto;
-        right:auto;
-
-        width:280px;
-        height:390px;
-
-        margin:65px auto 0;
-    }
-
-    .hero-description{
-        width:auto;
-        max-width:430px;
-        margin:35px 0 0;
-    }
-
-    .hero-bottom{
-        margin-top:70px;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .container,
-    .hero-inner{
-        width:calc(100% - 38px);
-    }
-
-    .hero{
-        min-height:auto;
-    }
-
-    .hero-inner{
-        padding:70px 0 65px;
-    }
-
-    .hero-topline{
-        margin-bottom:50px;
-    }
-
-    .hero-title h1{
-        font-size:clamp(62px,20vw,100px);
-        letter-spacing:-6px;
-    }
-
-    .hero-image{
-        width:245px;
-        height:335px;
-        margin-top:55px;
-    }
-
-    .hero-bottom{
-        display:block;
-        margin-top:55px;
-    }
-
-    .scroll-indicator{
-        margin-top:30px;
-    }
-
-}
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about{
-    padding:180px 0 150px;
-
-    border-top:1px solid var(--line);
-}
-
-.about-grid{
-    display:grid;
-    grid-template-columns:1fr 1.5fr;
-    gap:100px;
-
-    margin-top:80px;
-}
-
-.about-left h2{
-    font-family:"Space Grotesk";
-    font-size:clamp(40px,6vw,75px);
-    line-height:.95;
-    font-weight:400;
-    letter-spacing:-4px;
-}
-
-.about-left h2 span{
-    color:#555;
-}
-
-.about-right{
-    padding-top:12px;
-}
-
-.about-right p{
-    max-width:650px;
-
-    color:#999;
-
-    font-size:16px;
-    line-height:1.9;
-}
-
-.about-right p + p{
-    margin-top:25px;
-}
-
-.about-highlight{
-    margin-top:55px;
-
-    padding-top:25px;
-
-    border-top:1px solid #292929;
-
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.stat strong{
-    display:block;
-
-    font-family:"Space Grotesk";
-    font-size:38px;
-    font-weight:400;
-}
-
-.stat span{
-    display:block;
-
-    margin-top:7px;
-
-    color:#666;
-
-    font-size:8px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-}
-
-@media(max-width:800px){
-
-    .about{
-        padding:110px 0;
-    }
-
-    .about-grid{
-        grid-template-columns:1fr;
-        gap:45px;
-        margin-top:55px;
-    }
-
-    .about-left h2{
-        font-size:52px;
-    }
-
-}
-
-
-/* =========================================================
-   MARQUEE
-========================================================= */
-
-.marquee{
-    overflow:hidden;
-
-    border-top:1px solid #222;
-    border-bottom:1px solid #222;
-
-    padding:22px 0;
-
-    background:#0b0b0b;
-}
-
-.marquee-track{
-    width:max-content;
-
-    display:flex;
-    align-items:center;
-    gap:40px;
-
-    animation:marquee 28s linear infinite;
-}
-
-.marquee span{
-    font-family:"Space Grotesk";
-    font-size:12px;
-    font-weight:500;
-
-    text-transform:uppercase;
-    letter-spacing:3px;
-
-    color:#777;
-}
-
-.marquee .dot{
-    width:4px;
-    height:4px;
-    border-radius:50%;
-    background:#555;
-}
-
-@keyframes marquee{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:translateX(-50%);
-    }
-}
-
-
-/* =========================================================
-   EXPERTISE
-========================================================= */
-
-.expertise-section{
-    padding:180px 0;
-}
-
-.expertise-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-}
-
-.expertise-title{
-    max-width:760px;
-
-    margin-top:55px;
-
-    font-family:"Space Grotesk";
-    font-size:clamp(45px,7vw,90px);
-    line-height:.9;
-    letter-spacing:-5px;
-    font-weight:400;
-}
-
-.expertise-title span{
-    color:#555;
-}
-
-.expertise-list{
-    margin-top:110px;
-
-    border-top:1px solid #282828;
-}
-
-.expertise-item{
-    display:grid;
-
-    grid-template-columns:70px 1fr 1fr 50px;
-
-    gap:25px;
-
-    align-items:center;
-
-    padding:27px 0;
-
-    border-bottom:1px solid #282828;
-
-    transition:.4s ease;
-}
-
-.expertise-item:hover{
-    padding-left:18px;
-    padding-right:18px;
-
-    background:#101010;
-}
-
-.expertise-item .number{
-    color:#555;
-    font-size:9px;
-}
-
-.expertise-item h3{
-    font-family:"Space Grotesk";
-    font-size:19px;
-    font-weight:400;
-}
-
-.expertise-item p{
-    color:#666;
-    font-size:11px;
-    line-height:1.6;
-}
-
-.expertise-item .arrow{
-    color:#555;
-    font-size:18px;
-
-    transition:.3s ease;
-}
-
-.expertise-item:hover .arrow{
-    color:#fff;
-    transform:translateX(5px);
-}
-
-@media(max-width:700px){
-
-    .expertise-section{
-        padding:110px 0;
-    }
-
-    .expertise-title{
-        margin-top:45px;
-        font-size:55px;
-        letter-spacing:-3px;
-    }
-
-    .expertise-list{
-        margin-top:70px;
-    }
-
-    .expertise-item{
-        grid-template-columns:35px 1fr 25px;
-        gap:15px;
-    }
-
-    .expertise-item p{
-        display:none;
-    }
-
-}
-
-
-/* =========================================================
-   EXPERIENCE
-========================================================= */
-
-.experience{
-    padding:160px 0;
-
-    background:#0b0b0b;
-
-    border-top:1px solid #202020;
-    border-bottom:1px solid #202020;
-}
-
-.experience-header{
-    display:grid;
-    grid-template-columns:1fr 1.5fr;
-    gap:100px;
-}
-
-.experience-header h2{
-    font-family:"Space Grotesk";
-    font-size:clamp(50px,7vw,90px);
-    line-height:.88;
-    letter-spacing:-5px;
-    font-weight:400;
-}
-
-.experience-header h2 span{
-    color:#555;
-}
-
-.experience-intro{
-    max-width:550px;
-    color:#777;
-    font-size:13px;
-    line-height:1.9;
-}
-
-.timeline{
-    margin-top:110px;
-}
-
-.timeline-item{
-    display:grid;
-    grid-template-columns:100px 1fr 1fr;
-    gap:35px;
-
-    padding:45px 0;
-
-    border-top:1px solid #292929;
-}
-
-.timeline-item:last-child{
-    border-bottom:1px solid #292929;
-}
-
-.timeline-year{
-    color:#666;
-    font-family:"Space Grotesk";
-    font-size:11px;
-}
-
-.timeline-role{
-    font-family:"Space Grotesk";
-    font-size:27px;
-    font-weight:400;
-}
-
-.timeline-company{
-    margin-top:7px;
-    color:#fff;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-}
-
-.timeline-description{
-    color:#777;
-    font-size:12px;
-    line-height:1.8;
-}
-
-@media(max-width:800px){
-
-    .experience{
-        padding:110px 0;
-    }
-
-    .experience-header{
-        grid-template-columns:1fr;
-        gap:40px;
-    }
-
-    .experience-header h2{
-        font-size:58px;
-    }
-
-    .timeline{
-        margin-top:70px;
-    }
-
-    .timeline-item{
-        grid-template-columns:70px 1fr;
-        gap:15px;
-    }
-
-    .timeline-description{
-        grid-column:2;
-    }
-
-}
-
-
-/* =========================================================
-   PROCESS
-========================================================= */
-
-.process{
-    padding:170px 0;
-}
-
-.process-heading{
-    max-width:850px;
-}
-
-.process-heading h2{
-    margin-top:55px;
-
-    font-family:"Space Grotesk";
-    font-size:clamp(48px,7vw,90px);
-    line-height:.9;
-    letter-spacing:-5px;
-    font-weight:400;
-}
-
-.process-heading h2 span{
-    color:#555;
-}
-
-.process-grid{
-    margin-top:110px;
-
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-
-    border-top:1px solid #282828;
-    border-bottom:1px solid #282828;
-}
-
-.process-item{
-    min-height:240px;
-
-    padding:28px 17px;
-
-    border-right:1px solid #282828;
-
-    transition:.4s ease;
-}
-
-.process-item:last-child{
-    border-right:0;
-}
-
-.process-item:hover{
-    background:#111;
-}
-
-.process-number{
-    color:#555;
-    font-size:9px;
-}
-
-.process-item h3{
-    margin-top:85px;
-
-    font-family:"Space Grotesk";
-    font-size:16px;
-    font-weight:400;
-}
-
-.process-item p{
-    margin-top:10px;
-
-    color:#666;
-
-    font-size:9px;
-    line-height:1.6;
-}
-
-@media(max-width:1000px){
-
-    .process-grid{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-    .process-item:nth-child(4){
-        border-right:0;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .process{
-        padding:110px 0;
-    }
-
-    .process-heading h2{
-        font-size:55px;
-        letter-spacing:-3px;
-    }
-
-    .process-grid{
-        grid-template-columns:1fr 1fr;
-        margin-top:70px;
-    }
-
-    .process-item{
-        min-height:190px;
-    }
-
-    .process-item:nth-child(4){
-        border-right:1px solid #282828;
-    }
-
-    .process-item:nth-child(even){
-        border-right:0;
-    }
-
-    .process-item h3{
-        margin-top:55px;
-    }
-
-}
-
-
-/* =========================================================
-   CASE STUDIES
-========================================================= */
-
-.cases{
-    padding:170px 0;
-    background:#f1f1ef;
-    color:#101010;
-}
-
-.cases .eyebrow{
-    color:#777;
-}
-
-.cases .eyebrow::before{
-    background:#888;
-}
-
-.cases-title{
-    margin-top:55px;
-
-    max-width:850px;
-
-    font-family:"Space Grotesk";
-    font-size:clamp(48px,7vw,90px);
-    line-height:.88;
-    letter-spacing:-5px;
-    font-weight:400;
-}
-
-.cases-title span{
-    color:#999;
-}
-
-.case-list{
-    margin-top:110px;
-}
-
-.case{
-    display:grid;
-    grid-template-columns:90px 1fr 1fr;
-    gap:40px;
-
-    padding:45px 0;
-
-    border-top:1px solid #d1d1d1;
-}
-
-.case:last-child{
-    border-bottom:1px solid #d1d1d1;
-}
-
-.case-number{
-    color:#999;
-    font-size:10px;
-}
-
-.case h3{
-    font-family:"Space Grotesk";
-    font-size:30px;
-    font-weight:400;
-}
-
-.case p{
-    color:#666;
-    font-size:12px;
-    line-height:1.9;
-}
-
-.case-flow{
-    margin-top:25px;
-
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-}
-
-.case-flow span{
-    padding:7px 10px;
-
-    border:1px solid #ccc;
-
-    font-size:8px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-@media(max-width:700px){
-
-    .cases{
-        padding:110px 0;
-    }
-
-    .cases-title{
-        font-size:55px;
-        letter-spacing:-3px;
-    }
-
-    .case{
-        grid-template-columns:45px 1fr;
-        gap:20px;
-    }
-
-    .case p{
-        grid-column:2;
-    }
-
-}
-
-
-/* =========================================================
-   CERTIFICATES
-========================================================= */
-
-.certifications{
-    padding:170px 0;
-}
-
-.cert-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-}
-
-.cert-title{
-    margin-top:55px;
-
-    font-family:"Space Grotesk";
-    font-size:clamp(50px,7vw,90px);
-    line-height:.88;
-    letter-spacing:-5px;
-    font-weight:400;
-}
-
-.cert-title span{
-    color:#555;
-}
-
-.cert-note{
-    max-width:250px;
-    color:#666;
-    font-size:10px;
-    line-height:1.7;
-}
-
-.cert-grid{
-    margin-top:100px;
-
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-
-    gap:3px;
-}
-
-.cert{
-    position:relative;
-
-    overflow:hidden;
-
-    background:#121212;
-
-    cursor:pointer;
-}
-
-.cert-image{
-    aspect-ratio:1.35/1;
-    overflow:hidden;
-}
-
-.cert-image img{
-    width:100%;
-    height:100%;
-    display:block;
-
-    object-fit:cover;
-
-    transition:
-        transform .7s cubic-bezier(.2,.8,.2,1),
-        filter .5s ease;
-
-    filter:grayscale(100%);
-}
-
-.cert:hover img{
-    transform:scale(1.06);
-    filter:grayscale(0%);
-}
-
-.cert-overlay{
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-
-    padding:20px;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(0,0,0,.85),
-            transparent 55%
-        );
-
-    opacity:0;
-
-    transition:.4s ease;
-}
-
-.cert:hover .cert-overlay{
-    opacity:1;
-}
-
-.cert-overlay span{
-    color:#fff;
-    font-size:9px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-.cert-info{
-    padding:18px 2px 25px;
-}
-
-.cert-info h3{
-    font-family:"Space Grotesk";
-    font-size:15px;
-    font-weight:400;
-}
-
-.cert-info p{
-    margin-top:6px;
-    color:#666;
-    font-size:9px;
-}
-
-@media(max-width:850px){
-
-    .cert-header{
-        display:block;
-    }
-
-    .cert-note{
-        margin-top:25px;
-    }
-
-    .cert-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-@media(max-width:550px){
-
-    .certifications{
-        padding:110px 0;
-    }
-
-    .cert-title{
-        font-size:55px;
-        letter-spacing:-3px;
-    }
-
-    .cert-grid{
-        grid-template-columns:1fr;
-        gap:25px;
-    }
-
-}
-
-
-/* =========================================================
-   EDUCATION
-========================================================= */
-
-.education{
-    padding:150px 0;
-
-    border-top:1px solid #242424;
-}
-
-.education-grid{
-    display:grid;
-    grid-template-columns:1fr 1.5fr;
-    gap:100px;
-}
-
-.education h2{
-    font-family:"Space Grotesk";
-    font-size:clamp(50px,7vw,85px);
-    line-height:.88;
-    letter-spacing:-5px;
-    font-weight:400;
-}
-
-.education h2 span{
-    color:#555;
-}
-
-.edu-content{
-    border-top:1px solid #292929;
-}
-
-.edu-row{
-    display:grid;
-    grid-template-columns:120px 1fr;
-
-    padding:35px 0;
-
-    border-bottom:1px solid #292929;
-}
-
-.edu-year{
-    color:#666;
-    font-size:10px;
-}
-
-.edu-row h3{
-    font-family:"Space Grotesk";
-    font-size:23px;
-    font-weight:400;
-}
-
-.edu-row p{
-    margin-top:7px;
-    color:#666;
-    font-size:11px;
-}
-
-@media(max-width:750px){
-
-    .education{
-        padding:110px 0;
-    }
-
-    .education-grid{
-        grid-template-columns:1fr;
-        gap:60px;
-    }
-
-    .education h2{
-        font-size:58px;
-    }
-
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact{
-    min-height:85vh;
-
-    padding:150px 0 70px;
-
-    display:flex;
-    align-items:flex-end;
-
-    background:#f1f1ef;
-    color:#080808;
-}
-
-.contact .eyebrow{
-    color:#777;
-}
-
-.contact .eyebrow::before{
-    background:#888;
-}
-
-.contact-title{
-    margin-top:55px;
-
-    max-width:1000px;
-
-    font-family:"Space Grotesk";
-    font-size:clamp(65px,11vw,150px);
-    line-height:.78;
-    letter-spacing:-8px;
-    font-weight:400;
-}
-
-.contact-title span{
-    color:#999;
-}
-
-.contact-bottom{
-    margin-top:90px;
-
-    padding-top:25px;
-
-    border-top:1px solid #ccc;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:30px;
-}
-
-.email{
-    font-family:"Space Grotesk";
-    font-size:18px;
-
-    border-bottom:1px solid #999;
-
-    padding-bottom:5px;
-}
-
-.contact-links{
-    display:flex;
-    gap:25px;
-}
-
-.contact-links a{
-    font-size:9px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-}
-
-.contact-links a:hover{
-    text-decoration:underline;
-}
-
-@media(max-width:700px){
-
-    .contact{
-        min-height:auto;
-        padding:110px 0 45px;
-    }
-
-    .contact-title{
-        font-size:65px;
-        letter-spacing:-4px;
-    }
-
-    .contact-bottom{
-        display:block;
-        margin-top:65px;
-    }
-
-    .contact-links{
-        margin-top:35px;
-        flex-wrap:wrap;
-    }
-
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-    padding:22px 0;
-
-    background:#f1f1ef;
-    color:#888;
-
-    font-size:8px;
-
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-
-    text-align:center;
-}
-
-
-/* =========================================================
-   BACK TOP
-========================================================= */
-
-.back-top{
-    position:fixed;
-
-    right:25px;
-    bottom:25px;
-
-    width:44px;
-    height:44px;
-
-    border:1px solid #333;
-
-    background:#111;
-    color:#fff;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    opacity:0;
-    visibility:hidden;
-
-    transform:translateY(10px);
-
-    transition:.3s ease;
-
-    z-index:4000;
-}
-
-.back-top.show{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
-}
-
-
-/* =========================================================
-   REVEAL ANIMATION
-========================================================= */
-
-.reveal{
-    opacity:0;
-    transform:translateY(35px);
-
-    transition:
-        opacity .9s ease,
-        transform .9s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.visible{
-    opacity:1;
-    transform:translateY(0);
-}
-
-
-/* =========================================================
-   CERTIFICATE MODAL
-========================================================= */
-
-.viewer{
-    position:fixed;
-    inset:0;
-
-    z-index:10000;
-
-    background:rgba(0,0,0,.96);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:30px;
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.35s ease;
-}
-
-.viewer.open{
-    opacity:1;
-    visibility:visible;
-}
-
-.viewer img{
-    max-width:90vw;
-    max-height:85vh;
-
-    object-fit:contain;
-
-    background:#fff;
-}
-
-.viewer-close{
-    position:absolute;
-    top:25px;
-    right:25px;
-
-    width:45px;
-    height:45px;
-
-    border:1px solid #444;
-
-    background:#111;
-    color:#fff;
-
-    font-size:20px;
-
-    cursor:pointer;
-}
-
-.viewer-arrow{
-    position:absolute;
-    top:50%;
-
-    width:48px;
-    height:48px;
-
-    border:1px solid #444;
-
-    background:#111;
-    color:#fff;
-
-    cursor:pointer;
-
-    transform:translateY(-50%);
-
-    font-size:20px;
-}
-
-.viewer-prev{
-    left:25px;
-}
-
-.viewer-next{
-    right:25px;
-}
-
-.viewer-title{
-    position:absolute;
-    bottom:20px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    color:#aaa;
-
-    font-size:9px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-
-    white-space:nowrap;
-}
-
-@media(max-width:600px){
-
-    .viewer{
-        padding:15px;
-    }
-
-    .viewer img{
-        max-width:94vw;
-        max-height:80vh;
-    }
-
-    .viewer-prev{
-        left:10px;
-    }
-
-    .viewer-next{
-        right:10px;
-    }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-        animation:none !important;
-        transition:none !important;
-        scroll-behavior:auto !important;
-    }
-
-    .reveal{
-        opacity:1;
-        transform:none;
-    }
-
-}
-
-</style>
-</head>
-
-
-<body>
-
-
-<!-- =====================================================
-     LOADER
-===================================================== -->
-
-<div class="loader" id="loader">
-
-    <div class="loader-name">
-        RIZWAN ANSARI
-    </div>
-
-    <div class="loader-percent" id="loaderPercent">
-        0%
-    </div>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Rizwan Ansari | QA/QC Officer | Electrical & RMU Manufacturing</title>  <meta name="description" content="Rizwan Ansari — QA/QC Officer specializing in electrical and RMU manufacturing, quality inspection, Lean Six Sigma, 8D problem solving and ISO 9001:2015.">  <meta name="theme-color" content="#06101d">  <link rel="preconnect" href="https://fonts.googleapis.com">  
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>  
+  
+/* =========================================================  
+   PREMIUM QA/QC PORTFOLIO V2  
+========================================================= */  
+  
+:root{  
+    --bg:#030711;  
+    --bg2:#071321;  
+    --surface:rgba(255,255,255,.045);  
+    --surface2:rgba(255,255,255,.075);  
+  
+    --blue:#18c8ff;  
+    --cyan:#52efff;  
+    --blue2:#087cff;  
+  
+    --green:#43ef9a;  
+  
+    --white:#fff;  
+    --text:#eaf5ff;  
+    --muted:#8fa5bb;  
+    --muted2:#62758b;  
+  
+    --border:rgba(255,255,255,.10);  
+    --borderBlue:rgba(24,200,255,.28);  
+  
+    --shadow:0 25px 80px rgba(0,0,0,.30);  
+  
+    --nav:76px;  
+}  
+  
+/* =========================================================  
+   RESET  
+========================================================= */  
+  
+*{  
+    margin:0;  
+    padding:0;  
+    box-sizing:border-box;  
+}  
+  
+html{  
+    scroll-behavior:smooth;  
+    scroll-padding-top:90px;  
+}  
+  
+body{  
+    min-height:100vh;  
+    overflow-x:hidden;  
+  
+    font-family:"Inter",sans-serif;  
+  
+    color:var(--text);  
+  
+    background:  
+        radial-gradient(  
+            circle at 10% 10%,  
+            rgba(8,124,255,.16),  
+            transparent 28%  
+        ),  
+        radial-gradient(  
+            circle at 90% 5%,  
+            rgba(24,200,255,.12),  
+            transparent 25%  
+        ),  
+        radial-gradient(  
+            circle at 50% 80%,  
+            rgba(8,124,255,.07),  
+            transparent 30%  
+        ),  
+        linear-gradient(  
+            135deg,  
+            var(--bg),  
+            var(--bg2)  
+        );  
+  
+    transition:background .4s ease,color .4s ease;  
+}  
+  
+body.light{  
+    --bg:#eef7fc;  
+    --bg2:#dcecf5;  
+    --surface:rgba(255,255,255,.65);  
+    --surface2:rgba(255,255,255,.9);  
+  
+    --text:#071321;  
+    --muted:#52697d;  
+    --muted2:#718598;  
+  
+    --border:rgba(4,35,60,.12);  
+    --borderBlue:rgba(8,124,255,.30);  
+  
+    background:  
+        radial-gradient(circle at 10% 10%,rgba(24,200,255,.20),transparent 30%),  
+        linear-gradient(135deg,var(--bg),var(--bg2));  
+}  
+  
+a{  
+    color:inherit;  
+}  
+  
+button,  
+a{  
+    -webkit-tap-highlight-color:transparent;  
+}  
+  
+button{  
+    font-family:inherit;  
+}  
+  
+/* =========================================================  
+   BACKGROUND GRID  
+========================================================= */  
+  
+body::before{  
+    content:"";  
+    position:fixed;  
+    inset:0;  
+    z-index:-10;  
+    pointer-events:none;  
+  
+    background-image:  
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),  
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);  
+  
+    background-size:44px 44px;  
+  
+    mask-image:linear-gradient(  
+        to bottom,  
+        rgba(0,0,0,.9),  
+        rgba(0,0,0,.15)  
+    );  
+}  
+  
+body.light::before{  
+    background-image:  
+        linear-gradient(rgba(0,40,70,.045) 1px,transparent 1px),  
+        linear-gradient(90deg,rgba(0,40,70,.045) 1px,transparent 1px);  
+}  
+  
+/* =========================================================  
+   FLOATING ORBS  
+========================================================= */  
+  
+.orb{  
+    position:fixed;  
+    width:420px;  
+    height:420px;  
+    border-radius:50%;  
+  
+    pointer-events:none;  
+    z-index:-5;  
+  
+    filter:blur(80px);  
+  
+    opacity:.12;  
+  
+    animation:orbFloat 14s ease-in-out infinite alternate;  
+}  
+  
+.orb.one{  
+    top:10%;  
+    left:-220px;  
+    background:var(--blue2);  
+}  
+  
+.orb.two{  
+    right:-230px;  
+    top:40%;  
+    background:var(--cyan);  
+    animation-delay:-5s;  
+}  
+  
+.orb.three{  
+    bottom:-250px;  
+    left:40%;  
+    background:#0066ff;  
+    animation-delay:-9s;  
+}  
+  
+@keyframes orbFloat{  
+    from{  
+        transform:translate(0,0) scale(1);  
+    }  
+    to{  
+        transform:translate(80px,-50px) scale(1.12);  
+    }  
+}  
+  
+/* =========================================================  
+   PARTICLES  
+========================================================= */  
+  
+#particles{  
+    position:fixed;  
+    inset:0;  
+    pointer-events:none;  
+    z-index:-4;  
+}  
+  
+.particle{  
+    position:absolute;  
+    width:2px;  
+    height:2px;  
+    border-radius:50%;  
+    background:var(--cyan);  
+    box-shadow:0 0 10px var(--cyan);  
+    opacity:.35;  
+  
+    animation:particleMove linear infinite;  
+}  
+  
+@keyframes particleMove{  
+    from{  
+        transform:translateY(110vh);  
+        opacity:0;  
+    }  
+  
+    20%{  
+        opacity:.4;  
+    }  
+  
+    80%{  
+        opacity:.3;  
+    }  
+  
+    to{  
+        transform:translateY(-20vh);  
+        opacity:0;  
+    }  
+}  
+  
+/* =========================================================  
+   LOADER  
+========================================================= */  
+  
+#loader{  
+    position:fixed;  
+    inset:0;  
+    z-index:99999;  
+  
+    display:flex;  
+    justify-content:center;  
+    align-items:center;  
+  
+    background:#02050b;  
+  
+    transition:  
+        opacity .8s ease,  
+        visibility .8s ease;  
+}  
+  
+#loader.hide{  
+    opacity:0;  
+    visibility:hidden;  
+}  
+  
+.loader-box{  
+    text-align:center;  
+}  
+  
+.loader-logo{  
+    width:82px;  
+    height:82px;  
+  
+    display:flex;  
+    justify-content:center;  
+    align-items:center;  
+  
+    margin:auto;  
+  
+    border:1px solid rgba(24,200,255,.5);  
+    border-radius:22px;  
+  
+    color:var(--cyan);  
+  
+    font-family:"Space Grotesk";  
+    font-size:25px;  
+    font-weight:700;  
+  
+    background:rgba(24,200,255,.04);  
+  
+    box-shadow:  
+        0 0 40px rgba(24,200,255,.16),  
+        inset 0 0 30px rgba(24,200,255,.05);  
+  
+    animation:loaderPulse 1.5s infinite;  
+}  
+  
+.loader-text{  
+    margin-top:20px;  
+  
+    color:#7e94a9;  
+  
+    font-size:10px;  
+    letter-spacing:4px;  
+    text-transform:uppercase;  
+}  
+  
+.loader-line{  
+    width:170px;  
+    height:2px;  
+  
+    margin:20px auto 0;  
+  
+    overflow:hidden;  
+  
+    background:rgba(255,255,255,.08);  
+}  
+  
+.loader-line span{  
+    display:block;  
+    width:40%;  
+    height:100%;  
+  
+    background:linear-gradient(  
+        90deg,  
+        var(--blue2),  
+        var(--cyan)  
+    );  
+  
+    animation:loaderLine 1.2s infinite;  
+}  
+  
+@keyframes loaderPulse{  
+    50%{  
+        transform:scale(1.06);  
+        box-shadow:0 0 55px rgba(24,200,255,.32);  
+    }  
+}  
+  
+@keyframes loaderLine{  
+    from{  
+        transform:translateX(-160%);  
+    }  
+  
+    to{  
+        transform:translateX(420%);  
+    }  
+}  
+  
+/* =========================================================  
+   SCROLL BAR  
+========================================================= */  
+  
+::-webkit-scrollbar{  
+    width:7px;  
+}  
+  
+::-webkit-scrollbar-track{  
+    background:#030711;  
+}  
+  
+::-webkit-scrollbar-thumb{  
+    border-radius:20px;  
+    background:linear-gradient(  
+        var(--blue2),  
+        var(--cyan)  
+    );  
+}  
+  
+/* =========================================================  
+   PROGRESS  
+========================================================= */  
+  
+#progressBar{  
+    position:fixed;  
+    top:0;  
+    left:0;  
+  
+    width:0;  
+    height:3px;  
+  
+    z-index:10010;  
+  
+    background:linear-gradient(  
+        90deg,  
+        var(--blue2),  
+        var(--cyan)  
+    );  
+  
+    box-shadow:0 0 18px var(--cyan);  
+}  
+  
+/* =========================================================  
+   CURSOR  
+========================================================= */  
+  
+.cursor-dot,  
+.cursor-ring{  
+    position:fixed;  
+    top:0;  
+    left:0;  
+  
+    pointer-events:none;  
+  
+    transform:translate(-50%,-50%);  
+  
+    z-index:100000;  
+  
+    border-radius:50%;  
+}  
+  
+.cursor-dot{  
+    width:5px;  
+    height:5px;  
+  
+    background:var(--cyan);  
+    box-shadow:0 0 14px var(--cyan);  
+}  
+  
+.cursor-ring{  
+    width:35px;  
+    height:35px;  
+  
+    border:1px solid rgba(82,239,255,.6);  
+  
+    transition:  
+        width .25s ease,  
+        height .25s ease,  
+        background .25s ease;  
+}  
+  
+body.cursor-hover .cursor-ring{  
+    width:55px;  
+    height:55px;  
+  
+    background:rgba(82,239,255,.06);  
+    border-color:var(--cyan);  
+}  
+  
+/* =========================================================  
+   NAV  
+========================================================= */  
+  
+nav{  
+    position:fixed;  
+    top:0;  
+    left:0;  
+    right:0;  
+  
+    height:var(--nav);  
+  
+    z-index:5000;  
+  
+    display:flex;  
+    align-items:center;  
+  
+    border-bottom:1px solid var(--border);  
+  
+    background:rgba(3,7,17,.58);  
+  
+    backdrop-filter:blur(22px);  
+    -webkit-backdrop-filter:blur(22px);  
+  
+    transition:.35s ease;  
+}  
+  
+body.light nav{  
+    background:rgba(238,247,252,.72);  
+}  
+  
+nav.scrolled{  
+    background:rgba(3,7,17,.91);  
+    box-shadow:0 15px 50px rgba(0,0,0,.25);  
+}  
+  
+body.light nav.scrolled{  
+    background:rgba(238,247,252,.94);  
+}  
+  
+.nav-inner{  
+    width:min(1180px,92%);  
+    margin:auto;  
+  
+    display:flex;  
+    align-items:center;  
+    justify-content:space-between;  
+}  
+  
+.logo{  
+    width:46px;  
+    height:46px;  
+  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+  
+    text-decoration:none;  
+  
+    font-family:"Space Grotesk";  
+    font-weight:700;  
+  
+    border:1px solid rgba(24,200,255,.38);  
+    border-radius:13px;  
+  
+    background:linear-gradient(  
+        135deg,  
+        rgba(24,200,255,.14),  
+        rgba(8,124,255,.04)  
+    );  
+  
+    color:var(--text);  
+  
+    transition:.3s ease;  
+}  
+  
+.logo:hover{  
+    transform:translateY(-2px) rotate(3deg);  
+    box-shadow:0 0 35px rgba(24,200,255,.22);  
+}  
+  
+.nav-links{  
+    display:flex;  
+    align-items:center;  
+    gap:27px;  
+}  
+  
+.nav-links a{  
+    position:relative;  
+  
+    color:var(--muted);  
+  
+    text-decoration:none;  
+  
+    font-size:12px;  
+    font-weight:600;  
+  
+    transition:.3s ease;  
+}  
+  
+.nav-links a::after{  
+    content:"";  
+  
+    position:absolute;  
+    left:50%;  
+    bottom:-9px;  
+  
+    width:0;  
+    height:2px;  
+  
+    transform:translateX(-50%);  
+  
+    background:var(--cyan);  
+  
+    box-shadow:0 0 10px var(--cyan);  
+  
+    transition:.3s ease;  
+}  
+  
+.nav-links a:hover,  
+.nav-links a.active{  
+    color:var(--text);  
+}  
+  
+.nav-links a:hover::after,  
+.nav-links a.active::after{  
+    width:100%;  
+}  
+  
+.nav-actions{  
+    display:flex;  
+    align-items:center;  
+    gap:9px;  
+}  
+  
+.theme-btn,  
+.menu-btn{  
+    width:42px;  
+    height:42px;  
+  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+  
+    border:1px solid var(--border);  
+    border-radius:11px;  
+  
+    background:var(--surface);  
+  
+    color:var(--text);  
+  
+    cursor:pointer;  
+  
+    transition:.3s ease;  
+}  
+  
+.theme-btn:hover,  
+.menu-btn:hover{  
+    border-color:var(--borderBlue);  
+    background:rgba(24,200,255,.08);  
+}  
+  
+.menu-btn{  
+    display:none;  
+    font-size:18px;  
+}  
+  
+/* =========================================================  
+   COMMON  
+========================================================= */  
+  
+.container{  
+    width:min(1180px,92%);  
+    margin:auto;  
+}  
+  
+section{  
+    position:relative;  
+    padding:115px 0;  
+    scroll-margin-top:80px;  
+}  
+  
+.section-head{  
+    margin-bottom:52px;  
+}  
+  
+.section-label{  
+    display:inline-flex;  
+    align-items:center;  
+    gap:10px;  
+  
+    margin-bottom:14px;  
+  
+    color:var(--blue);  
+  
+    font-size:10px;  
+    font-weight:700;  
+  
+    letter-spacing:3px;  
+    text-transform:uppercase;  
+}  
+  
+.section-label::before{  
+    content:"";  
+  
+    width:28px;  
+    height:1px;  
+  
+    background:var(--blue);  
+  
+    box-shadow:0 0 10px var(--blue);  
+}  
+  
+.section-title{  
+    font-family:"Space Grotesk";  
+  
+    font-size:clamp(35px,5vw,58px);  
+  
+    line-height:.98;  
+  
+    letter-spacing:-2.5px;  
+}  
+  
+.section-title span{  
+    color:var(--blue);  
+}  
+  
+.section-description{  
+    max-width:700px;  
+  
+    margin-top:18px;  
+  
+    color:var(--muted);  
+  
+    font-size:14px;  
+    line-height:1.9;  
+}  
+  
+/* =========================================================  
+   HERO  
+========================================================= */  
+  
+.hero{  
+    min-height:100vh;  
+  
+    display:flex;  
+    align-items:center;  
+  
+    padding-top:130px;  
+  
+    overflow:hidden;  
+}  
+  
+.hero-grid{  
+    display:grid;  
+  
+    grid-template-columns:1.12fr .88fr;  
+  
+    gap:70px;  
+  
+    align-items:center;  
+}  
+  
+.status{  
+    display:inline-flex;  
+    align-items:center;  
+    gap:10px;  
+  
+    padding:9px 14px;  
+  
+    margin-bottom:26px;  
+  
+    border:1px solid rgba(24,200,255,.2);  
+    border-radius:50px;  
+  
+    background:rgba(24,200,255,.045);  
+  
+    color:#a8dcec;  
+  
+    font-size:10px;  
+    font-weight:600;  
+  
+    letter-spacing:.4px;  
+}  
+  
+.status-dot{  
+    width:7px;  
+    height:7px;  
+  
+    border-radius:50%;  
+  
+    background:var(--green);  
+  
+    box-shadow:0 0 13px var(--green);  
+  
+    animation:statusPulse 1.5s infinite;  
+}  
+  
+@keyframes statusPulse{  
+    50%{  
+        transform:scale(1.5);  
+        opacity:.45;  
+    }  
+}  
+  
+.hero h1{  
+    font-family:"Space Grotesk";  
+  
+    font-size:clamp(64px,9vw,115px);  
+  
+    line-height:.79;  
+  
+    letter-spacing:-7px;  
+  
+    margin-bottom:27px;  
+}  
+  
+.hero h1 .first{  
+    display:block;  
+    color:var(--text);  
+}  
+  
+.hero h1 .last{  
+    display:block;  
+  
+    color:transparent;  
+  
+    -webkit-text-stroke:1px rgba(255,255,255,.72);  
+  
+    text-shadow:  
+        0 0 35px rgba(24,200,255,.08);  
+}  
+  
+body.light .hero h1 .last{  
+    -webkit-text-stroke:1px rgba(7,19,33,.65);  
+}  
+  
+.hero-role{  
+    min-height:38px;  
+  
+    display:flex;  
+    align-items:center;  
+  
+    gap:10px;  
+  
+    color:var(--blue);  
+  
+    font-size:clamp(18px,2.8vw,28px);  
+    font-weight:700;  
+}  
+  
+.hero-role::before{  
+    content:"";  
+  
+    width:35px;  
+    height:2px;  
+  
+    background:linear-gradient(  
+        90deg,  
+        var(--blue),  
+        transparent  
+    );  
+}  
+  
+.typing-cursor{  
+    width:2px;  
+    height:24px;  
+  
+    background:var(--cyan);  
+  
+    animation:blink .8s infinite;  
+}  
+  
+@keyframes blink{  
+    50%{opacity:0}  
+}  
+  
+.hero-tagline{  
+    margin-top:20px;  
+  
+    font-family:"Space Grotesk";  
+  
+    font-size:20px;  
+    font-weight:600;  
+  
+    color:var(--text);  
+}  
+  
+.hero-description{  
+    max-width:640px;  
+  
+    margin-top:16px;  
+  
+    color:var(--muted);  
+  
+    font-size:14px;  
+  
+    line-height:1.9;  
+}  
+  
+.hero-buttons{  
+    display:flex;  
+    flex-wrap:wrap;  
+    gap:12px;  
+  
+    margin-top:31px;  
+}  
+  
+.btn{  
+    position:relative;  
+  
+    display:inline-flex;  
+    align-items:center;  
+    justify-content:center;  
+    gap:9px;  
+  
+    min-height:45px;  
+  
+    padding:12px 19px;  
+  
+    border-radius:10px;  
+  
+    text-decoration:none;  
+  
+    font-size:12px;  
+    font-weight:700;  
+  
+    overflow:hidden;  
+  
+    cursor:pointer;  
+  
+    transition:.3s ease;  
+}  
+  
+.btn::before{  
+    content:"";  
+  
+    position:absolute;  
+    top:0;  
+    left:-130%;  
+  
+    width:70%;  
+    height:100%;  
+  
+    transform:skewX(-20deg);  
+  
+    background:linear-gradient(  
+        90deg,  
+        transparent,  
+        rgba(255,255,255,.3),  
+        transparent  
+    );  
+  
+    transition:.65s ease;  
+}  
+  
+.btn:hover::before{  
+    left:140%;  
+}  
+  
+.btn-primary{  
+    color:#02101a;  
+  
+    background:linear-gradient(  
+        135deg,  
+        var(--cyan),  
+        var(--blue)  
+    );  
+  
+    box-shadow:  
+        0 12px 35px rgba(24,200,255,.18);  
+}  
+  
+.btn-primary:hover{  
+    transform:translateY(-3px);  
+  
+    box-shadow:  
+        0 18px 45px rgba(24,200,255,.28);  
+}  
+  
+.btn-outline{  
+    color:var(--text);  
+  
+    border:1px solid var(--border);  
+  
+    background:var(--surface);  
+}  
+  
+.btn-outline:hover{  
+    transform:translateY(-3px);  
+  
+    border-color:var(--borderBlue);  
+  
+    background:rgba(24,200,255,.07);  
+}  
+  
+.hero-mini-stats{  
+    display:flex;  
+    flex-wrap:wrap;  
+    gap:10px;  
+  
+    margin-top:28px;  
+}  
+  
+.mini-stat{  
+    padding:10px 13px;  
+  
+    border:1px solid var(--border);  
+    border-radius:9px;  
+  
+    background:rgba(255,255,255,.025);  
+}  
+  
+.mini-stat strong{  
+    display:block;  
+  
+    font-family:"Space Grotesk";  
+  
+    font-size:17px;  
+}  
+  
+.mini-stat span{  
+    display:block;  
+  
+    margin-top:2px;  
+  
+    color:var(--muted2);  
+  
+    font-size:9px;  
+  
+    text-transform:uppercase;  
+    letter-spacing:1px;  
+}  
+  
+/* =========================================================  
+   HERO VISUAL  
+========================================================= */  
+  
+.hero-visual{  
+    position:relative;  
+}  
+  
+.profile-wrap{  
+    position:relative;  
+  
+    width:min(400px,80vw);  
+  
+    aspect-ratio:1;  
+  
+    margin:auto;  
+}  
+  
+.profile-ring{  
+    position:absolute;  
+    inset:-15px;  
+  
+    border-radius:50%;  
+  
+    background:conic-gradient(  
+        from 0deg,  
+        transparent 0deg,  
+        var(--blue) 70deg,  
+        transparent 145deg,  
+        var(--cyan) 240deg,  
+        transparent 320deg  
+    );  
+  
+    filter:drop-shadow(  
+        0 0 20px rgba(24,200,255,.32)  
+    );  
+  
+    animation:spin 9s linear infinite;  
+}  
+  
+.profile-ring::after{  
+    content:"";  
+  
+    position:absolute;  
+    inset:2px;  
+  
+    border-radius:50%;  
+  
+    background:var(--bg);  
+}  
+  
+@keyframes spin{  
+    to{  
+        transform:rotate(360deg);  
+    }  
+}  
+  
+.profile-card{  
+    position:absolute;  
+    inset:0;  
+  
+    overflow:hidden;  
+  
+    border:1px solid rgba(255,255,255,.14);  
+    border-radius:50%;  
+  
+    background:rgba(255,255,255,.04);  
+  
+    box-shadow:  
+        0 35px 100px rgba(0,0,0,.5),  
+        0 0 60px rgba(24,200,255,.08);  
+}  
+  
+.profile-card img{  
+    width:100%;  
+    height:100%;  
+  
+    object-fit:cover;  
+  
+    display:block;  
+  
+    filter:saturate(.9) contrast(1.05);  
+  
+    transition:.6s ease;  
+}  
+  
+.profile-card:hover img{  
+    transform:scale(1.06);  
+}  
+  
+.profile-badge{  
+    position:absolute;  
+  
+    bottom:24px;  
+    left:50%;  
+  
+    transform:translateX(-50%);  
+  
+    padding:10px 17px;  
+  
+    white-space:nowrap;  
+  
+    border:1px solid rgba(24,200,255,.3);  
+    border-radius:50px;  
+  
+    background:rgba(3,7,17,.76);  
+  
+    backdrop-filter:blur(15px);  
+  
+    color:white;  
+  
+    font-size:9px;  
+    font-weight:700;  
+  
+    letter-spacing:1px;  
+}  
+  
+.floating-card{  
+    position:absolute;  
+  
+    padding:13px 15px;  
+  
+    border:1px solid rgba(24,200,255,.2);  
+    border-radius:13px;  
+  
+    background:rgba(3,7,17,.72);  
+  
+    backdrop-filter:blur(18px);  
+  
+    box-shadow:0 20px 50px rgba(0,0,0,.3);  
+  
+    animation:floatCard 4s ease-in-out infinite;  
+}  
+  
+.floating-card strong{  
+    display:block;  
+  
+    font-family:"Space Grotesk";  
+  
+    font-size:19px;  
+}  
+  
+.floating-card span{  
+    display:block;  
+  
+    margin-top:3px;  
+  
+    color:#8ba1b6;  
+  
+    font-size:8px;  
+  
+    text-transform:uppercase;  
+    letter-spacing:1px;  
+}  
+  
+.floating-card.one{  
+    top:12%;  
+    right:-5%;  
+}  
+  
+.floating-card.two{  
+    bottom:13%;  
+    left:-8%;  
+  
+    animation-delay:-2s;  
+}  
+  
+@keyframes floatCard{  
+    50%{  
+        transform:translateY(-10px);  
+    }  
+}  
+  
+/* =========================================================  
+   GLASS  
+========================================================= */  
+  
+.glass{  
+    position:relative;  
+  
+    overflow:hidden;  
+  
+    border:1px solid var(--border);  
+    border-radius:18px;  
+  
+    background:  
+        linear-gradient(  
+            135deg,  
+            rgba(255,255,255,.055),  
+            rgba(255,255,255,.018)  
+        );  
+  
+    box-shadow:var(--shadow);  
+  
+    transition:  
+        transform .35s ease,  
+        border-color .35s ease,  
+        box-shadow .35s ease;  
+}  
+  
+body.light .glass{  
+    background:rgba(255,255,255,.60);  
+}  
+  
+.glass::before{  
+    content:"";  
+  
+    position:absolute;  
+    inset:0;  
+  
+    pointer-events:none;  
+  
+    background:  
+        linear-gradient(  
+            120deg,  
+            transparent 35%,  
+            rgba(53,228,255,.07),  
+            transparent 65%  
+        );  
+  
+    transform:translateX(-100%);  
+  
+    transition:.8s ease;  
+}  
+  
+.glass:hover::before{  
+    transform:translateX(100%);  
+}  
+  
+.glass:hover{  
+    border-color:rgba(24,200,255,.24);  
+  
+    box-shadow:  
+        0 30px 90px rgba(0,0,0,.35),  
+        0 0 35px rgba(24,200,255,.05);  
+}  
+  
+/* =========================================================  
+   ABOUT  
+========================================================= */  
+  
+.about-grid{  
+    display:grid;  
+  
+    grid-template-columns:.85fr 1.15fr;  
+  
+    gap:22px;  
+}  
+  
+.about-info{  
+    padding:30px;  
+}  
+  
+.info-list{  
+    display:flex;  
+    flex-direction:column;  
+    gap:18px;  
+}  
+  
+.info-item{  
+    display:flex;  
+    justify-content:space-between;  
+    gap:20px;  
+  
+    padding-bottom:16px;  
+  
+    border-bottom:1px solid var(--border);  
+}  
+  
+.info-item:last-child{  
+    border-bottom:0;  
+    padding-bottom:0;  
+}  
+  
+.info-label{  
+    color:var(--muted2);  
+  
+    font-size:9px;  
+    font-weight:700;  
+  
+    text-transform:uppercase;  
+    letter-spacing:1.2px;  
+}  
+  
+.info-value{  
+    text-align:right;  
+  
+    color:var(--text);  
+  
+    font-size:12px;  
+    font-weight:600;  
+}  
+  
+.about-text{  
+    padding:31px;  
+  
+    color:var(--muted);  
+  
+    font-size:14px;  
+  
+    line-height:1.95;  
+}  
+  
+.about-text strong{  
+    color:var(--text);  
+}  
+  
+/* =========================================================  
+   DASHBOARD  
+========================================================= */  
+  
+.dashboard{  
+    margin-top:22px;  
+  
+    display:grid;  
+  
+    grid-template-columns:repeat(4,1fr);  
+  
+    gap:14px;  
+}  
+  
+.dashboard-card{  
+    position:relative;  
+  
+    padding:25px 20px;  
+  
+    text-align:center;  
+  
+    border:1px solid var(--border);  
+    border-radius:15px;  
+  
+    background:var(--surface);  
+  
+    overflow:hidden;  
+}  
+  
+.dashboard-card::after{  
+    content:"";  
+  
+    position:absolute;  
+  
+    left:10%;  
+    right:10%;  
+    bottom:0;  
+  
+    height:2px;  
+  
+    background:linear-gradient(  
+        90deg,  
+        transparent,  
+        var(--cyan),  
+        transparent  
+    );  
+  
+    opacity:.6;  
+}  
+  
+.dashboard-number{  
+    font-family:"Space Grotesk";  
+  
+    font-size:34px;  
+    font-weight:700;  
+}  
+  
+.dashboard-label{  
+    margin-top:7px;  
+  
+    color:var(--muted);  
+  
+    font-size:9px;  
+    font-weight:700;  
+  
+    text-transform:uppercase;  
+    letter-spacing:1px;  
+}  
+  
+/* =========================================================  
+   QUALITY PROCESS  
+========================================================= */  
+  
+.process-grid{  
+    display:grid;  
+  
+    grid-template-columns:repeat(7,1fr);  
+  
+    gap:7px;  
+  
+    align-items:stretch;  
+}  
+  
+.process-step{  
+    position:relative;  
+  
+    min-height:170px;  
+  
+    padding:20px 12px;  
+  
+    display:flex;  
+    flex-direction:column;  
+    align-items:center;  
+    justify-content:center;  
+  
+    text-align:center;  
+  
+    border:1px solid var(--border);  
+    border-radius:14px;  
+  
+    background:var(--surface);  
+  
+    transition:.35s ease;  
+}  
+  
+.process-step:hover{  
+    transform:translateY(-8px);  
+  
+    border-color:var(--borderBlue);  
+  
+    background:rgba(24,200,255,.06);  
+}  
+  
+.process-number{  
+    width:38px;  
+    height:38px;  
+  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+  
+    margin-bottom:16px;  
+  
+    border-radius:50%;  
+  
+    border:1px solid rgba(24,200,255,.25);  
+  
+    color:var(--cyan);  
+  
+    font-family:"Space Grotesk";  
+    font-size:12px;  
+    font-weight:700;  
+}  
+  
+.process-step h3{  
+    font-family:"Space Grotesk";  
+  
+    font-size:12px;  
+}  
+  
+.process-step p{  
+    margin-top:8px;  
+  
+    color:var(--muted2);  
+  
+    font-size:9px;  
+  
+    line-height:1.5;  
+}  
+  
+/* =========================================================  
+   EXPERIENCE  
+========================================================= */  
+  
+.timeline{  
+    position:relative;  
+  
+    max-width:1000px;  
+  
+    margin:auto;  
+}  
+  
+.timeline::before{  
+    content:"";  
+  
+    position:absolute;  
+  
+    top:0;  
+    bottom:0;  
+    left:50%;  
+  
+    width:1px;  
+  
+    transform:translateX(-50%);  
+  
+    background:  
+        linear-gradient(  
+            to bottom,  
+            transparent,  
+            var(--blue),  
+            var(--cyan),  
+            transparent  
+        );  
+}  
+  
+.timeline-item{  
+    position:relative;  
+  
+    width:50%;  
+  
+    padding:0 40px 55px;  
+}  
+  
+.timeline-item:nth-child(odd){  
+    left:0;  
+    text-align:right;  
+}  
+  
+.timeline-item:nth-child(even){  
+    left:50%;  
+}  
+  
+.timeline-dot{  
+    position:absolute;  
+  
+    top:20px;  
+  
+    width:13px;  
+    height:13px;  
+  
+    border:3px solid var(--bg);  
+  
+    border-radius:50%;  
+  
+    background:var(--cyan);  
+  
+    box-shadow:0 0 20px var(--cyan);  
+  
+    z-index:2;  
+}  
+  
+.timeline-item:nth-child(odd) .timeline-dot{  
+    right:-7px;  
+}  
+  
+.timeline-item:nth-child(even) .timeline-dot{  
+    left:-6px;  
+}  
+  
+.timeline-card{  
+    padding:28px;  
+  
+    text-align:left;  
+}  
+  
+.timeline-item:nth-child(odd) .timeline-card{  
+    text-align:left;  
+}  
+  
+.timeline-date{  
+    color:var(--blue);  
+  
+    font-size:9px;  
+    font-weight:800;  
+  
+    letter-spacing:2px;  
+    text-transform:uppercase;  
+}  
+  
+.timeline-card h3{  
+    margin-top:11px;  
+  
+    font-family:"Space Grotesk";  
+  
+    font-size:21px;  
+}  
+  
+.timeline-company{  
+    margin-top:6px;  
+  
+    color:var(--blue);  
+  
+    font-size:12px;  
+    font-weight:700;  
+}  
+  
+.timeline-card p{  
+    margin-top:16px;  
+  
+    color:var(--muted);  
+  
+    font-size:12px;  
+  
+    line-height:1.8;  
+}  
+  
+.tags{  
+    display:flex;  
+    flex-wrap:wrap;  
+    gap:7px;  
+  
+    margin-top:18px;  
+}  
+  
+.timeline-item:nth-child(odd) .tags{  
+    justify-content:flex-start;  
+}  
+  
+.tag{  
+    padding:6px 9px;  
+  
+    border:1px solid rgba(24,200,255,.15);  
+    border-radius:6px;  
+  
+    background:rgba(24,200,255,.035);  
+  
+    color:#9bdcf0;  
+  
+    font-size:8px;  
+    font-weight:700;  
+}  
+  
+/* =========================================================  
+   SKILLS  
+========================================================= */  
+  
+.skills-grid{  
+    display:grid;  
+  
+    grid-template-columns:repeat(4,1fr);  
+  
+    gap:15px;  
+}  
+  
+.skill{  
+    min-height:180px;  
+  
+    padding:25px;  
+}  
+  
+.skill-icon{  
+    width:43px;  
+    height:43px;  
+  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+  
+    margin-bottom:21px;  
+  
+    border:1px solid rgba(24,200,255,.18);  
+    border-radius:11px;  
+  
+    background:rgba(24,200,255,.055);  
+  
+    color:var(--cyan);  
+  
+    font-size:17px;  
+}  
+  
+.skill h3{  
+    font-family:"Space Grotesk";  
+  
+    font-size:15px;  
+}  
+  
+.skill p{  
+    margin-top:9px;  
+  
+    color:var(--muted2);  
+  
+    font-size:11px;  
+  
+    line-height:1.65;  
+}  
+  
+/* =========================================================  
+   SKILL METER  
+========================================================= */  
+  
+.skill-meter{  
+    margin-top:18px;  
+}  
+  
+.meter-head{  
+    display:flex;  
+    justify-content:space-between;  
+  
+    color:var(--muted2);  
+  
+    font-size:8px;  
+    font-weight:700;  
+  
+    text-transform:uppercase;  
+}  
+  
+.meter{  
+    height:3px;  
+  
+    margin-top:7px;  
+  
+    overflow:hidden;  
+  
+    border-radius:10px;  
+  
+    background:rgba(255,255,255,.08);  
+}  
+  
+.meter span{  
+    display:block;  
+  
+    height:100%;  
+  
+    border-radius:10px;  
+  
+    background:linear-gradient(  
+        90deg,  
+        var(--blue2),  
+        var(--cyan)  
+    );  
+  
+    transform-origin:left;  
+  
+    animation:meterLoad 1.4s ease forwards;  
+}  
+  
+@keyframes meterLoad{  
+    from{  
+        transform:scaleX(0);  
+    }  
+  
+    to{  
+        transform:scaleX(1);  
+    }  
+}  
+  
+/* =========================================================  
+   EXPERTISE  
+========================================================= */  
+  
+.expertise-grid{  
+    display:grid;  
+  
+    grid-template-columns:repeat(5,1fr);  
+  
+    gap:13px;  
+}  
+  
+.expertise{  
+    padding:24px 15px;  
+  
+    text-align:center;  
+  
+    border:1px solid var(--border);  
+    border-radius:14px;  
+  
+    background:var(--surface);  
+  
+    transition:.35s ease;  
+}  
+  
+.expertise:hover{  
+    transform:translateY(-8px);  
+  
+    border-color:var(--borderBlue);  
+  
+    background:rgba(24,200,255,.06);  
+}  
+  
+.expertise span{  
+    display:block;  
+  
+    margin-bottom:9px;  
+  
+    color:var(--blue);  
+  
+    font-size:9px;  
+    font-weight:800;  
+  
+    letter-spacing:1px;  
+}  
+  
+.expertise strong{  
+    font-family:"Space Grotesk";  
+  
+    font-size:12px;  
+}  
+  
+/* =========================================================  
+   CASE STUDIES  
+========================================================= */  
+  
+.case-grid{  
+    display:grid;  
+  
+    grid-template-columns:repeat(2,1fr);  
+  
+    gap:20px;  
+}  
+  
+.case-card{  
+    padding:30px;  
+}  
+  
+.case-top{  
+    display:flex;  
+  
+    justify-content:space-between;  
+    align-items:flex-start;  
+  
+    gap:20px;  
+}  
+  
+.case-number{  
+    color:rgba(24,200,255,.28);  
+  
+    font-family:"Space Grotesk";  
+  
+    font-size:43px;  
+    font-weight:700;  
+}  
+  
+.case-badge{  
+    padding:7px 10px;  
+  
+    border:1px solid rgba(67,239,154,.2);  
+    border-radius:50px;  
+  
+    background:rgba(67,239,154,.045);  
+  
+    color:#71edb0;  
+  
+    font-size:8px;  
+    font-weight:800;  
+  
+    letter-spacing:1px;  
+}  
+  
+.case-card h3{  
+    margin-top:25px;  
+  
+    font-family:"Space Grotesk";  
+  
+    font-size:22px;  
+}  
+  
+.case-card > p{  
+    margin-top:14px;  
+  
+    color:var(--muted);  
+  
+    font-size:12px;  
+  
+    line-height:1.8;  
+}  
+  
+.case-flow{  
+    display:grid;  
+  
+    grid-template-columns:repeat(3,1fr);  
+  
+    gap:8px;  
+  
+    margin-top:23px;  
+}  
+  
+.case-flow div{  
+    padding:12px 8px;  
+  
+    text-align:center;  
+  
+    border-radius:9px;  
+  
+    background:rgba(255,255,255,.025);  
+  
+    border:1px solid var(--border);  
+}  
+  
+.case-flow span{  
+    display:block;  
+  
+    color:var(--muted2);  
+  
+    font-size:7px;  
+    font-weight:800;  
+  
+    text-transform:uppercase;  
+    letter-spacing:1px;  
+}  
+  
+.case-flow strong{  
+    display:block;  
+  
+    margin-top:5px;  
+  
+    font-size:10px;  
+}  
+  
+/* =========================================================  
+   CERTIFICATES  
+========================================================= */  
+  
+.certifications-grid{  
+    display:grid;  
+  
+    grid-template-columns:repeat(3,1fr);  
+  
+    gap:20px;  
+}  
+  
+.cert-card{  
+    position:relative;  
+  
+    overflow:hidden;  
+  
+    border:1px solid var(--border);  
+    border-radius:18px;  
+  
+    background:var(--surface);  
+  
+    cursor:pointer;  
+  
+    transition:  
+        transform .4s cubic-bezier(.2,.8,.2,1),  
+        border-color .3s ease,  
+        box-shadow .3s ease;  
+}  
+  
+.cert-card:hover{  
+    transform:translateY(-10px);  
+  
+    border-color:rgba(24,200,255,.35);  
+  
+    box-shadow:  
+        0 30px 80px rgba(0,0,0,.42),  
+        0 0 35px rgba(24,200,255,.08);  
+}  
+  
+.cert-image-wrap{  
+    position:relative;  
+  
+    aspect-ratio:1.42/1;  
+  
+    overflow:hidden;  
+  
+    background:#fff;  
+}  
+  
+.cert-image-wrap img{  
+    width:100%;  
+    height:100%;  
+  
+    display:block;  
+  
+    object-fit:cover;  
+  
+    transition:  
+        transform .6s ease,  
+        filter .4s ease;  
+}  
+  
+.cert-card:hover img{  
+    transform:scale(1.06);  
+  
+    filter:brightness(.68);  
+}  
+  
+.cert-overlay{  
+    position:absolute;  
+    inset:0;  
+  
+    display:flex;  
+    justify-content:center;  
+    align-items:center;  
+  
+    background:rgba(3,7,17,.42);  
+  
+    opacity:0;  
+  
+    transition:.35s ease;  
+}  
+  
+.cert-card:hover .cert-overlay,  
+.cert-card:focus-visible .cert-overlay{  
+    opacity:1;  
+}  
+  
+.view-cert{  
+    padding:11px 17px;  
+  
+    border:1px solid rgba(255,255,255,.3);  
+    border-radius:50px;  
+  
+    background:rgba(0,0,0,.45);  
+  
+    backdrop-filter:blur(10px);  
+  
+    color:white;  
+  
+    font-size:9px;  
+    font-weight:800;  
+  
+    letter-spacing:1px;  
+}  
+  
+.cert-info{  
+    padding:20px;  
+}  
+  
+.cert-info h3{  
+    font-family:"Space Grotesk";  
+  
+    font-size:15px;  
+}  
+  
+.cert-info p{  
+    margin-top:7px;  
+  
+    color:var(--muted2);  
+  
+    font-size:10px;  
+  
+    line-height:1.5;  
+}  
+  
+/* =========================================================  
+   VIEWER  
+========================================================= */  
+  
+#certificateViewer{  
+    position:fixed;  
+    inset:0;  
+  
+    z-index:20000;  
+  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+  
+    padding:25px;  
+  
+    background:  
+        radial-gradient(  
+            circle at center,  
+            rgba(24,200,255,.09),  
+            transparent 45%  
+        ),  
+        rgba(1,4,10,.96);  
+  
+    backdrop-filter:blur(22px);  
+    -webkit-backdrop-filter:blur(22px);  
+  
+    opacity:0;  
+    visibility:hidden;  
+  
+    transition:.4s ease;  
+}  
+  
+#certificateViewer.open{  
+    opacity:1;  
+    visibility:visible;  
+}  
+  
+.viewer-content{  
+    position:relative;  
+  
+    width:min(1200px,94vw);  
+    height:min(87vh,900px);  
+  
+    display:flex;  
+    justify-content:center;  
+    align-items:center;  
+  
+    transform:scale(.9) translateY(20px);  
+  
+    transition:.5s cubic-bezier(.2,.8,.2,1);  
+}  
+  
+#certificateViewer.open .viewer-content{  
+    transform:scale(1) translateY(0);  
+}  
+  
+.viewer-image{  
+    max-width:100%;  
+    max-height:100%;  
+  
+    object-fit:contain;  
+  
+    border-radius:7px;  
+  
+    background:white;  
+  
+    box-shadow:  
+        0 40px 120px rgba(0,0,0,.75),  
+        0 0 50px rgba(24,200,255,.08);  
+  
+    transition:.35s ease;  
+}  
+  
+.viewer-close,  
+.viewer-arrow{  
+    position:fixed;  
+  
+    display:flex;  
+    justify-content:center;  
+    align-items:center;  
+  
+    border:1px solid rgba(255,255,255,.16);  
+    border-radius:50%;  
+  
+    background:rgba(255,255,255,.07);  
+  
+    color:white;  
+  
+    cursor:pointer;  
+  
+    z-index:10;  
+  
+    transition:.3s ease;  
+}  
+  
+.viewer-close{  
+    top:22px;  
+    right:22px;  
+  
+    width:48px;  
+    height:48px;  
+  
+    font-size:22px;  
+}  
+  
+.viewer-close:hover{  
+    transform:rotate(90deg);  
+  
+    border-color:rgba(24,200,255,.4);  
+  
+    background:rgba(24,200,255,.1);  
+}  
+  
+.viewer-arrow{  
+    top:50%;  
+  
+    width:53px;  
+    height:53px;  
+  
+    transform:translateY(-50%);  
+  
+    font-size:25px;  
+}  
+  
+.viewer-arrow:hover{  
+    background:rgba(24,200,255,.1);  
+  
+    border-color:rgba(24,200,255,.4);  
+  
+    box-shadow:0 0 30px rgba(24,200,255,.12);  
+}  
+  
+.viewer-prev{  
+    left:22px;  
+}  
+  
+.viewer-next{  
+    right:22px;  
+}  
+  
+.viewer-title{  
+    position:fixed;  
+  
+    bottom:20px;  
+    left:50%;  
+  
+    max-width:80vw;  
+  
+    transform:translateX(-50%);  
+  
+    padding:10px 17px;  
+  
+    overflow:hidden;  
+  
+    white-space:nowrap;  
+    text-overflow:ellipsis;  
+  
+    border:1px solid rgba(255,255,255,.12);  
+    border-radius:50px;  
+  
+    background:rgba(0,0,0,.5);  
+  
+    backdrop-filter:blur(12px);  
+  
+    color:#dbeeff;  
+  
+    font-size:9px;  
+    font-weight:700;  
+  
+    letter-spacing:.5px;  
+}  
+  
+/* =========================================================  
+   EDUCATION  
+========================================================= */  
+  
+.education-card{  
+    display:grid;  
+  
+    grid-template-columns:auto 1fr auto;  
+  
+    align-items:center;  
+  
+    gap:25px;  
+  
+    padding:30px;  
+}  
+  
+.edu-icon{  
+    width:70px;  
+    height:70px;  
+  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+  
+    border:1px solid rgba(24,200,255,.2);  
+    border-radius:17px;  
+  
+    background:rgba(24,200,255,.055);  
+  
+    font-size:27px;  
+}  
+  
+.education-card h3{  
+    font-family:"Space Grotesk";  
+  
+    font-size:22px;  
+}  
+  
+.education-card p{  
+    margin-top:8px;  
+  
+    color:var(--muted);  
+  
+    font-size:12px;  
+    line-height:1.6;  
+}  
+  
+.edu-badge{  
+    padding:9px 12px;  
+  
+    border:1px solid rgba(24,200,255,.17);  
+    border-radius:50px;  
+  
+    color:var(--blue);  
+  
+    background:rgba(24,200,255,.045);  
+  
+    font-size:8px;  
+    font-weight:800;  
+  
+    text-transform:uppercase;  
+    letter-spacing:1px;  
+}  
+  
+/* =========================================================  
+   CONTACT  
+========================================================= */  
+  
+.contact-box{  
+    position:relative;  
+  
+    overflow:hidden;  
+  
+    padding:65px 30px;  
+  
+    text-align:center;  
+  
+    border:1px solid rgba(24,200,255,.22);  
+    border-radius:27px;  
+  
+    background:  
+        radial-gradient(  
+            circle at 50% 0%,  
+            rgba(24,200,255,.14),  
+            transparent 55%  
+        ),  
+        var(--surface);  
+  
+    box-shadow:0 35px 110px rgba(0,0,0,.3);  
+}  
+  
+.contact-box::before{  
+    content:"";  
+  
+    position:absolute;  
+  
+    width:300px;  
+    height:300px;  
+  
+    top:-170px;  
+    left:50%;  
+  
+    transform:translateX(-50%);  
+  
+    border-radius:50%;  
+  
+    border:1px solid rgba(24,200,255,.12);  
+  
+    box-shadow:  
+        0 0 0 35px rgba(24,200,255,.025),  
+        0 0 0 70px rgba(24,200,255,.015);  
+  
+    pointer-events:none;  
+}  
+  
+.contact-box h2{  
+    position:relative;  
+  
+    font-family:"Space Grotesk";  
+  
+    font-size:clamp(35px,5vw,58px);  
+  
+    line-height:.98;  
+  
+    letter-spacing:-2.5px;  
+}  
+  
+.contact-box h2 span{  
+    color:var(--blue);  
+}  
+  
+.contact-box p{  
+    position:relative;  
+  
+    max-width:650px;  
+  
+    margin:20px auto 0;  
+  
+    color:var(--muted);  
+  
+    font-size:13px;  
+  
+    line-height:1.8;  
+}  
+  
+.email{  
+    position:relative;  
+  
+    display:inline-block;  
+  
+    margin-top:24px;  
+  
+    color:var(--cyan);  
+  
+    font-size:14px;  
+    font-weight:700;  
+  
+    text-decoration:none;  
+}  
+  
+.email:hover{  
+    text-decoration:underline;  
+}  
+  
+.contact-buttons{  
+    position:relative;  
+  
+    display:flex;  
+    justify-content:center;  
+    flex-wrap:wrap;  
+  
+    gap:11px;  
+  
+    margin-top:28px;  
+}  
+  
+/* =========================================================  
+   FOOTER  
+========================================================= */  
+  
+footer{  
+    padding:30px 0;  
+  
+    border-top:1px solid var(--border);  
+  
+    color:var(--muted2);  
+  
+    text-align:center;  
+  
+    font-size:9px;  
+  
+    letter-spacing:.4px;  
+}  
+  
+/* =========================================================  
+   BACK TOP  
+========================================================= */  
+  
+#backTop{  
+    position:fixed;  
+  
+    right:20px;  
+    bottom:20px;  
+  
+    width:45px;  
+    height:45px;  
+  
+    display:flex;  
+    align-items:center;  
+    justify-content:center;  
+  
+    border:1px solid rgba(24,200,255,.22);  
+    border-radius:12px;  
+  
+    background:rgba(3,7,17,.82);  
+  
+    backdrop-filter:blur(15px);  
+  
+    color:var(--cyan);  
+  
+    cursor:pointer;  
+  
+    opacity:0;  
+    visibility:hidden;  
+  
+    transform:translateY(15px);  
+  
+    transition:.3s ease;  
+  
+    z-index:900;  
+}  
+  
+#backTop.show{  
+    opacity:1;  
+    visibility:visible;  
+    transform:translateY(0);  
+}  
+  
+#backTop:hover{  
+    transform:translateY(-4px);  
+    border-color:rgba(24,200,255,.5);  
+}  
+  
+/* =========================================================  
+   REVEAL  
+========================================================= */  
+  
+.reveal{  
+    opacity:0;  
+  
+    transform:translateY(35px);  
+  
+    transition:  
+        opacity .8s ease,  
+        transform .8s cubic-bezier(.2,.8,.2,1);  
+}  
+  
+.reveal.visible{  
+    opacity:1;  
+    transform:translateY(0);  
+}  
+  
+.delay-1{transition-delay:.08s}  
+.delay-2{transition-delay:.16s}  
+.delay-3{transition-delay:.24s}  
+.delay-4{transition-delay:.32s}  
+  
+/* =========================================================  
+   RESPONSIVE  
+========================================================= */  
+  
+@media(max-width:1050px){  
+  
+    .hero-grid{  
+        grid-template-columns:1fr;  
+        text-align:center;  
+    }  
+  
+    .hero-content{  
+        order:1;  
+    }  
+  
+    .hero-visual{  
+        order:2;  
+    }  
+  
+    .hero-description{  
+        margin-left:auto;  
+        margin-right:auto;  
+    }  
+  
+    .hero-buttons,  
+    .hero-mini-stats{  
+        justify-content:center;  
+    }  
+  
+    .hero-role{  
+        justify-content:center;  
+    }  
+  
+    .status{  
+        margin-left:auto;  
+        margin-right:auto;  
+    }  
+  
+    .dashboard{  
+        grid-template-columns:repeat(2,1fr);  
+    }  
+  
+    .process-grid{  
+        grid-template-columns:repeat(4,1fr);  
+    }  
+  
+    .skills-grid{  
+        grid-template-columns:repeat(2,1fr);  
+    }  
+  
+    .expertise-grid{  
+        grid-template-columns:repeat(3,1fr);  
+    }  
+  
+    .certifications-grid{  
+        grid-template-columns:repeat(2,1fr);  
+    }  
+}  
+  
+@media(max-width:800px){  
+  
+    :root{  
+        --nav:70px;  
+    }  
+  
+    .menu-btn{  
+        display:flex;  
+    }  
+  
+    .nav-actions{  
+        margin-left:auto;  
+        margin-right:9px;  
+    }  
+  
+    .nav-links{  
+        position:absolute;  
+  
+        top:70px;  
+        left:4%;  
+        right:4%;  
+  
+        display:flex;  
+        flex-direction:column;  
+        align-items:stretch;  
+  
+        gap:3px;  
+  
+        max-height:0;  
+  
+        overflow:hidden;  
+  
+        opacity:0;  
+        pointer-events:none;  
+  
+        padding:0;  
+  
+        border:1px solid transparent;  
+        border-radius:15px;  
+  
+        background:rgba(3,7,17,.97);  
+  
+        backdrop-filter:blur(20px);  
+  
+        transition:  
+            max-height .4s ease,  
+            opacity .3s ease,  
+            padding .3s ease,  
+            border-color .3s ease;  
+    }  
+  
+    body.light .nav-links{  
+        background:rgba(238,247,252,.97);  
+    }  
+  
+    .nav-links.open{  
+        max-height:520px;  
+  
+        opacity:1;  
+        pointer-events:auto;  
+  
+        padding:8px;  
+  
+        border-color:var(--border);  
+    }  
+  
+    .nav-links a{  
+        padding:13px;  
+  
+        border-radius:8px;  
+    }  
+  
+    .nav-links a:hover{  
+        background:rgba(24,200,255,.06);  
+    }  
+  
+    .nav-links a::after{  
+        display:none;  
+    }  
+  
+    .about-grid{  
+        grid-template-columns:1fr;  
+    }  
+  
+    .timeline::before{  
+        left:9px;  
+    }  
+  
+    .timeline-item,  
+    .timeline-item:nth-child(even),  
+    .timeline-item:nth-child(odd){  
+        width:100%;  
+        left:0;  
+  
+        padding-left:40px;  
+        padding-right:0;  
+  
+        text-align:left;  
+    }  
+  
+    .timeline-item:nth-child(odd) .timeline-card{  
+        text-align:left;  
+    }  
+  
+    .timeline-dot,  
+    .timeline-item:nth-child(odd) .timeline-dot,  
+    .timeline-item:nth-child(even) .timeline-dot{  
+        left:3px;  
+        right:auto;  
+    }  
+  
+    .process-grid{  
+        grid-template-columns:repeat(2,1fr);  
+    }  
+  
+    .case-grid{  
+        grid-template-columns:1fr;  
+    }  
+  
+    .education-card{  
+        grid-template-columns:auto 1fr;  
+    }  
+  
+    .edu-badge{  
+        grid-column:2;  
+        width:max-content;  
+    }  
+}  
+  
+@media(max-width:600px){  
+  
+    section{  
+        padding:82px 0;  
+    }  
+  
+    .hero{  
+        min-height:auto;  
+  
+        padding-top:125px;  
+        padding-bottom:95px;  
+    }  
+  
+    .hero h1{  
+        font-size:clamp(53px,18vw,84px);  
+  
+        letter-spacing:-5px;  
+    }  
+  
+    .profile-wrap{  
+        width:280px;  
+    }  
+  
+    .floating-card.one{  
+        right:-4%;  
+    }  
+  
+    .floating-card.two{  
+        left:-3%;  
+    }  
+  
+    .dashboard{  
+        grid-template-columns:1fr 1fr;  
+    }  
+  
+    .dashboard-number{  
+        font-size:27px;  
+    }  
+  
+    .process-grid{  
+        grid-template-columns:1fr 1fr;  
+    }  
+  
+    .skills-grid{  
+        grid-template-columns:1fr;  
+    }  
+  
+    .expertise-grid{  
+        grid-template-columns:1fr 1fr;  
+    }  
+  
+    .certifications-grid{  
+        grid-template-columns:1fr;  
+    }  
+  
+    .case-flow{  
+        grid-template-columns:1fr;  
+    }  
+  
+    .education-card{  
+        grid-template-columns:1fr;  
+  
+        text-align:center;  
+    }  
+  
+    .edu-icon{  
+        margin:auto;  
+    }  
+  
+    .edu-badge{  
+        grid-column:auto;  
+  
+        margin:auto;  
+    }  
+  
+    .contact-box{  
+        padding:48px 19px;  
+    }  
+  
+    .email{  
+        max-width:90%;  
+  
+        overflow-wrap:anywhere;  
+    }  
+  
+    .viewer-close{  
+        top:11px;  
+        right:11px;  
+    }  
+  
+    .viewer-prev{  
+        left:9px;  
+    }  
+  
+    .viewer-next{  
+        right:9px;  
+    }  
+  
+    .viewer-arrow{  
+        width:42px;  
+        height:42px;  
+    }  
+  
+    .viewer-title{  
+        bottom:10px;  
+    }  
+  
+    .floating-card{  
+        transform:scale(.88);  
+    }  
+}  
+  
+/* =========================================================  
+   ACCESSIBILITY  
+========================================================= */  
+  
+:focus-visible{  
+    outline:2px solid var(--cyan);  
+    outline-offset:4px;  
+}  
+  
+@media(pointer:coarse){  
+  
+    .cursor-dot,  
+    .cursor-ring{  
+        display:none;  
+    }  
+}  
+  
+@media(prefers-reduced-motion:reduce){  
+  
+    *,  
+    *::before,  
+    *::after{  
+        animation-duration:.01ms !important;  
+        animation-iteration-count:1 !important;  
+        transition-duration:.01ms !important;  
+        scroll-behavior:auto !important;  
+    }  
+  
+    .reveal{  
+        opacity:1;  
+        transform:none;  
+    }  
+  
+    .cursor-dot,  
+    .cursor-ring{  
+        display:none;  
+    }  
+}  
+  
+</style>  </head>  <body>  <!-- =====================================================  
+     BACKGROUND  
+===================================================== -->  <div class="orb one"></div>  
+<div class="orb two"></div>  
+<div class="orb three"></div>  <div id="particles"></div>  <!-- =====================================================  
+     LOADER  
+===================================================== -->  <div id="loader">  <div class="loader-box">  
+
+    <div class="loader-logo">  
+        RA.  
+    </div>  
+
+    <div class="loader-text">  
+        QA/QC Portfolio  
+    </div>  
+
+    <div class="loader-line">  
+        <span></span>  
+    </div>  
 
 </div>
 
-
-<!-- =====================================================
-     CURSOR
-===================================================== -->
-
-<div class="cursor"></div>
-<div class="cursor-circle"></div>
-
-
-<!-- =====================================================
-     NAV
-===================================================== -->
-
-<nav id="navbar">
-
-    <div class="nav-inner">
-
-        <a href="#home" class="logo">
-            RA<span>.</span>
-        </a>
-
-
-        <div class="nav-links" id="navLinks">
-
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#expertise">Expertise</a>
-            <a href="#experience">Experience</a>
-            <a href="#process">Process</a>
-            <a href="#cases">Cases</a>
-            <a href="#certifications">Certificates</a>
-            <a href="#contact">Contact</a>
-
-        </div>
-
-
-        <div class="nav-right">
-
-            <div class="availability">
-
-                <span class="availability-dot"></span>
-
-                Available for opportunities
-
-            </div>
-
-            <button
-                class="menu"
-                id="menuButton"
-                aria-label="Open menu">
-
-                ☰
-
-            </button>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="hero" id="home">
-
-    <div class="hero-inner">
-
-        <div class="hero-topline">
-
-            <div class="hero-location">
-                Riyadh, Saudi Arabia
-            </div>
-
-            <div class="hero-year">
-                QA / QC — 2026
-            </div>
-
-        </div>
-
-
-        <div class="hero-title reveal">
-
-            <span class="small">
-                Hello, I'm
-            </span>
-
-            <h1>
-
-                RIZWAN
-
-                <br>
-
-                <span class="outline">
-                    ANSARI
-                </span>
-
-            </h1>
-
-        </div>
-
-
-        <div class="hero-description reveal">
-
-            <p>
-
-                QA/QC Officer working across
-                electrical and RMU manufacturing,
-                inspection, quality assurance and
-                continuous improvement.
-
-            </p>
-
-            <div class="hero-role">
-                Quality • Precision • Reliability
-            </div>
-
-        </div>
-
-
-        <div class="hero-image reveal">
-
-            <img
-                src="profile.jpg"
-                alt="Rizwan Ansari — QA/QC Officer">
-
-            <div class="image-caption">
-                QA / QC Officer — Alfanar
-            </div>
-
-        </div>
-
-
-        <div class="hero-bottom reveal">
-
-            <div class="hero-statement">
-
-                I don't just inspect quality.
-
-                <span>
-                    I help build it into the process.
-                </span>
-
-            </div>
-
-
-            <div class="scroll-indicator">
-
-                Scroll to explore
-
-                <span class="scroll-line"></span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     MARQUEE
-===================================================== -->
-
-<div class="marquee">
-
-    <div class="marquee-track">
-
-        <span>Quality Assurance</span>
-        <span class="dot"></span>
-
-        <span>Quality Control</span>
-        <span class="dot"></span>
-
-        <span>RMU Manufacturing</span>
-        <span class="dot"></span>
-
-        <span>Electrical Inspection</span>
-        <span class="dot"></span>
-
-        <span>Lean Six Sigma</span>
-        <span class="dot"></span>
-
-        <span>8D Problem Solving</span>
-        <span class="dot"></span>
-
-        <span>ISO 9001:2015</span>
-        <span class="dot"></span>
-
-        <span>Quality Assurance</span>
-        <span class="dot"></span>
-
-        <span>Quality Control</span>
-        <span class="dot"></span>
-
-        <span>RMU Manufacturing</span>
-        <span class="dot"></span>
-
-        <span>Electrical Inspection</span>
-        <span class="dot"></span>
-
-        <span>Lean Six Sigma</span>
-        <span class="dot"></span>
-
-        <span>8D Problem Solving</span>
-        <span class="dot"></span>
-
-        <span>ISO 9001:2015</span>
-
-    </div>
+</div>  <div id="progressBar"></div>  <div class="cursor-dot"></div>  
+<div class="cursor-ring"></div>  <!-- =====================================================  
+     NAVIGATION  
+===================================================== -->  <nav id="navbar">  <div class="nav-inner">  
+
+    <a href="#home" class="logo magnetic">  
+        RA.  
+    </a>  
+
+    <div class="nav-actions">  
+
+        <button  
+            class="theme-btn magnetic"  
+            id="themeBtn"  
+            aria-label="Toggle theme">  
+            ☾  
+        </button>  
+
+        <button  
+            class="menu-btn magnetic"  
+            id="menuBtn"  
+            aria-label="Open menu"  
+            aria-expanded="false">  
+            ☰  
+        </button>  
+
+    </div>  
+
+    <div class="nav-links" id="navLinks">  
+
+        <a href="#home" class="active">Home</a>  
+        <a href="#about">About</a>  
+        <a href="#process">Process</a>  
+        <a href="#experience">Experience</a>  
+        <a href="#skills">Skills</a>  
+        <a href="#cases">Case Studies</a>  
+        <a href="#certifications">Certificates</a>  
+        <a href="#education">Education</a>  
+        <a href="#contact">Contact</a>  
+
+    </div>  
 
 </div>
 
+</nav>  <!-- =====================================================  
+     HERO  
+===================================================== -->  <section class="hero" id="home">  <div class="container">  
 
-<!-- =====================================================
-     ABOUT
-===================================================== -->
+    <div class="hero-grid">  
 
-<section class="about" id="about">
+        <div class="hero-content reveal">  
 
-    <span class="section-number">
-        01 / 08
-    </span>
+            <div class="status">  
+                <span class="status-dot"></span>  
+                Currently working at Alfanar — Riyadh  
+            </div>  
 
-    <div class="container">
+            <h1>  
+                <span class="first">RIZWAN</span>  
+                <span class="last">ANSARI</span>  
+            </h1>  
 
-        <div class="eyebrow reveal">
-            About me
-        </div>
+            <div class="hero-role">  
 
+                <span id="typingRole"></span>  
 
-        <div class="about-grid">
+                <span class="typing-cursor"></span>  
 
-            <div class="about-left reveal">
+            </div>  
 
-                <h2>
+            <div class="hero-tagline">  
+                Quality. Precision. Reliability.  
+            </div>  
 
-                    Quality-driven.
+            <p class="hero-description">  
 
-                    <br>
+                QA/QC Officer specializing in electrical and RMU  
+                manufacturing, quality inspection, process improvement,  
+                Lean Six Sigma and quality assurance systems.  
 
-                    <span>
-                        Process-focused.
-                    </span>
+            </p>  
 
-                </h2>
+            <div class="hero-buttons">  
 
-            </div>
+                <a  
+                    href="#experience"  
+                    class="btn btn-primary magnetic">  
+                    Explore My Journey →  
+                </a>  
 
+                <a  
+                    href="#contact"  
+                    class="btn btn-outline magnetic">  
+                    Contact Me  
+                </a>  
 
-            <div class="about-right reveal">
+                <a  
+                    href="Rizwan-Ansari-CV.pdf"  
+                    class="btn btn-outline magnetic"  
+                    download>  
+                    Download CV ↓  
+                </a>  
 
-                <p>
+            </div>  
 
-                    I am a QA/QC Officer with practical
-                    experience in manufacturing quality,
-                    electrical inspection and RMU production
-                    environments.
 
-                </p>
+            <div class="hero-mini-stats">  
 
-                <p>
+                <div class="mini-stat">  
+                    <strong>4+</strong>  
+                    <span>Years Experience</span>  
+                </div>  
 
-                    My work focuses on maintaining product
-                    quality, identifying non-conformities,
-                    supporting root-cause analysis,
-                    improving processes and ensuring
-                    compliance with quality requirements.
+                <div class="mini-stat">  
+                    <strong>RMU</strong>  
+                    <span>Manufacturing</span>  
+                </div>  
 
-                </p>
+                <div class="mini-stat">  
+                    <strong>ISO</strong>  
+                    <span>9001:2015</span>  
+                </div>  
 
-                <p>
+                <div class="mini-stat">  
+                    <strong>8D</strong>  
+                    <span>Problem Solving</span>  
+                </div>  
 
-                    I have developed professional knowledge
-                    in Lean Six Sigma, 7 QC Tools, 8D problem
-                    solving, Gauge R&R and ISO 9001:2015.
+            </div>  
 
-                </p>
+        </div>  
 
 
-                <div class="about-highlight">
+        <div class="hero-visual reveal delay-2">  
 
-                    <div class="stat">
+            <div class="profile-wrap tilt">  
 
-                        <strong>4+</strong>
+                <div class="profile-ring"></div>  
 
-                        <span>
-                            Years Experience
-                        </span>
+                <div class="profile-card">  
 
-                    </div>
+                    <img  
+                        src="profile.jpg"  
+                        alt="Rizwan Ansari — QA/QC Officer">  
 
+                    <div class="profile-badge">  
+                        QA / QC • ELECTRICAL • MANUFACTURING  
+                    </div>  
 
-                    <div class="stat">
+                </div>  
 
-                        <strong>RMU</strong>
+                <div class="floating-card one">  
 
-                        <span>
-                            Manufacturing
-                        </span>
+                    <strong>4+</strong>  
 
-                    </div>
+                    <span>  
+                        Years Experience  
+                    </span>  
 
+                </div>  
 
-                    <div class="stat">
+                <div class="floating-card two">  
 
-                        <strong>8D</strong>
+                    <strong>RMU</strong>  
 
-                        <span>
-                            Problem Solving
-                        </span>
+                    <span>  
+                        Quality Focus  
+                    </span>  
 
-                    </div>
+                </div>  
 
-                </div>
+            </div>  
 
-            </div>
+        </div>  
 
-        </div>
+    </div>  
 
-    </div>
+</div>
 
-</section>
+</section>  <!-- =====================================================  
+     ABOUT  
+===================================================== -->  <section id="about">  <div class="container">  
 
+    <div class="section-head reveal">  
 
-<!-- =====================================================
-     EXPERTISE
-===================================================== -->
+        <div class="section-label">  
+            Professional Profile  
+        </div>  
 
-<section class="expertise-section" id="expertise">
+        <h2 class="section-title">  
+            Quality-driven.<br>  
+            <span>Process-focused.</span>  
+        </h2>  
 
-    <span class="section-number">
-        02 / 08
-    </span>
+        <p class="section-description">  
+            A practical QA/QC professional focused on manufacturing  
+            quality, inspection, defect prevention and continuous  
+            improvement.  
+        </p>  
 
-    <div class="container">
+    </div>  
 
-        <div class="expertise-head">
 
-            <div>
+    <div class="about-grid">  
 
-                <div class="eyebrow reveal">
-                    What I do
-                </div>
+        <div class="glass about-info reveal tilt">  
 
-                <h2 class="expertise-title reveal">
+            <div class="info-list">  
 
-                    Technical
-                    <span>expertise</span>
-                    built around quality.
+                <div class="info-item">  
+                    <span class="info-label">Name</span>  
+                    <span class="info-value">Rizwan Ansari</span>  
+                </div>  
 
-                </h2>
+                <div class="info-item">  
+                    <span class="info-label">Position</span>  
+                    <span class="info-value">QA/QC Officer</span>  
+                </div>  
 
-            </div>
+                <div class="info-item">  
+                    <span class="info-label">Company</span>  
+                    <span class="info-value">Alfanar</span>  
+                </div>  
 
-        </div>
+                <div class="info-item">  
+                    <span class="info-label">Location</span>  
+                    <span class="info-value">Riyadh, Saudi Arabia</span>  
+                </div>  
 
+                <div class="info-item">  
+                    <span class="info-label">Specialization</span>  
+                    <span class="info-value">RMU Manufacturing</span>  
+                </div>  
 
-        <div class="expertise-list">
+                <div class="info-item">  
+                    <span class="info-label">Experience</span>  
+                    <span class="info-value">4+ Years</span>  
+                </div>  
 
+            </div>  
 
-            <div class="expertise-item reveal">
+        </div>  
 
-                <div class="number">
-                    01
-                </div>
 
-                <h3>
-                    QA / QC Inspection
-                </h3>
+        <div class="glass about-text reveal delay-1">  
 
-                <p>
-                    Product, process and manufacturing
-                    quality inspection and verification.
-                </p>
+            I am a <strong>QA/QC Officer</strong> with practical  
+            experience in manufacturing quality, electrical inspection  
+            and RMU production environments.  
 
-                <div class="arrow">
-                    ↗
-                </div>
+            <br><br>  
 
-            </div>
+            My work focuses on maintaining product quality,  
+            identifying non-conformities, supporting root-cause analysis,  
+            improving processes and ensuring compliance with quality  
+            requirements.  
 
+            <br><br>  
 
-            <div class="expertise-item reveal">
+            I have developed knowledge in  
+            <strong>Lean Six Sigma, 7 QC Tools, 8D problem solving,  
+            quality auditing and ISO 9001:2015</strong>.  
 
-                <div class="number">
-                    02
-                </div>
+            <br><br>  
 
-                <h3>
-                    RMU Manufacturing
-                </h3>
+            My professional approach is simple:  
 
-                <p>
-                    Quality control within electrical RMU
-                    manufacturing environments.
-                </p>
+            <strong>  
+                prevent defects, improve processes and deliver  
+                reliable quality.  
+            </strong>  
 
-                <div class="arrow">
-                    ↗
-                </div>
+        </div>  
 
-            </div>
+    </div>  
 
 
-            <div class="expertise-item reveal">
+    <!-- DASHBOARD -->  
 
-                <div class="number">
-                    03
-                </div>
+    <div class="dashboard">  
 
-                <h3>
-                    Electrical Quality
-                </h3>
+        <div class="dashboard-card reveal">  
 
-                <p>
-                    Inspection and verification of electrical
-                    manufacturing requirements.
-                </p>
+            <div  
+                class="dashboard-number counter"  
+                data-target="4">  
+                0  
+            </div>  
 
-                <div class="arrow">
-                    ↗
-                </div>
+            <div class="dashboard-label">  
+                Years Experience  
+            </div>  
 
-            </div>
+        </div>  
 
+        <div class="dashboard-card reveal delay-1">  
 
-            <div class="expertise-item reveal">
+            <div class="dashboard-number">  
+                RMU  
+            </div>  
 
-                <div class="number">
-                    04
-                </div>
+            <div class="dashboard-label">  
+                Manufacturing Focus  
+            </div>  
 
-                <h3>
-                    Supplier Quality
-                </h3>
+        </div>  
 
-                <p>
-                    Supplier inspection, communication,
-                    follow-up and quality coordination.
-                </p>
+        <div class="dashboard-card reveal delay-2">  
 
-                <div class="arrow">
-                    ↗
-                </div>
+            <div class="dashboard-number">  
+                8D  
+            </div>  
 
-            </div>
+            <div class="dashboard-label">  
+                Problem Solving  
+            </div>  
 
+        </div>  
 
-            <div class="expertise-item reveal">
+        <div class="dashboard-card reveal delay-3">  
 
-                <div class="number">
-                    05
-                </div>
+            <div class="dashboard-number">  
+                ISO  
+            </div>  
 
-                <h3>
-                    Quality Auditing
-                </h3>
+            <div class="dashboard-label">  
+                9001:2015  
+            </div>  
 
-                <p>
-                    Quality system awareness and support
-                    for auditing activities.
-                </p>
+        </div>  
 
-                <div class="arrow">
-                    ↗
-                </div>
+    </div>  
 
-            </div>
+</div>
 
+</section>  <!-- =====================================================  
+     QUALITY PROCESS  
+===================================================== -->  <section id="process">  <div class="container">  
 
-            <div class="expertise-item reveal">
+    <div class="section-head reveal">  
 
-                <div class="number">
-                    06
-                </div>
+        <div class="section-label">  
+            Quality Workflow  
+        </div>  
 
-                <h3>
-                    Continuous Improvement
-                </h3>
+        <h2 class="section-title">  
+            My Quality <span>Process.</span>  
+        </h2>  
 
-                <p>
-                    Defect prevention, process improvement
-                    and structured problem solving.
-                </p>
+        <p class="section-description">  
+            A structured approach from incoming inspection through  
+            corrective action and final quality release.  
+        </p>  
 
-                <div class="arrow">
-                    ↗
-                </div>
+    </div>  
 
-            </div>
 
-        </div>
+    <div class="process-grid">  
 
-    </div>
+        <div class="process-step reveal">  
+            <div class="process-number">01</div>  
+            <h3>Incoming</h3>  
+            <p>Material verification and inspection.</p>  
+        </div>  
 
-</section>
+        <div class="process-step reveal delay-1">  
+            <div class="process-number">02</div>  
+            <h3>In-Process</h3>  
+            <p>Manufacturing quality monitoring.</p>  
+        </div>  
 
+        <div class="process-step reveal delay-2">  
+            <div class="process-number">03</div>  
+            <h3>Inspection</h3>  
+            <p>Product and process verification.</p>  
+        </div>  
 
-<!-- =====================================================
-     EXPERIENCE
-===================================================== -->
+        <div class="process-step reveal delay-3">  
+            <div class="process-number">04</div>  
+            <h3>NCR</h3>  
+            <p>Identify and document non-conformity.</p>  
+        </div>  
 
-<section class="experience" id="experience">
+        <div class="process-step reveal delay-4">  
+            <div class="process-number">05</div>  
+            <h3>RCA</h3>  
+            <p>Find the underlying root cause.</p>  
+        </div>  
 
-    <span class="section-number">
-        03 / 08
-    </span>
+        <div class="process-step reveal">  
+            <div class="process-number">06</div>  
+            <h3>CAPA</h3>  
+            <p>Corrective and preventive action.</p>  
+        </div>  
 
-    <div class="container">
+        <div class="process-step reveal delay-1">  
+            <div class="process-number">07</div>  
+            <h3>Release</h3>  
+            <p>Final quality verification.</p>  
+        </div>  
 
-        <div class="experience-header">
+    </div>  
 
-            <div>
+</div>
 
-                <div class="eyebrow reveal">
-                    Career
-                </div>
+</section>  <!-- =====================================================  
+     EXPERIENCE  
+===================================================== -->  <section id="experience">  <div class="container">  
 
-                <h2 class="reveal">
+    <div class="section-head reveal">  
 
-                    Professional
+        <div class="section-label">  
+            Career  
+        </div>  
 
-                    <span>
-                        journey.
-                    </span>
+        <h2 class="section-title">  
+            Professional <span>Journey.</span>  
+        </h2>  
 
-                </h2>
+        <p class="section-description">  
+            Experience across quality control, inspection and  
+            manufacturing environments.  
+        </p>  
 
-            </div>
+    </div>  
 
 
-            <p class="experience-intro reveal">
+    <div class="timeline">  
 
-                Experience across manufacturing quality,
-                inspection, process monitoring and
-                quality improvement.
 
-                <br><br>
+        <div class="timeline-item reveal">  
 
-                My professional journey has increasingly
-                focused on preventing defects rather than
-                simply detecting them.
+            <div class="timeline-dot"></div>  
 
-            </p>
+            <div class="glass timeline-card">  
 
-        </div>
+                <div class="timeline-date">  
+                    Current Role  
+                </div>  
 
+                <h3>  
+                    QA/QC Officer  
+                </h3>  
 
-        <div class="timeline">
+                <div class="timeline-company">  
+                    Alfanar — Riyadh  
+                </div>  
 
+                <p>  
+                    Responsible for quality inspection, manufacturing  
+                    quality control, identifying non-conformities,  
+                    inspection activities and supporting continuous  
+                    improvement within the production environment.  
+                </p>  
 
-            <div class="timeline-item reveal">
+                <div class="tags">  
+                    <span class="tag">QA/QC</span>  
+                    <span class="tag">RMU</span>  
+                    <span class="tag">Inspection</span>  
+                    <span class="tag">Manufacturing</span>  
+                </div>  
 
-                <div class="timeline-year">
-                    CURRENT
-                </div>
+            </div>  
 
-                <div>
+        </div>  
 
-                    <div class="timeline-role">
-                        QA/QC Officer
-                    </div>
 
-                    <div class="timeline-company">
-                        Alfanar — Riyadh
-                    </div>
+        <div class="timeline-item reveal delay-1">  
 
-                </div>
+            <div class="timeline-dot"></div>  
 
-                <div class="timeline-description">
+            <div class="glass timeline-card">  
 
-                    Responsible for quality inspection,
-                    manufacturing quality control,
-                    identifying non-conformities,
-                    inspection activities and supporting
-                    continuous improvement within the
-                    production environment.
+                <div class="timeline-date">  
+                    Manufacturing  
+                </div>  
 
-                </div>
+                <h3>  
+                    Quality Control & Inspection  
+                </h3>  
 
-            </div>
+                <div class="timeline-company">  
+                    Manufacturing Environment  
+                </div>  
 
+                <p>  
+                    Practical involvement in sheet metal manufacturing,  
+                    powder coating, quality inspection, process monitoring,  
+                    supplier coordination and quality assurance activities.  
+                </p>  
 
-            <div class="timeline-item reveal">
+                <div class="tags">  
+                    <span class="tag">Sheet Metal</span>  
+                    <span class="tag">Powder Coating</span>  
+                    <span class="tag">Supplier Quality</span>  
+                    <span class="tag">QC</span>  
+                </div>  
 
-                <div class="timeline-year">
-                    EXPERIENCE
-                </div>
+            </div>  
 
-                <div>
+        </div>  
 
-                    <div class="timeline-role">
-                        Quality Control
-                    </div>
 
-                    <div class="timeline-company">
-                        Manufacturing Environment
-                    </div>
+        <div class="timeline-item reveal delay-2">  
 
-                </div>
+            <div class="timeline-dot"></div>  
 
-                <div class="timeline-description">
+            <div class="glass timeline-card">  
 
-                    Practical involvement in sheet metal
-                    manufacturing, powder coating, quality
-                    inspection, process monitoring,
-                    supplier coordination and quality
-                    assurance activities.
+                <div class="timeline-date">  
+                    Professional Development  
+                </div>  
 
-                </div>
+                <h3>  
+                    Quality Systems & Improvement  
+                </h3>  
 
-            </div>
+                <div class="timeline-company">  
+                    Continuous Learning  
+                </div>  
 
+                <p>  
+                    Expanded professional knowledge through Lean Six Sigma,  
+                    7 QC Tools, 8D problem solving, Gauge R&R and  
+                    ISO 9001:2015 quality management training.  
+                </p>  
 
-            <div class="timeline-item reveal">
+                <div class="tags">  
+                    <span class="tag">8D</span>  
+                    <span class="tag">Lean Six Sigma</span>  
+                    <span class="tag">7 QC Tools</span>  
+                    <span class="tag">ISO 9001</span>  
+                </div>  
 
-                <div class="timeline-year">
-                    DEVELOPMENT
-                </div>
+            </div>  
 
-                <div>
+        </div>  
 
-                    <div class="timeline-role">
-                        Quality Systems
-                    </div>
+    </div>  
 
-                    <div class="timeline-company">
-                        Continuous Learning
-                    </div>
+</div>
 
-                </div>
+</section>  <!-- =====================================================  
+     SKILLS  
+===================================================== -->  <section id="skills">  <div class="container">  
 
-                <div class="timeline-description">
+    <div class="section-head reveal">  
 
-                    Developed knowledge in Lean Six Sigma,
-                    7 QC Tools, 8D problem solving,
-                    Gauge R&R and ISO 9001:2015 quality
-                    management systems.
+        <div class="section-label">  
+            Technical Capabilities  
+        </div>  
 
-                </div>
+        <h2 class="section-title">  
+            Skills that <span>Deliver.</span>  
+        </h2>  
 
-            </div>
+    </div>  
 
 
-        </div>
+    <div class="skills-grid">  
 
-    </div>
 
-</section>
+        <div class="glass skill reveal tilt">  
 
+            <div class="skill-icon">✓</div>  
 
-<!-- =====================================================
-     PROCESS
-===================================================== -->
+            <h3>  
+                QA/QC Inspection  
+            </h3>  
 
-<section class="process" id="process">
+            <p>  
+                Inspection, verification and manufacturing quality  
+                control activities.  
+            </p>  
 
-    <span class="section-number">
-        04 / 08
-    </span>
+            <div class="skill-meter">  
 
-    <div class="container">
+                <div class="meter-head">  
+                    <span>Core Skill</span>  
+                    <span>95%</span>  
+                </div>  
 
-        <div class="process-heading">
+                <div class="meter">  
+                    <span style="width:95%"></span>  
+                </div>  
 
-            <div class="eyebrow reveal">
-                How I work
-            </div>
+            </div>  
 
-            <h2 class="reveal">
+        </div>  
 
-                Quality is a
 
-                <span>
-                    process,
-                </span>
+        <div class="glass skill reveal delay-1 tilt">  
 
-                not just an inspection.
+            <div class="skill-icon">⚡</div>  
 
-            </h2>
+            <h3>  
+                Electrical RMU  
+            </h3>  
 
-        </div>
+            <p>  
+                Quality control within electrical RMU manufacturing  
+                environments.  
+            </p>  
 
+            <div class="skill-meter">  
 
-        <div class="process-grid">
+                <div class="meter-head">  
+                    <span>Specialization</span>  
+                    <span>92%</span>  
+                </div>  
 
+                <div class="meter">  
+                    <span style="width:92%"></span>  
+                </div>  
 
-            <div class="process-item reveal">
+            </div>  
 
-                <div class="process-number">
-                    01
-                </div>
+        </div>  
 
-                <h3>
-                    Incoming
-                </h3>
 
-                <p>
-                    Material verification and inspection.
-                </p>
+        <div class="glass skill reveal delay-2 tilt">  
 
-            </div>
+            <div class="skill-icon">▣</div>  
 
+            <h3>  
+                Sheet Metal  
+            </h3>  
 
-            <div class="process-item reveal">
+            <p>  
+                Manufacturing process and product quality inspection.  
+            </p>  
 
-                <div class="process-number">
-                    02
-                </div>
+            <div class="skill-meter">  
 
-                <h3>
-                    In-Process
-                </h3>
+                <div class="meter-head">  
+                    <span>Capability</span>  
+                    <span>88%</span>  
+                </div>  
 
-                <p>
-                    Manufacturing quality monitoring.
-                </p>
+                <div class="meter">  
+                    <span style="width:88%"></span>  
+                </div>  
 
-            </div>
+            </div>  
 
+        </div>  
 
-            <div class="process-item reveal">
 
-                <div class="process-number">
-                    03
-                </div>
+        <div class="glass skill reveal delay-3 tilt">  
 
-                <h3>
-                    Inspection
-                </h3>
+            <div class="skill-icon">◇</div>  
 
-                <p>
-                    Product and process verification.
-                </p>
+            <h3>  
+                Powder Coating  
+            </h3>  
 
-            </div>
+            <p>  
+                Visual and process quality checks for finished products.  
+            </p>  
 
+            <div class="skill-meter">  
 
-            <div class="process-item reveal">
+                <div class="meter-head">  
+                    <span>Capability</span>  
+                    <span>85%</span>  
+                </div>  
 
-                <div class="process-number">
-                    04
-                </div>
+                <div class="meter">  
+                    <span style="width:85%"></span>  
+                </div>  
 
-                <h3>
-                    NCR
-                </h3>
+            </div>  
 
-                <p>
-                    Identify and document non-conformity.
-                </p>
+        </div>  
 
-            </div>
 
+        <div class="glass skill reveal tilt">  
 
-            <div class="process-item reveal">
+            <div class="skill-icon">⌕</div>  
 
-                <div class="process-number">
-                    05
-                </div>
+            <h3>  
+                Quality Auditing  
+            </h3>  
 
-                <h3>
-                    RCA
-                </h3>
+            <p>  
+                Quality system awareness and audit support.  
+            </p>  
 
-                <p>
-                    Find the underlying root cause.
-                </p>
+            <div class="skill-meter">  
 
-            </div>
+                <div class="meter-head">  
+                    <span>Knowledge</span>  
+                    <span>82%</span>  
+                </div>  
 
+                <div class="meter">  
+                    <span style="width:82%"></span>  
+                </div>  
 
-            <div class="process-item reveal">
+            </div>  
 
-                <div class="process-number">
-                    06
-                </div>
+        </div>  
 
-                <h3>
-                    CAPA
-                </h3>
 
-                <p>
-                    Corrective and preventive action.
-                </p>
+        <div class="glass skill reveal delay-1 tilt">  
 
-            </div>
+            <div class="skill-icon">↔</div>  
 
+            <h3>  
+                Supplier Quality  
+            </h3>  
 
-            <div class="process-item reveal">
+            <p>  
+                Supplier quality communication, inspection and follow-up.  
+            </p>  
 
-                <div class="process-number">
-                    07
-                </div>
+            <div class="skill-meter">  
 
-                <h3>
-                    Release
-                </h3>
+                <div class="meter-head">  
+                    <span>Capability</span>  
+                    <span>84%</span>  
+                </div>  
 
-                <p>
-                    Final quality verification.
-                </p>
+                <div class="meter">  
+                    <span style="width:84%"></span>  
+                </div>  
 
-            </div>
+            </div>  
 
+        </div>  
 
-        </div>
 
-    </div>
+        <div class="glass skill reveal delay-2 tilt">  
 
-</section>
+            <div class="skill-icon">⚙</div>  
 
+            <h3>  
+                Quality Processes  
+            </h3>  
 
-<!-- =====================================================
-     CASE STUDIES
-===================================================== -->
+            <p>  
+                Process monitoring, inspection and defect prevention.  
+            </p>  
 
-<section class="cases" id="cases">
+            <div class="skill-meter">  
 
-    <span class="section-number">
-        05 / 08
-    </span>
+                <div class="meter-head">  
+                    <span>Core Skill</span>  
+                    <span>90%</span>  
+                </div>  
 
-    <div class="container">
+                <div class="meter">  
+                    <span style="width:90%"></span>  
+                </div>  
 
-        <div class="eyebrow reveal">
-            Quality thinking
-        </div>
+            </div>  
 
-        <h2 class="cases-title reveal">
+        </div>  
 
-            From problem
 
-            <span>
-                to solution.
-            </span>
+        <div class="glass skill reveal delay-3 tilt">  
 
-        </h2>
+            <div class="skill-icon">◎</div>  
 
+            <h3>  
+                Manufacturing QA  
+            </h3>  
 
-        <div class="case-list">
+            <p>  
+                Quality assurance throughout manufacturing operations.  
+            </p>  
 
+            <div class="skill-meter">  
 
-            <article class="case reveal">
+                <div class="meter-head">  
+                    <span>Core Skill</span>  
+                    <span>91%</span>  
+                </div>  
 
-                <div class="case-number">
-                    01
-                </div>
+                <div class="meter">  
+                    <span style="width:91%"></span>  
+                </div>  
 
-                <h3>
-                    RMU Manufacturing Quality
-                </h3>
+            </div>  
 
-                <div>
+        </div>  
 
-                    <p>
+    </div>  
 
-                        A structured approach to identifying
-                        manufacturing non-conformities,
-                        understanding their causes and
-                        supporting corrective action.
 
-                    </p>
+    <div style="height:30px"></div>  
 
-                    <div class="case-flow">
 
-                        <span>
-                            Identify Defect
-                        </span>
+    <div class="expertise-grid">  
 
-                        <span>
-                            Root Cause
-                        </span>
+        <div class="expertise reveal tilt">  
+            <span>01</span>  
+            <strong>Manufacturing QA</strong>  
+        </div>  
 
-                        <span>
-                            Corrective Action
-                        </span>
+        <div class="expertise reveal delay-1 tilt">  
+            <span>02</span>  
+            <strong>Inspection</strong>  
+        </div>  
 
-                        <span>
-                            Prevention
-                        </span>
+        <div class="expertise reveal delay-2 tilt">  
+            <span>03</span>  
+            <strong>RMU</strong>  
+        </div>  
 
-                    </div>
+        <div class="expertise reveal delay-3 tilt">  
+            <span>04</span>  
+            <strong>Supplier Quality</strong>  
+        </div>  
 
-                </div>
+        <div class="expertise reveal delay-4 tilt">  
+            <span>05</span>  
+            <strong>Quality Auditing</strong>  
+        </div>  
 
-            </article>
+    </div>  
 
+</div>
 
-            <article class="case reveal">
+</section>  <!-- =====================================================  
+     CASE STUDIES  
+===================================================== -->  <section id="cases">  <div class="container">  
 
-                <div class="case-number">
-                    02
-                </div>
+    <div class="section-head reveal">  
 
-                <h3>
-                    8D Problem Solving
-                </h3>
+        <div class="section-label">  
+            Quality Thinking  
+        </div>  
 
-                <div>
+        <h2 class="section-title">  
+            Professional <span>Case Studies.</span>  
+        </h2>  
 
-                    <p>
+        <p class="section-description">  
+            A visual representation of the structured approach used  
+            when investigating manufacturing quality issues.  
+        </p>  
 
-                        Applying structured problem-solving
-                        principles to investigate issues,
-                        establish corrective actions and
-                        strengthen manufacturing quality.
+    </div>  
 
-                    </p>
 
-                    <div class="case-flow">
+    <div class="case-grid">  
 
-                        <span>
-                            Detect
-                        </span>
 
-                        <span>
-                            Investigate
-                        </span>
+        <div class="glass case-card reveal tilt">  
 
-                        <span>
-                            RCA / 8D
-                        </span>
+            <div class="case-top">  
 
-                        <span>
-                            CAPA
-                        </span>
+                <div class="case-number">  
+                    01  
+                </div>  
 
-                    </div>
+                <div class="case-badge">  
+                    QUALITY CONTROL  
+                </div>  
 
-                </div>
+            </div>  
 
-            </article>
+            <h3>  
+                RMU Manufacturing Quality  
+            </h3>  
 
+            <p>  
+                A structured approach to identifying manufacturing  
+                non-conformities, understanding their causes and  
+                supporting corrective action.  
+            </p>  
 
-            <article class="case reveal">
+            <div class="case-flow">  
 
-                <div class="case-number">
-                    03
-                </div>
+                <div>  
+                    <span>Challenge</span>  
+                    <strong>Identify Defect</strong>  
+                </div>  
 
-                <h3>
-                    Process Improvement
-                </h3>
+                <div>  
+                    <span>Analysis</span>  
+                    <strong>Find Root Cause</strong>  
+                </div>  
 
-                <div>
+                <div>  
+                    <span>Action</span>  
+                    <strong>Prevent Recurrence</strong>  
+                </div>  
 
-                    <p>
+            </div>  
 
-                        Using quality tools and process
-                        thinking to reduce recurring issues,
-                        improve control points and support
-                        continuous improvement.
+        </div>  
 
-                    </p>
 
-                    <div class="case-flow">
+        <div class="glass case-card reveal delay-1 tilt">  
 
-                        <span>
-                            Measure
-                        </span>
+            <div class="case-top">  
 
-                        <span>
-                            Analyze
-                        </span>
+                <div class="case-number">  
+                    02  
+                </div>  
 
-                        <span>
-                            Improve
-                        </span>
+                <div class="case-badge">  
+                    CONTINUOUS IMPROVEMENT  
+                </div>  
 
-                        <span>
-                            Control
-                        </span>
+            </div>  
 
-                    </div>
+            <h3>  
+                8D Problem Solving  
+            </h3>  
 
-                </div>
+            <p>  
+                Applying structured problem-solving principles to  
+                investigate issues, establish corrective actions and  
+                strengthen manufacturing quality.  
+            </p>  
 
-            </article>
+            <div class="case-flow">  
 
+                <div>  
+                    <span>Detect</span>  
+                    <strong>Non-Conformity</strong>  
+                </div>  
 
-        </div>
+                <div>  
+                    <span>Investigate</span>  
+                    <strong>RCA / 8D</strong>  
+                </div>  
 
+                <div>  
+                    <span>Improve</span>  
+                    <strong>CAPA</strong>  
+                </div>  
 
-        <p style="
-            margin-top:25px;
-            color:#999;
-            font-size:9px;
-            text-align:right;
-        ">
+            </div>  
 
-            * Case studies are presented at a general
-            level to protect confidential company information.
+        </div>  
 
-        </p>
 
-    </div>
+    </div>  
 
-</section>
+    <p  
+        style="  
+        margin-top:18px;  
+        color:var(--muted2);  
+        font-size:9px;  
+        text-align:center;  
+        ">  
+        * Case-study descriptions are intentionally presented at a  
+        general level to protect confidential company information.  
+    </p>  
 
+</div>
 
-<!-- =====================================================
-     CERTIFICATIONS
-===================================================== -->
+</section>  <!-- =====================================================  
+     CERTIFICATIONS  
+===================================================== -->  <section id="certifications">  <div class="container">  
 
-<section class="certifications" id="certifications">
+    <div class="section-head reveal">  
 
-    <span class="section-number">
-        06 / 08
-    </span>
+        <div class="section-label">  
+            Professional Credentials  
+        </div>  
 
-    <div class="container">
+        <h2 class="section-title">  
+            Certifications <span>& Training.</span>  
+        </h2>  
 
-        <div class="cert-header">
+        <p class="section-description">  
+            Explore the professional certifications and quality-related  
+            training completed by Rizwan Ansari.  
+        </p>  
 
-            <div>
+    </div>  
 
-                <div class="eyebrow reveal">
-                    Credentials
-                </div>
 
-                <h2 class="cert-title reveal">
+    <div class="certifications-grid">  
 
-                    Learning
 
-                    <span>
-                        that compounds.
-                    </span>
+        <article  
+            class="cert-card reveal tilt"  
+            data-cert="0"  
+            tabindex="0"  
+            role="button">  
 
-                </h2>
+            <div class="cert-image-wrap">  
 
-            </div>
+                <img  
+                    src="certificate-1.jpg"  
+                    alt="Seven Basic Tools of Quality Expert Certificate"  
+                    loading="lazy">  
 
+                <div class="cert-overlay">  
+                    <div class="view-cert">  
+                        VIEW CERTIFICATE ↗  
+                    </div>  
+                </div>  
 
-            <p class="cert-note reveal">
+            </div>  
 
-                Professional certifications and quality
-                training supporting my manufacturing and
-                continuous improvement practice.
+            <div class="cert-info">  
 
-            </p>
+                <h3>  
+                    Seven Basic Tools of Quality Expert  
+                </h3>  
 
-        </div>
+                <p>  
+                    AIGPE™ — Quality Tools Certification  
+                </p>  
 
+            </div>  
 
-        <div class="cert-grid">
+        </article>  
 
 
-            <article
-                class="cert reveal"
-                data-cert="0">
+        <article  
+            class="cert-card reveal delay-1 tilt"  
+            data-cert="1"  
+            tabindex="0"  
+            role="button">  
 
-                <div class="cert-image">
+            <div class="cert-image-wrap">  
 
-                    <img
-                        src="certificate-1.jpg"
-                        alt="Seven Basic Tools of Quality Expert">
+                <img  
+                    src="certificate-2.jpg"  
+                    alt="8D Problem Solving Specialist Certificate"  
+                    loading="lazy">  
 
-                </div>
+                <div class="cert-overlay">  
+                    <div class="view-cert">  
+                        VIEW CERTIFICATE ↗  
+                    </div>  
+                </div>  
 
-                <div class="cert-overlay">
+            </div>  
 
-                    <span>
-                        View certificate ↗
-                    </span>
+            <div class="cert-info">  
 
-                    <span>
-                        01
-                    </span>
+                <h3>  
+                    8D Problem Solving Specialist  
+                </h3>  
 
-                </div>
+                <p>  
+                    AIGPE™ — Problem Solving Certification  
+                </p>  
 
-                <div class="cert-info">
+            </div>  
 
-                    <h3>
-                        Seven Basic Tools of Quality Expert
-                    </h3>
+        </article>  
 
-                    <p>
-                        AIGPE™ — Quality Tools
-                    </p>
 
-                </div>
+        <article  
+            class="cert-card reveal delay-2 tilt"  
+            data-cert="2"  
+            tabindex="0"  
+            role="button">  
 
-            </article>
+            <div class="cert-image-wrap">  
 
+                <img  
+                    src="certificate-3.jpg"  
+                    alt="Gauge R&R Simplified Certificate"  
+                    loading="lazy">  
 
-            <article
-                class="cert reveal"
-                data-cert="1">
+                <div class="cert-overlay">  
+                    <div class="view-cert">  
+                        VIEW CERTIFICATE ↗  
+                    </div>  
+                </div>  
 
-                <div class="cert-image">
+            </div>  
 
-                    <img
-                        src="certificate-2.jpg"
-                        alt="8D Problem Solving Specialist">
+            <div class="cert-info">  
 
-                </div>
+                <h3>  
+                    Gauge R&R Simplified  
+                </h3>  
 
-                <div class="cert-overlay">
+                <p>  
+                    Manufacturing Quality Training  
+                </p>  
 
-                    <span>
-                        View certificate ↗
-                    </span>
+            </div>  
 
-                    <span>
-                        02
-                    </span>
+        </article>  
 
-                </div>
 
-                <div class="cert-info">
+        <article  
+            class="cert-card reveal delay-3 tilt"  
+            data-cert="3"  
+            tabindex="0"  
+            role="button">  
 
-                    <h3>
-                        8D Problem Solving Specialist
-                    </h3>
+            <div class="cert-image-wrap">  
 
-                    <p>
-                        AIGPE™ — Problem Solving
-                    </p>
+                <img  
+                    src="certificate-4.jpg"  
+                    alt="Lean Six Sigma Yellow Belt Certificate"  
+                    loading="lazy">  
 
-                </div>
+                <div class="cert-overlay">  
+                    <div class="view-cert">  
+                        VIEW CERTIFICATE ↗  
+                    </div>  
+                </div>  
 
-            </article>
+            </div>  
 
+            <div class="cert-info">  
 
-            <article
-                class="cert reveal"
-                data-cert="2">
+                <h3>  
+                    Lean Six Sigma Yellow Belt  
+                </h3>  
 
-                <div class="cert-image">
+                <p>  
+                    AIGPE™ — Lean Six Sigma Certification  
+                </p>  
 
-                    <img
-                        src="certificate-3.jpg"
-                        alt="Gauge R&R Simplified">
+            </div>  
 
-                </div>
+        </article>  
 
-                <div class="cert-overlay">
 
-                    <span>
-                        View certificate ↗
-                    </span>
+        <article  
+            class="cert-card reveal delay-4 tilt"  
+            data-cert="4"  
+            tabindex="0"  
+            role="button">  
 
-                    <span>
-                        03
-                    </span>
+            <div class="cert-image-wrap">  
 
-                </div>
+                <img  
+                    src="certificate-5.jpg"  
+                    alt="Lean Six Sigma Green Belt Certificate"  
+                    loading="lazy">  
 
-                <div class="cert-info">
+                <div class="cert-overlay">  
+                    <div class="view-cert">  
+                        VIEW CERTIFICATE ↗  
+                    </div>  
+                </div>  
 
-                    <h3>
-                        Gauge R&R Simplified
-                    </h3>
+            </div>  
 
-                    <p>
-                        Manufacturing Quality
-                    </p>
+            <div class="cert-info">  
 
-                </div>
+                <h3>  
+                    Lean Six Sigma Green Belt  
+                </h3>  
 
-            </article>
+                <p>  
+                    AIGPE™ — Lean Six Sigma Certification  
+                </p>  
 
+            </div>  
 
-            <article
-                class="cert reveal"
-                data-cert="3">
+        </article>  
 
-                <div class="cert-image">
 
-                    <img
-                        src="certificate-4.jpg"
-                        alt="Lean Six Sigma Yellow Belt">
+        <article  
+            class="cert-card reveal tilt"  
+            data-cert="5"  
+            tabindex="0"  
+            role="button">  
 
-                </div>
+            <div class="cert-image-wrap">  
 
-                <div class="cert-overlay">
+                <img  
+                    src="certificate-6.jpg"  
+                    alt="ISO 9001:2015 Quality Management System Certificate"  
+                    loading="lazy">  
 
-                    <span>
-                        View certificate ↗
-                    </span>
+                <div class="cert-overlay">  
+                    <div class="view-cert">  
+                        VIEW CERTIFICATE ↗  
+                    </div>  
+                </div>  
 
-                    <span>
-                        04
-                    </span>
+            </div>  
 
-                </div>
+            <div class="cert-info">  
 
-                <div class="cert-info">
+                <h3>  
+                    ISO 9001:2015 Quality Management System  
+                </h3>  
 
-                    <h3>
-                        Lean Six Sigma Yellow Belt
-                    </h3>
+                <p>  
+                    Quality Management System Training  
+                </p>  
 
-                    <p>
-                        AIGPE™ — Lean Six Sigma
-                    </p>
+            </div>  
 
-                </div>
+        </article>  
 
-            </article>
+    </div>  
 
+</div>
 
-            <article
-                class="cert reveal"
-                data-cert="4">
+</section>  <!-- =====================================================  
+     CERTIFICATE VIEWER  
+===================================================== -->  <div  
+    id="certificateViewer"  
+    role="dialog"  
+    aria-modal="true"  
+    aria-label="Certificate viewer">  <button  
+    class="viewer-close"  
+    id="viewerClose"  
+    aria-label="Close certificate viewer">  
+    ×  
+</button>  
 
-                <div class="cert-image">
+<button  
+    class="viewer-arrow viewer-prev"  
+    id="viewerPrev"  
+    aria-label="Previous certificate">  
+    ‹  
+</button>  
 
-                    <img
-                        src="certificate-5.jpg"
-                        alt="Lean Six Sigma Green Belt">
+<div class="viewer-content">  
 
-                </div>
+    <img  
+        id="viewerImage"  
+        class="viewer-image"  
+        src=""  
+        alt="Certificate">  
 
-                <div class="cert-overlay">
+</div>  
 
-                    <span>
-                        View certificate ↗
-                    </span>
+<button  
+    class="viewer-arrow viewer-next"  
+    id="viewerNext"  
+    aria-label="Next certificate">  
+    ›  
+</button>  
 
-                    <span>
-                        05
-                    </span>
+<div  
+    id="viewerTitle"  
+    class="viewer-title">  
+</div>
 
-                </div>
+</div>  <!-- =====================================================  
+     EDUCATION  
+===================================================== -->  <section id="education">  <div class="container">  
 
-                <div class="cert-info">
+    <div class="section-head reveal">  
 
-                    <h3>
-                        Lean Six Sigma Green Belt
-                    </h3>
+        <div class="section-label">  
+            Academic Foundation  
+        </div>  
 
-                    <p>
-                        AIGPE™ — Lean Six Sigma
-                    </p>
+        <h2 class="section-title">  
+            Education <span>Background.</span>  
+        </h2>  
 
-                </div>
+    </div>  
 
-            </article>
 
+    <div class="glass education-card reveal tilt">  
 
-            <article
-                class="cert reveal"
-                data-cert="5">
+        <div class="edu-icon">  
+            🎓  
+        </div>  
 
-                <div class="cert-image">
+        <div>  
 
-                    <img
-                        src="certificate-6.jpg"
-                        alt="ISO 9001:2015">
+            <h3>  
+                Diploma  
+            </h3>  
 
-                </div>
+            <p>  
+                Technical education supporting a career in  
+                manufacturing, electrical quality and inspection.  
+            </p>  
 
-                <div class="cert-overlay">
+        </div>  
 
-                    <span>
-                        View certificate ↗
-                    </span>
+        <div class="edu-badge">  
+            Technical Education  
+        </div>  
 
-                    <span>
-                        06
-                    </span>
+    </div>  
 
-                </div>
+</div>
 
-                <div class="cert-info">
+</section>  <!-- =====================================================  
+     CONTACT  
+===================================================== -->  <section id="contact">  <div class="container">  
 
-                    <h3>
-                        ISO 9001:2015 Quality Management System
-                    </h3>
+    <div class="contact-box reveal">  
 
-                    <p>
-                        Quality Management System
-                    </p>
+        <div class="section-label">  
+            Professional Connection  
+        </div>  
 
-                </div>
+        <h2>  
+            Let's build quality<br>  
+            <span>that lasts.</span>  
+        </h2>  
 
-            </article>
+        <p>  
+            Interested in connecting regarding QA/QC,  
+            manufacturing quality, inspection or professional  
+            opportunities? Feel free to get in touch.  
+        </p>  
 
+        <a  
+            href="mailto:rizwanansari60568@gmail.com"  
+            class="email magnetic">  
+            rizwanansari60568@gmail.com  
+        </a>  
 
-        </div>
+        <div class="contact-buttons">  
 
-    </div>
+            <a  
+                href="mailto:rizwanansari60568@gmail.com"  
+                class="btn btn-primary magnetic">  
+                Email Me →  
+            </a>  
 
-</section>
+            <a  
+                href="Rizwan-Ansari-CV.pdf"  
+                class="btn btn-outline magnetic"  
+                download>  
+                Download CV ↓  
+            </a>  
 
+            <a  
+                href="#home"  
+                class="btn btn-outline magnetic">  
+                Back to Top ↑  
+            </a>  
 
-<!-- =====================================================
-     EDUCATION
-===================================================== -->
+        </div>  
 
-<section class="education" id="education">
+    </div>  
 
-    <span class="section-number">
-        07 / 08
-    </span>
+</div>
 
-    <div class="container">
+</section>  <!-- =====================================================  
+     FOOTER  
+===================================================== -->  <footer>  © <span id="year"></span> Rizwan Ansari.  
+QA/QC Officer • Quality • Precision • Reliability.
 
-        <div class="education-grid">
-
-            <div>
-
-                <div class="eyebrow reveal">
-                    Education
-                </div>
-
-                <h2 class="reveal">
-
-                    Academic
-
-                    <span>
-                        foundation.
-                    </span>
-
-                </h2>
-
-            </div>
-
-
-            <div class="edu-content">
-
-                <div class="edu-row reveal">
-
-                    <div class="edu-year">
-                        TECHNICAL
-                    </div>
-
-                    <div>
-
-                        <h3>
-                            Diploma
-                        </h3>
-
-                        <p>
-                            Technical education supporting
-                            a career in manufacturing,
-                            electrical quality and inspection.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     CONTACT
-===================================================== -->
-
-<section class="contact" id="contact">
-
-    <div class="container">
-
-        <div class="eyebrow reveal">
-            Let's connect
-        </div>
-
-
-        <h2 class="contact-title reveal">
-
-            Let's build
-
-            <span>
-                quality
-            </span>
-
-            that lasts.
-
-        </h2>
-
-
-        <div class="contact-bottom reveal">
-
-            <a
-                class="email"
-                href="mailto:rizwanansari60568@gmail.com">
-
-                rizwanansari60568@gmail.com
-
-            </a>
-
-
-            <div class="contact-links">
-
-                <a href="mailto:rizwanansari60568@gmail.com">
-                    Email ↗
-                </a>
-
-                <a
-                    href="Rizwan-Ansari-CV.pdf"
-                    download>
-                    Download CV ↓
-                </a>
-
-                <a href="#home">
-                    Back to top ↑
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    © <span id="year"></span>
-    Rizwan Ansari — QA/QC Officer
-
-</footer>
-
-
-<!-- =====================================================
-     BACK TOP
-===================================================== -->
-
-<button
-    class="back-top"
-    id="backTop"
-    aria-label="Back to top">
-
-    ↑
-
+</footer>  <button  
+id="backTop"  
+aria-label="Back to top">
+↑
 </button>
 
-
-<!-- =====================================================
-     CERTIFICATE VIEWER
-===================================================== -->
-
-<div
-    class="viewer"
-    id="viewer">
-
-    <button
-        class="viewer-close"
-        id="viewerClose">
-
-        ×
-
-    </button>
-
-
-    <button
-        class="viewer-arrow viewer-prev"
-        id="viewerPrev">
-
-        ‹
-
-    </button>
-
-
-    <img
-        id="viewerImage"
-        src=""
-        alt="Certificate">
-
-
-    <button
-        class="viewer-arrow viewer-next"
-        id="viewerNext">
-
-        ›
-
-    </button>
-
-
-    <div
-        class="viewer-title"
-        id="viewerTitle">
-    </div>
-
-</div>
-
-
-<script>
-
-/* =========================================================
-   YEAR
-========================================================= */
-
-document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-let loaderPercent = 0;
-
-const loader =
-    document.getElementById("loader");
-
-const loaderText =
-    document.getElementById("loaderPercent");
-
-
-const loaderInterval =
-    setInterval(function(){
-
-        loaderPercent +=
-            Math.floor(
-                Math.random()*8
-            ) + 3;
-
-        if(loaderPercent >= 100){
-
-            loaderPercent = 100;
-
-            clearInterval(loaderInterval);
-
-            setTimeout(function(){
-
-                loader.classList.add("hide");
-
-            },350);
-
-        }
-
-        loaderText.textContent =
-            loaderPercent + "%";
-
-    },70);
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-const navbar =
-    document.getElementById("navbar");
-
-const menuButton =
-    document.getElementById("menuButton");
-
-const navLinks =
-    document.getElementById("navLinks");
-
-
-menuButton.addEventListener(
-    "click",
-    function(){
-
-        navLinks.classList.toggle("open");
-
-        menuButton.textContent =
-            navLinks.classList.contains("open")
-            ? "×"
-            : "☰";
-
-    }
-);
-
-
-document.querySelectorAll(
-    ".nav-links a"
-).forEach(function(link){
-
-    link.addEventListener(
-        "click",
-        function(){
-
-            navLinks.classList.remove("open");
-
-            menuButton.textContent="☰";
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   SCROLL NAV
-========================================================= */
-
-window.addEventListener(
-    "scroll",
-    function(){
-
-        if(window.scrollY > 50){
-
-            navbar.classList.add("scrolled");
-
-        }else{
-
-            navbar.classList.remove("scrolled");
-
-        }
-
-    },
-    {passive:true}
-);
-
-
-/* =========================================================
-   ACTIVE NAV
-========================================================= */
-
-const sections =
-    document.querySelectorAll(
-        "section[id]"
-    );
-
-const links =
-    document.querySelectorAll(
-        ".nav-links a"
-    );
-
-
-function updateNavigation(){
-
-    let current = "";
-
-    sections.forEach(function(section){
-
-        const sectionTop =
-            section.offsetTop - 180;
-
-        if(
-            window.scrollY >=
-            sectionTop
-        ){
-
-            current =
-                section.id;
-
-        }
-
-    });
-
-
-    links.forEach(function(link){
-
-        link.classList.remove("active");
-
-        if(
-            link.getAttribute("href") ===
-            "#" + current
-        ){
-
-            link.classList.add("active");
-
-        }
-
-    });
-
-}
-
-
-window.addEventListener(
-    "scroll",
-    updateNavigation,
-    {passive:true}
-);
-
-
-/* =========================================================
-   SMOOTH SCROLL
-========================================================= */
-
-document.querySelectorAll(
-    'a[href^="#"]'
-).forEach(function(anchor){
-
-    anchor.addEventListener(
-        "click",
-        function(e){
-
-            const target =
-                document.querySelector(
-                    this.getAttribute("href")
-                );
-
-            if(!target) return;
-
-            e.preventDefault();
-
-            const top =
-                target.getBoundingClientRect().top +
-                window.scrollY -
-                70;
-
-            window.scrollTo({
-
-                top:top,
-
-                behavior:"smooth"
-
-            });
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   REVEAL
-========================================================= */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-
-const observer =
-    new IntersectionObserver(
-        function(entries){
-
-            entries.forEach(function(entry){
-
-                if(entry.isIntersecting){
-
-                    entry.target.classList.add(
-                        "visible"
-                    );
-
-                    observer.unobserve(
-                        entry.target
-                    );
-
-                }
-
-            });
-
-        },
-        {
-            threshold:.08
-        }
-    );
-
-
-revealElements.forEach(function(element){
-
-    observer.observe(element);
-
-});
-
-
-/* =========================================================
-   CURSOR
-========================================================= */
-
-const cursor =
-    document.querySelector(".cursor");
-
-const cursorCircle =
-    document.querySelector(".cursor-circle");
-
-
-if(
-    window.matchMedia("(pointer:fine)").matches
-){
-
-    let mouseX = 0;
-    let mouseY = 0;
-
-    let circleX = 0;
-    let circleY = 0;
-
-
-    window.addEventListener(
-        "mousemove",
-        function(e){
-
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-            cursor.style.left =
-                mouseX + "px";
-
-            cursor.style.top =
-                mouseY + "px";
-
-        }
-    );
-
-
-    function animateCursor(){
-
-        circleX +=
-            (mouseX-circleX)*.13;
-
-        circleY +=
-            (mouseY-circleY)*.13;
-
-        cursorCircle.style.left =
-            circleX + "px";
-
-        cursorCircle.style.top =
-            circleY + "px";
-
-        requestAnimationFrame(
-            animateCursor
-        );
-
-    }
-
-    animateCursor();
-
-
-    document.querySelectorAll(
-        "a,button,.cert,.expertise-item,.process-item,.hero-image"
-    ).forEach(function(element){
-
-        element.addEventListener(
-            "mouseenter",
-            function(){
-
-                document.body.classList.add(
-                    "hovering"
-                );
-
-            }
-        );
-
-
-        element.addEventListener(
-            "mouseleave",
-            function(){
-
-                document.body.classList.remove(
-                    "hovering"
-                );
-
-            }
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   BACK TO TOP
-========================================================= */
-
-const backTop =
-    document.getElementById("backTop");
-
-
-window.addEventListener(
-    "scroll",
-    function(){
-
-        if(window.scrollY > 700){
-
-            backTop.classList.add("show");
-
-        }else{
-
-            backTop.classList.remove("show");
-
-        }
-
-    },
-    {passive:true}
-);
-
-
-backTop.addEventListener(
-    "click",
-    function(){
-
-        window.scrollTo({
-
-            top:0,
-
-            behavior:"smooth"
-
-        });
-
-    }
-);
-
-
-/* =========================================================
-   CERTIFICATE VIEWER
-========================================================= */
-
-const certificates = [
-
-    {
-        image:"certificate-1.jpg",
-        title:"Seven Basic Tools of Quality Expert"
-    },
-
-    {
-        image:"certificate-2.jpg",
-        title:"8D Problem Solving Specialist"
-    },
-
-    {
-        image:"certificate-3.jpg",
-        title:"Gauge R&R Simplified"
-    },
-
-    {
-        image:"certificate-4.jpg",
-        title:"Lean Six Sigma Yellow Belt"
-    },
-
-    {
-        image:"certificate-5.jpg",
-        title:"Lean Six Sigma Green Belt"
-    },
-
-    {
-        image:"certificate-6.jpg",
-        title:"ISO 9001:2015 Quality Management System"
-    }
-
-];
-
-
-const viewer =
-    document.getElementById("viewer");
-
-const viewerImage =
-    document.getElementById("viewerImage");
-
-const viewerTitle =
-    document.getElementById("viewerTitle");
-
-const viewerClose =
-    document.getElementById("viewerClose");
-
-const viewerPrev =
-    document.getElementById("viewerPrev");
-
-const viewerNext =
-    document.getElementById("viewerNext");
-
-
-let currentCertificate = 0;
-
-
-function showCertificate(index){
-
-    currentCertificate =
-        (index + certificates.length) %
-        certificates.length;
-
-    const certificate =
-        certificates[currentCertificate];
-
-
-    viewerImage.src =
-        certificate.image;
-
-    viewerImage.alt =
-        certificate.title;
-
-
-    viewerTitle.textContent =
-        certificate.title +
-        " — " +
-        (currentCertificate+1) +
-        " / " +
-        certificates.length;
-
-}
-
-
-function openViewer(index){
-
-    showCertificate(index);
-
-    viewer.classList.add("open");
-
-    document.body.classList.add(
-        "no-scroll"
-    );
-
-}
-
-
-function closeViewer(){
-
-    viewer.classList.remove("open");
-
-    document.body.classList.remove(
-        "no-scroll"
-    );
-
-}
-
-
-document.querySelectorAll(
-    ".cert"
-).forEach(function(card){
-
-    card.addEventListener(
-        "click",
-        function(){
-
-            openViewer(
-                Number(
-                    this.dataset.cert
-                )
-            );
-
-        }
-    );
-
-});
-
-
-viewerClose.addEventListener(
-    "click",
-    closeViewer
-);
-
-
-viewerPrev.addEventListener(
-    "click",
-    function(){
-
-        showCertificate(
-            currentCertificate-1
-        );
-
-    }
-);
-
-
-viewerNext.addEventListener(
-    "click",
-    function(){
-
-        showCertificate(
-            currentCertificate+1
-        );
-
-    }
-);
-
-
-viewer.addEventListener(
-    "click",
-    function(e){
-
-        if(e.target === viewer){
-
-            closeViewer();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(e){
-
-        if(!viewer.classList.contains("open")){
-            return;
-        }
-
-        if(e.key === "Escape"){
-
-            closeViewer();
-
-        }
-
-        if(e.key === "ArrowLeft"){
-
-            showCertificate(
-                currentCertificate-1
-            );
-
-        }
-
-        if(e.key === "ArrowRight"){
-
-            showCertificate(
-                currentCertificate+1
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   TOUCH SWIPE
-========================================================= */
-
-let touchStart = 0;
-
-
-viewer.addEventListener(
-    "touchstart",
-    function(e){
-
-        touchStart =
-            e.changedTouches[0].screenX;
-
-    },
-    {passive:true}
-);
-
-
-viewer.addEventListener(
-    "touchend",
-    function(e){
-
-        const touchEnd =
-            e.changedTouches[0].screenX;
-
-        const difference =
-            touchEnd-touchStart;
-
-
-        if(
-            Math.abs(difference) < 50
-        ){
-
-            return;
-
-        }
-
-
-        if(difference < 0){
-
-            showCertificate(
-                currentCertificate+1
-            );
-
-        }else{
-
-            showCertificate(
-                currentCertificate-1
-            );
-
-        }
-
-    },
-    {passive:true}
-);
-
-
-/* =========================================================
-   IMAGE PARALLAX
-========================================================= */
-
-const heroImage =
-    document.querySelector(".hero-image");
-
-
-if(
-    window.matchMedia("(pointer:fine)").matches
-){
-
-    window.addEventListener(
-        "mousemove",
-        function(e){
-
-            const x =
-                (e.clientX /
-                window.innerWidth -
-                .5) * 10;
-
-            const y =
-                (e.clientY /
-                window.innerHeight -
-                .5) * 10;
-
-
-            heroImage.style.transform =
-                `translate(${x}px,${y}px)`;
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   MAGNETIC BUTTON EFFECT
-========================================================= */
-
-document.querySelectorAll(
-    ".contact-links a,.logo,.menu"
-).forEach(function(element){
-
-    if(
-        !window.matchMedia(
-            "(pointer:fine)"
-        ).matches
-    ){
-
-        return;
-
-    }
-
-
-    element.addEventListener(
-        "mousemove",
-        function(e){
-
-            const rect =
-                element.getBoundingClientRect();
-
-            const x =
-                e.clientX -
-                rect.left -
-                rect.width/2;
-
-            const y =
-                e.clientY -
-                rect.top -
-                rect.height/2;
-
-
-            element.style.transform =
-                `translate(
-                    ${x*.12}px,
-                    ${y*.12}px
-                )`;
-
-        }
-    );
-
-
-    element.addEventListener(
-        "mouseleave",
-        function(){
-
-            element.style.transform="";
-
-        }
-    );
-
-});
-
-
-</script>
-
-</body>
+<script>  
+  
+/* =========================================================  
+   YEAR  
+========================================================= */  
+  
+document.getElementById("year").textContent =  
+    new Date().getFullYear();  
+  
+  
+/* =========================================================  
+   LOADER  
+========================================================= */  
+  
+window.addEventListener("load",function(){  
+  
+    setTimeout(function(){  
+  
+        document  
+            .getElementById("loader")  
+            .classList.add("hide");  
+  
+    },650);  
+  
+});  
+  
+  
+/* =========================================================  
+   PARTICLES  
+========================================================= */  
+  
+const particleContainer =  
+    document.getElementById("particles");  
+  
+if(  
+    !window.matchMedia(  
+        "(prefers-reduced-motion: reduce)"  
+    ).matches  
+){  
+  
+    for(let i=0;i<35;i++){  
+  
+        const particle =  
+            document.createElement("span");  
+  
+        particle.className="particle";  
+  
+        particle.style.left =  
+            Math.random()*100 + "%";  
+  
+        particle.style.animationDuration =  
+            (8 + Math.random()*14) + "s";  
+  
+        particle.style.animationDelay =  
+            (-Math.random()*18) + "s";  
+  
+        particle.style.opacity =  
+            (.12 + Math.random()*.35);  
+  
+        particleContainer.appendChild(  
+            particle  
+        );  
+  
+    }  
+  
+}  
+  
+  
+/* =========================================================  
+   MOBILE MENU  
+========================================================= */  
+  
+const menuBtn =  
+    document.getElementById("menuBtn");  
+  
+const navLinks =  
+    document.getElementById("navLinks");  
+  
+menuBtn.addEventListener("click",function(){  
+  
+    const open =  
+        navLinks.classList.toggle("open");  
+  
+    menuBtn.setAttribute(  
+        "aria-expanded",  
+        open  
+    );  
+  
+    menuBtn.textContent =  
+        open ? "×" : "☰";  
+  
+});  
+  
+  
+document.querySelectorAll(  
+    ".nav-links a"  
+).forEach(function(link){  
+  
+    link.addEventListener(  
+        "click",  
+        function(){  
+  
+            navLinks.classList.remove("open");  
+  
+            menuBtn.setAttribute(  
+                "aria-expanded",  
+                "false"  
+            );  
+  
+            menuBtn.textContent="☰";  
+  
+        }  
+    );  
+  
+});  
+  
+  
+/* =========================================================  
+   THEME  
+========================================================= */  
+  
+const themeBtn =  
+    document.getElementById("themeBtn");  
+  
+const savedTheme =  
+    localStorage.getItem("rizwan-theme");  
+  
+if(savedTheme === "light"){  
+  
+    document.body.classList.add("light");  
+  
+    themeBtn.textContent="☀";  
+  
+}  
+  
+  
+themeBtn.addEventListener(  
+    "click",  
+    function(){  
+  
+        document.body.classList.toggle("light");  
+  
+        const light =  
+            document.body.classList.contains("light");  
+  
+        localStorage.setItem(  
+            "rizwan-theme",  
+            light ? "light" : "dark"  
+        );  
+  
+        themeBtn.textContent =  
+            light ? "☀" : "☾";  
+  
+    }  
+);  
+  
+  
+/* =========================================================  
+   SCROLL  
+========================================================= */  
+  
+const navbar =  
+    document.getElementById("navbar");  
+  
+const progressBar =  
+    document.getElementById("progressBar");  
+  
+const backTop =  
+    document.getElementById("backTop");  
+  
+  
+function handleScroll(){  
+  
+    const scrollTop =  
+        window.scrollY;  
+  
+    const maxScroll =  
+        document.documentElement.scrollHeight -  
+        window.innerHeight;  
+  
+    const progress =  
+        maxScroll > 0  
+        ? scrollTop / maxScroll * 100  
+        : 0;  
+  
+    progressBar.style.width =  
+        progress + "%";  
+  
+  
+    if(scrollTop > 40){  
+  
+        navbar.classList.add("scrolled");  
+  
+    }else{  
+  
+        navbar.classList.remove("scrolled");  
+  
+    }  
+  
+  
+    if(scrollTop > 600){  
+  
+        backTop.classList.add("show");  
+  
+    }else{  
+  
+        backTop.classList.remove("show");  
+  
+    }  
+  
+}  
+  
+  
+window.addEventListener(  
+    "scroll",  
+    handleScroll,  
+    {passive:true}  
+);  
+  
+handleScroll();  
+  
+  
+backTop.addEventListener(  
+    "click",  
+    function(){  
+  
+        window.scrollTo({  
+            top:0,  
+            behavior:"smooth"  
+        });  
+  
+    }  
+);  
+  
+  
+/* =========================================================  
+   ACTIVE NAV  
+========================================================= */  
+  
+const sections =  
+    document.querySelectorAll(  
+        "section[id]"  
+    );  
+  
+const navItems =  
+    document.querySelectorAll(  
+        ".nav-links a"  
+    );  
+  
+  
+function updateActiveNav(){  
+  
+    let current="";  
+  
+    sections.forEach(function(section){  
+  
+        const top =  
+            section.offsetTop - 180;  
+  
+        if(window.scrollY >= top){  
+  
+            current =  
+                section.id;  
+  
+        }  
+  
+    });  
+  
+  
+    navItems.forEach(function(link){  
+  
+        link.classList.remove("active");  
+  
+        if(  
+            link.getAttribute("href") ===  
+            "#" + current  
+        ){  
+  
+            link.classList.add("active");  
+  
+        }  
+  
+    });  
+  
+}  
+  
+  
+window.addEventListener(  
+    "scroll",  
+    updateActiveNav,  
+    {passive:true}  
+);  
+  
+  
+/* =========================================================  
+   SMOOTH SCROLL  
+========================================================= */  
+  
+document.querySelectorAll(  
+    'a[href^="#"]'  
+).forEach(function(anchor){  
+  
+    anchor.addEventListener(  
+        "click",  
+        function(e){  
+  
+            const target =  
+                document.querySelector(  
+                    this.getAttribute("href")  
+                );  
+  
+            if(!target) return;  
+  
+            e.preventDefault();  
+  
+            const top =  
+                target.getBoundingClientRect().top +  
+                window.scrollY -  
+                navbar.offsetHeight;  
+  
+            window.scrollTo({  
+  
+                top:top,  
+                behavior:"smooth"  
+  
+            });  
+  
+        }  
+    );  
+  
+});  
+  
+  
+/* =========================================================  
+   REVEAL  
+========================================================= */  
+  
+const revealElements =  
+    document.querySelectorAll(".reveal");  
+  
+  
+const revealObserver =  
+    new IntersectionObserver(  
+        function(entries){  
+  
+            entries.forEach(function(entry){  
+  
+                if(entry.isIntersecting){  
+  
+                    entry.target.classList.add(  
+                        "visible"  
+                    );  
+  
+                    revealObserver.unobserve(  
+                        entry.target  
+                    );  
+  
+                }  
+  
+            });  
+  
+        },  
+        {  
+            threshold:.10  
+        }  
+    );  
+  
+  
+revealElements.forEach(function(element){  
+  
+    revealObserver.observe(element);  
+  
+});  
+  
+  
+/* =========================================================  
+   TYPING  
+========================================================= */  
+  
+const roles = [  
+  
+    "QA/QC OFFICER",  
+    "QUALITY ASSURANCE",  
+    "RMU MANUFACTURING",  
+    "QUALITY CONTROL",  
+    "QUALITY IMPROVEMENT"  
+  
+];  
+  
+const typingElement =  
+    document.getElementById("typingRole");  
+  
+let roleIndex=0;  
+let charIndex=0;  
+let deleting=false;  
+  
+  
+function typeRole(){  
+  
+    const role =  
+        roles[roleIndex];  
+  
+    if(!deleting){  
+  
+        charIndex++;  
+  
+        typingElement.textContent =  
+            role.substring(  
+                0,  
+                charIndex  
+            );  
+  
+        if(charIndex >= role.length){  
+  
+            deleting=true;  
+  
+            setTimeout(  
+                typeRole,  
+                1500  
+            );  
+  
+            return;  
+  
+        }  
+  
+        setTimeout(  
+            typeRole,  
+            65  
+        );  
+  
+    }else{  
+  
+        charIndex--;  
+  
+        typingElement.textContent =  
+            role.substring(  
+                0,  
+                charIndex  
+            );  
+  
+        if(charIndex <= 0){  
+  
+            deleting=false;  
+  
+            roleIndex =  
+                (roleIndex + 1) %  
+                roles.length;  
+  
+            setTimeout(  
+                typeRole,  
+                300  
+            );  
+  
+            return;  
+  
+        }  
+  
+        setTimeout(  
+            typeRole,  
+            35  
+        );  
+  
+    }  
+  
+}  
+  
+  
+if(  
+    !window.matchMedia(  
+        "(prefers-reduced-motion: reduce)"  
+    ).matches  
+){  
+  
+    typeRole();  
+  
+}else{  
+  
+    typingElement.textContent =  
+        "QA/QC OFFICER";  
+  
+}  
+  
+  
+/* =========================================================  
+   COUNTER  
+========================================================= */  
+  
+const counters =  
+    document.querySelectorAll(".counter");  
+  
+  
+const counterObserver =  
+    new IntersectionObserver(  
+        function(entries){  
+  
+            entries.forEach(function(entry){  
+  
+                if(!entry.isIntersecting){  
+                    return;  
+                }  
+  
+                const element =  
+                    entry.target;  
+  
+                const target =  
+                    Number(  
+                        element.dataset.target  
+                    );  
+  
+                let current=0;  
+  
+                const duration=1000;  
+  
+                const start =  
+                    performance.now();  
+  
+  
+                function updateCounter(time){  
+  
+                    const progress =  
+                        Math.min(  
+                            (time-start) /  
+                            duration,  
+                            1  
+                        );  
+  
+                    current =  
+                        Math.floor(  
+                            progress * target  
+                        );  
+  
+                    element.textContent =  
+                        current + "+";  
+  
+                    if(progress < 1){  
+  
+                        requestAnimationFrame(  
+                            updateCounter  
+                        );  
+  
+                    }  
+  
+                }  
+  
+                requestAnimationFrame(  
+                    updateCounter  
+                );  
+  
+                counterObserver.unobserve(  
+                    element  
+                );  
+  
+            });  
+  
+        }  
+    );  
+  
+  
+counters.forEach(function(counter){  
+  
+    counterObserver.observe(counter);  
+  
+});  
+  
+  
+/* =========================================================  
+   CURSOR  
+========================================================= */  
+  
+const cursorDot =  
+    document.querySelector(".cursor-dot");  
+  
+const cursorRing =  
+    document.querySelector(".cursor-ring");  
+  
+  
+if(  
+    window.matchMedia("(pointer:fine)").matches &&  
+    !window.matchMedia(  
+        "(prefers-reduced-motion: reduce)"  
+    ).matches  
+){  
+  
+    let mouseX=0;  
+    let mouseY=0;  
+  
+    let ringX=0;  
+    let ringY=0;  
+  
+  
+    window.addEventListener(  
+        "mousemove",  
+        function(e){  
+  
+            mouseX=e.clientX;  
+            mouseY=e.clientY;  
+  
+            cursorDot.style.left =  
+                mouseX+"px";  
+  
+            cursorDot.style.top =  
+                mouseY+"px";  
+  
+        }  
+    );  
+  
+  
+    function animateCursor(){  
+  
+        ringX +=  
+            (mouseX-ringX)*.15;  
+  
+        ringY +=  
+            (mouseY-ringY)*.15;  
+  
+        cursorRing.style.left =  
+            ringX+"px";  
+  
+        cursorRing.style.top =  
+            ringY+"px";  
+  
+        requestAnimationFrame(  
+            animateCursor  
+        );  
+  
+    }  
+  
+    animateCursor();  
+  
+  
+    document.querySelectorAll(  
+        "a,button,.cert-card,.glass,.expertise,.process-step"  
+    ).forEach(function(element){  
+  
+        element.addEventListener(  
+            "mouseenter",  
+            function(){  
+  
+                document.body.classList.add(  
+                    "cursor-hover"  
+                );  
+  
+            }  
+        );  
+  
+  
+        element.addEventListener(  
+            "mouseleave",  
+            function(){  
+  
+                document.body.classList.remove(  
+                    "cursor-hover"  
+                );  
+  
+            }  
+        );  
+  
+    });  
+  
+}  
+  
+  
+/* =========================================================  
+   3D TILT  
+========================================================= */  
+  
+if(  
+    window.matchMedia("(pointer:fine)").matches &&  
+    !window.matchMedia(  
+        "(prefers-reduced-motion: reduce)"  
+    ).matches  
+){  
+  
+    document.querySelectorAll(  
+        ".tilt"  
+    ).forEach(function(card){  
+  
+        card.addEventListener(  
+            "mousemove",  
+            function(e){  
+  
+                const rect =  
+                    card.getBoundingClientRect();  
+  
+                const x =  
+                    e.clientX - rect.left;  
+  
+                const y =  
+                    e.clientY - rect.top;  
+  
+                const rotateX =  
+                    ((y - rect.height/2) /  
+                    (rect.height/2)) * -3;  
+  
+                const rotateY =  
+                    ((x - rect.width/2) /  
+                    (rect.width/2)) * 3;  
+  
+                card.style.transform =  
+                    `perspective(900px)  
+                     rotateX(${rotateX}deg)  
+                     rotateY(${rotateY}deg)  
+                     translateY(-4px)`;  
+  
+            }  
+        );  
+  
+  
+        card.addEventListener(  
+            "mouseleave",  
+            function(){  
+  
+                card.style.transform="";  
+  
+            }  
+        );  
+  
+    });  
+  
+}  
+  
+  
+/* =========================================================  
+   MAGNETIC  
+========================================================= */  
+  
+if(  
+    window.matchMedia("(pointer:fine)").matches &&  
+    !window.matchMedia(  
+        "(prefers-reduced-motion: reduce)"  
+    ).matches  
+){  
+  
+    document.querySelectorAll(  
+        ".magnetic"  
+    ).forEach(function(element){  
+  
+        element.addEventListener(  
+            "mousemove",  
+            function(e){  
+  
+                const rect =  
+                    element.getBoundingClientRect();  
+  
+                const x =  
+                    e.clientX -  
+                    rect.left -  
+                    rect.width/2;  
+  
+                const y =  
+                    e.clientY -  
+                    rect.top -  
+                    rect.height/2;  
+  
+                element.style.transform =  
+                    `translate(  
+                        ${x*.10}px,  
+                        ${y*.10}px  
+                    )`;  
+  
+            }  
+        );  
+  
+  
+        element.addEventListener(  
+            "mouseleave",  
+            function(){  
+  
+                element.style.transform="";  
+  
+            }  
+        );  
+  
+    });  
+  
+}  
+  
+  
+/* =========================================================  
+   CERTIFICATE DATA  
+========================================================= */  
+  
+const certificates = [  
+  
+    {  
+        image:"certificate-1.jpg",  
+        title:"Seven Basic Tools of Quality Expert"  
+    },  
+  
+    {  
+        image:"certificate-2.jpg",  
+        title:"8D Problem Solving Specialist"  
+    },  
+  
+    {  
+        image:"certificate-3.jpg",  
+        title:"Gauge R&R Simplified"  
+    },  
+  
+    {  
+        image:"certificate-4.jpg",  
+        title:"Lean Six Sigma Yellow Belt"  
+    },  
+  
+    {  
+        image:"certificate-5.jpg",  
+        title:"Lean Six Sigma Green Belt"  
+    },  
+  
+    {  
+        image:"certificate-6.jpg",  
+        title:"ISO 9001:2015 Quality Management System"  
+    }  
+  
+];  
+  
+  
+const viewer =  
+    document.getElementById(  
+        "certificateViewer"  
+    );  
+  
+const viewerImage =  
+    document.getElementById(  
+        "viewerImage"  
+    );  
+  
+const viewerTitle =  
+    document.getElementById(  
+        "viewerTitle"  
+    );  
+  
+const viewerClose =  
+    document.getElementById(  
+        "viewerClose"  
+    );  
+  
+const viewerPrev =  
+    document.getElementById(  
+        "viewerPrev"  
+    );  
+  
+const viewerNext =  
+    document.getElementById(  
+        "viewerNext"  
+    );  
+  
+let currentCertificate=0;  
+  
+  
+function showCertificate(index){  
+  
+    currentCertificate =  
+        (index + certificates.length) %  
+        certificates.length;  
+  
+    const cert =  
+        certificates[currentCertificate];  
+  
+    viewerImage.style.opacity="0";  
+  
+    setTimeout(function(){  
+  
+        viewerImage.src =  
+            cert.image;  
+  
+        viewerImage.alt =  
+            cert.title;  
+  
+        viewerTitle.textContent =  
+            cert.title +  
+            "  •  " +  
+            (currentCertificate+1) +  
+            " / " +  
+            certificates.length;  
+  
+        viewerImage.onload=function(){  
+  
+            viewerImage.style.opacity="1";  
+  
+        };  
+  
+    },80);  
+  
+}  
+  
+  
+function openCertificate(index){  
+  
+    showCertificate(index);  
+  
+    viewer.classList.add("open");  
+  
+    document.body.style.overflow="hidden";  
+  
+}  
+  
+  
+function closeCertificate(){  
+  
+    viewer.classList.remove("open");  
+  
+    document.body.style.overflow="";  
+  
+}  
+  
+  
+document.querySelectorAll(  
+    ".cert-card"  
+).forEach(function(card){  
+  
+    card.addEventListener(  
+        "click",  
+        function(){  
+  
+            openCertificate(  
+                Number(  
+                    this.dataset.cert  
+                )  
+            );  
+  
+        }  
+    );  
+  
+  
+    card.addEventListener(  
+        "keydown",  
+        function(e){  
+  
+            if(  
+                e.key==="Enter" ||  
+                e.key===" "  
+            ){  
+  
+                e.preventDefault();  
+  
+                openCertificate(  
+                    Number(  
+                        this.dataset.cert  
+                    )  
+                );  
+  
+            }  
+  
+        }  
+    );  
+  
+});  
+  
+  
+viewerClose.addEventListener(  
+    "click",  
+    closeCertificate  
+);  
+  
+  
+viewerPrev.addEventListener(  
+    "click",  
+    function(){  
+  
+        showCertificate(  
+            currentCertificate-1  
+        );  
+  
+    }  
+);  
+  
+  
+viewerNext.addEventListener(  
+    "click",  
+    function(){  
+  
+        showCertificate(  
+            currentCertificate+1  
+        );  
+  
+    }  
+);  
+  
+  
+/* =========================================================  
+   VIEWER BACKGROUND CLICK  
+========================================================= */  
+  
+viewer.addEventListener(  
+    "click",  
+    function(e){  
+  
+        if(e.target===viewer){  
+  
+            closeCertificate();  
+  
+        }  
+  
+    }  
+);  
+  
+  
+/* =========================================================  
+   KEYBOARD  
+========================================================= */  
+  
+document.addEventListener(  
+    "keydown",  
+    function(e){  
+  
+        if(!viewer.classList.contains("open")){  
+            return;  
+        }  
+  
+        if(e.key==="Escape"){  
+  
+            closeCertificate();  
+  
+        }  
+  
+        if(e.key==="ArrowLeft"){  
+  
+            showCertificate(  
+                currentCertificate-1  
+            );  
+  
+        }  
+  
+        if(e.key==="ArrowRight"){  
+  
+            showCertificate(  
+                currentCertificate+1  
+            );  
+  
+        }  
+  
+    }  
+);  
+  
+  
+/* =========================================================  
+   TOUCH SWIPE  
+========================================================= */  
+  
+let touchStartX=0;  
+  
+viewer.addEventListener(  
+    "touchstart",  
+    function(e){  
+  
+        touchStartX =  
+            e.changedTouches[0].screenX;  
+  
+    },  
+    {passive:true}  
+);  
+  
+  
+viewer.addEventListener(  
+    "touchend",  
+    function(e){  
+  
+        const touchEndX =  
+            e.changedTouches[0].screenX;  
+  
+        const difference =  
+            touchEndX-touchStartX;  
+  
+        if(Math.abs(difference)<50){  
+            return;  
+        }  
+  
+        if(difference<0){  
+  
+            showCertificate(  
+                currentCertificate+1  
+            );  
+  
+        }else{  
+  
+            showCertificate(  
+                currentCertificate-1  
+            );  
+  
+        }  
+  
+    },  
+    {passive:true}  
+);  
+  
+</script>  </body>  
 </html>
