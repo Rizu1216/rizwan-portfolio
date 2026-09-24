@@ -2,7 +2,11 @@
 <html lang="en">  
 <head>  
 <meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Rizwan Ansari | QA/QC Officer | Electrical & RMU Manufacturing</title>  <meta name="description" content="Rizwan Ansari — QA/QC Officer specializing in electrical and RMU manufacturing, quality inspection, Lean Six Sigma, 8D problem solving and ISO 9001:2015.">  <meta name="theme-color" content="#06101d">  <link rel="preconnect" href="https://fonts.googleapis.com">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Rizwan Ansari | QA/QC Officer | Electrical & RMU Manufacturing</title>  <meta name="description" content="Rizwan Ansari — QA/QC Officer specializing in electrical and RMU manufacturing, quality inspection, dimensional verification, non-conformity management, 8D problem solving and quality systems.">  <meta name="theme-color" content="#06101d">
+<meta property="og:title" content="Rizwan Ansari | QA/QC Officer">
+<meta property="og:description" content="QA/QC professional portfolio — electrical & RMU manufacturing, inspection, 8D, RCA and quality systems.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">  <link rel="preconnect" href="https://fonts.googleapis.com">  
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>  
   
 /* =========================================================  
@@ -2759,6 +2763,190 @@ footer{
     }  
 }  
   
+
+/* =========================================================
+   PROFESSIONAL PORTFOLIO ENHANCEMENTS
+   Added without changing existing assets or JavaScript
+========================================================= */
+
+.professional-strip{
+    margin-top:24px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+.professional-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 11px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:rgba(255,255,255,.025);
+    color:var(--muted);
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.3px;
+}
+.professional-chip b{color:var(--text);}
+
+.toolkit-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+.toolkit-card{
+    padding:22px;
+    min-height:145px;
+}
+.toolkit-icon{
+    width:40px;height:40px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(24,200,255,.18);
+    border-radius:10px;
+    background:rgba(24,200,255,.05);
+    color:var(--cyan);
+    font-size:17px;
+    margin-bottom:16px;
+}
+.toolkit-card h3{
+    font-family:"Space Grotesk";
+    font-size:14px;
+}
+.toolkit-card p{
+    margin-top:8px;
+    color:var(--muted2);
+    font-size:10px;
+    line-height:1.65;
+}
+
+.achievement-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+.achievement-card{
+    padding:25px;
+}
+.achievement-number{
+    color:var(--blue);
+    font-family:"Space Grotesk";
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.5px;
+}
+.achievement-card h3{
+    margin-top:13px;
+    font-family:"Space Grotesk";
+    font-size:17px;
+}
+.achievement-card p{
+    margin-top:9px;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.75;
+}
+
+.section-divider{
+    width:100%;
+    height:1px;
+    margin:0;
+    background:linear-gradient(90deg,transparent,var(--borderBlue),transparent);
+}
+
+@media(max-width:900px){
+    .toolkit-grid{grid-template-columns:repeat(2,1fr);}
+    .achievement-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+    .toolkit-grid,.achievement-grid{grid-template-columns:1fr;}
+    .professional-strip{gap:6px;}
+}
+
+.skill-meter{display:none;} .skill{min-height:165px;}
+
+/* =========================================================
+   V2 — INTERNATIONAL QA/QC ENGINEER UI
+========================================================= */
+.v2-dashboard-section{padding-top:90px}
+.v2-dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.v2-kpi{padding:23px 21px;min-height:210px}
+.v2-kpi-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted2);font-size:9px;font-weight:800;letter-spacing:1.5px}
+.v2-live{color:var(--cyan);font-size:8px}
+.v2-kpi-value{font-family:"Space Grotesk";font-size:38px;font-weight:800;letter-spacing:-1px;margin-top:24px}
+.v2-kpi-label{font-size:11px;color:var(--muted);margin-top:2px;font-weight:600}
+.v2-meter{height:4px;background:rgba(255,255,255,.07);border-radius:10px;margin-top:23px;overflow:hidden}
+.v2-meter i{display:block;height:100%;background:linear-gradient(90deg,var(--blue2),var(--cyan));border-radius:10px}
+.v2-kpi small{display:block;margin-top:9px;color:var(--muted2);font-size:8px;line-height:1.4}
+.v2-command{margin-top:15px;padding:22px 24px}
+.v2-command-title{display:flex;gap:11px;align-items:center}
+.v2-command-title strong{display:block;font-size:10px;letter-spacing:1.7px}
+.v2-command-title small{display:block;color:var(--muted2);font-size:9px;margin-top:4px}
+.v2-pulse{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 15px var(--green)}
+.v2-flow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:21px}
+.v2-flow div{flex:1;text-align:center;padding:12px 7px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.025)}
+.v2-flow b{display:block;color:var(--cyan);font:700 9px "Space Grotesk"}
+.v2-flow span{display:block;font:700 11px "Space Grotesk";margin-top:5px}
+.v2-flow small{display:block;color:var(--muted2);font-size:8px;margin-top:4px}
+.v2-flow em{font-style:normal;color:var(--blue);font-size:16px}
+.v2-profile{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:21px 24px;margin-bottom:14px}
+.v2-profile-main{display:flex;align-items:center;gap:15px}
+.v2-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(24,200,255,.35);background:linear-gradient(135deg,rgba(24,200,255,.2),rgba(8,124,255,.05));color:var(--cyan);font:800 16px "Space Grotesk";box-shadow:0 0 28px rgba(24,200,255,.08)}
+.v2-profile-name{font:800 18px "Space Grotesk"}
+.v2-profile-title{font-size:11px;color:var(--blue);font-weight:700;margin-top:4px}
+.v2-profile-meta{font-size:9px;color:var(--muted2);margin-top:5px}
+.v2-profile-actions{display:flex;gap:8px}
+.v2-profile-actions a{padding:9px 13px;border-radius:8px;text-decoration:none;font-size:9px;font-weight:800}
+.v2-connect{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#02101a}
+.v2-follow{border:1px solid var(--border);color:var(--text);background:var(--surface)}
+.v2-profile-summary{position:relative;padding:26px 30px;margin-bottom:22px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(135deg,rgba(24,200,255,.055),rgba(255,255,255,.018));overflow:hidden}
+.v2-summary-mark{position:absolute;right:25px;top:-18px;color:rgba(82,239,255,.10);font:900 110px Georgia}
+.v2-profile-summary p{max-width:900px;color:var(--muted);font-size:13px;line-height:1.9}
+.v2-profile-summary p strong{color:var(--text)}
+.v2-specialties{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.v2-specialties span{padding:6px 9px;border:1px solid rgba(24,200,255,.16);border-radius:50px;background:rgba(24,200,255,.035);font-size:8px;color:#a9dff0;font-weight:700}
+.v2-instrument-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.v2-instrument{min-height:145px;padding:19px;text-align:left;border:1px solid var(--border);border-radius:14px;background:var(--surface);transition:.35s ease}
+.v2-instrument:hover{transform:translateY(-7px);border-color:var(--borderBlue);background:rgba(24,200,255,.055)}
+.v2-instrument svg{width:40px;height:40px;stroke:var(--cyan);fill:none;stroke-width:1.5;margin-bottom:13px}
+.v2-instrument h3{font:700 12px "Space Grotesk"}
+.v2-instrument p{font-size:9px;color:var(--muted2);line-height:1.55;margin-top:6px}
+.v2-recruiter{display:grid;grid-template-columns:1.3fr .7fr;gap:16px;margin-top:18px}
+.v2-recruiter-card{padding:26px}
+.v2-recruiter-card h3{font:700 21px "Space Grotesk"}
+.v2-recruiter-card p{color:var(--muted);font-size:11px;line-height:1.8;margin-top:10px}
+.v2-checklist{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.v2-check{font-size:9px;color:var(--muted);padding:8px 10px;border:1px solid var(--border);border-radius:8px}
+.v2-check::before{content:"✓";color:var(--green);font-weight:800;margin-right:7px}
+.v2-availability{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:25px}
+.v2-availability .dot{width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 20px var(--green);margin-bottom:12px}
+.v2-availability strong{font:700 18px "Space Grotesk"}
+.v2-availability span{font-size:9px;color:var(--muted2);margin-top:7px;line-height:1.6}
+@media(max-width:1050px){
+  .v2-dashboard{grid-template-columns:repeat(2,1fr)}
+  .v2-instrument-grid{grid-template-columns:repeat(3,1fr)}
+  .v2-flow{flex-wrap:wrap}.v2-flow div{min-width:130px}.v2-flow em{display:none}
+}
+@media(max-width:760px){
+  .v2-dashboard-section{padding-top:70px}
+  .v2-dashboard{grid-template-columns:1fr}
+  .v2-command{padding:18px}
+  .v2-flow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .v2-flow div{min-width:0}
+  .v2-profile{align-items:flex-start;flex-direction:column;padding:18px}
+  .v2-profile-main{align-items:flex-start}
+  .v2-profile-actions{width:100%}.v2-profile-actions a{flex:1;text-align:center}
+  .v2-profile-summary{padding:22px}
+  .v2-instrument-grid{grid-template-columns:1fr 1fr}
+  .v2-recruiter{grid-template-columns:1fr}
+  .v2-checklist{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .v2-instrument-grid{grid-template-columns:1fr}
+  .v2-flow{grid-template-columns:1fr}
+  .v2-kpi{min-height:185px}
+  .v2-profile-meta{line-height:1.5}
+}
 </style>  </head>  <body>  <!-- =====================================================  
      BACKGROUND  
 ===================================================== -->  <div class="orb one"></div>  
@@ -2809,18 +2997,15 @@ footer{
 
     </div>  
 
-    <div class="nav-links" id="navLinks">  
-
-        <a href="#home" class="active">Home</a>  
-        <a href="#about">About</a>  
-        <a href="#process">Process</a>  
-        <a href="#experience">Experience</a>  
-        <a href="#skills">Skills</a>  
-        <a href="#cases">Case Studies</a>  
-        <a href="#certifications">Certificates</a>  
-        <a href="#education">Education</a>  
-        <a href="#contact">Contact</a>  
-
+    <div class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">Profile</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#experience">Experience</a>
+        <a href="#toolkit">Toolkit</a>
+        <a href="#cases">Case Studies</a>
+        <a href="#certifications">Credentials</a>
+        <a href="#contact">Contact</a>
     </div>  
 
 </div>
@@ -2851,14 +3036,21 @@ footer{
 
             </div>  
 
-            <div class="hero-tagline">  
-                Quality. Precision. Reliability.  
+            <div class="hero-tagline">
+                Quality. Precision. Reliability.
+            </div>
+
+            <div class="professional-strip">
+                <span class="professional-chip"><b>QA/QC</b> Inspection</span>
+                <span class="professional-chip"><b>RMU</b> Manufacturing</span>
+                <span class="professional-chip"><b>8D</b> Problem Solving</span>
+                <span class="professional-chip"><b>ISO 9001:2015</b> Quality Systems</span>
             </div>  
 
             <p class="hero-description">  
 
-                QA/QC Officer specializing in electrical and RMU  
-                manufacturing, quality inspection, process improvement,  
+                QA/QC Officer specializing in electrical and RMU manufacturing, quality inspection,
+                non-conformity management, structured problem solving, process improvement,
                 Lean Six Sigma and quality assurance systems.  
 
             </p>  
@@ -2962,7 +3154,77 @@ footer{
 
 </section>  <!-- =====================================================  
      ABOUT  
-===================================================== -->  <section id="about">  <div class="container">  
+===================================================== -->  
+<!-- =====================================================
+     V2 ENGINEERING QUALITY DASHBOARD
+===================================================== -->
+<section id="dashboard" class="v2-dashboard-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">Engineering Quality Dashboard</div>
+      <h2 class="section-title">Quality at a <span>Glance.</span></h2>
+      <p class="section-description">
+        A recruiter-friendly snapshot of the inspection, manufacturing and problem-solving areas represented across this portfolio.
+      </p>
+    </div>
+
+    <div class="v2-dashboard">
+      <div class="v2-kpi glass reveal">
+        <div class="v2-kpi-top"><span>01</span><span class="v2-live">QUALITY</span></div>
+        <div class="v2-kpi-value">QA/QC</div>
+        <div class="v2-kpi-label">Inspection & Control</div>
+        <div class="v2-meter"><i style="width:92%"></i></div>
+        <small>Visual • Dimensional • Process</small>
+      </div>
+
+      <div class="v2-kpi glass reveal delay-1">
+        <div class="v2-kpi-top"><span>02</span><span class="v2-live">CORE</span></div>
+        <div class="v2-kpi-value">RMU</div>
+        <div class="v2-kpi-label">Electrical Manufacturing</div>
+        <div class="v2-meter"><i style="width:88%"></i></div>
+        <small>Fabrication • Assembly • Verification</small>
+      </div>
+
+      <div class="v2-kpi glass reveal delay-2">
+        <div class="v2-kpi-top"><span>03</span><span class="v2-live">RCA</span></div>
+        <div class="v2-kpi-value">8D</div>
+        <div class="v2-kpi-label">Problem Solving</div>
+        <div class="v2-meter"><i style="width:90%"></i></div>
+        <small>Containment • Root Cause • CAPA</small>
+      </div>
+
+      <div class="v2-kpi glass reveal delay-3">
+        <div class="v2-kpi-top"><span>04</span><span class="v2-live">SYSTEM</span></div>
+        <div class="v2-kpi-value">ISO</div>
+        <div class="v2-kpi-label">9001:2015 Awareness</div>
+        <div class="v2-meter"><i style="width:86%"></i></div>
+        <small>Quality systems • Documentation</small>
+      </div>
+    </div>
+
+    <div class="v2-command glass reveal">
+      <div class="v2-command-title">
+        <span class="v2-pulse"></span>
+        <div><strong>QUALITY CONTROL FLOW</strong><small>From requirement to verified output</small></div>
+      </div>
+      <div class="v2-flow">
+        <div><b>01</b><span>Drawing</span><small>Requirement</small></div>
+        <em>→</em>
+        <div><b>02</b><span>Inspection</span><small>Measure</small></div>
+        <em>→</em>
+        <div><b>03</b><span>Detection</span><small>Non-conformity</small></div>
+        <em>→</em>
+        <div><b>04</b><span>RCA / 8D</span><small>Investigate</small></div>
+        <em>→</em>
+        <div><b>05</b><span>Action</span><small>Correct</small></div>
+        <em>→</em>
+        <div><b>06</b><span>Verification</span><small>Release</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">  <div class="container">  
 
     <div class="section-head reveal">  
 
@@ -2984,7 +3246,30 @@ footer{
     </div>  
 
 
-    <div class="about-grid">  
+    
+<div class="v2-profile glass reveal">
+  <div class="v2-profile-main">
+    <div class="v2-avatar">RA</div>
+    <div>
+      <div class="v2-profile-name">Rizwan Ansari</div>
+      <div class="v2-profile-title">QA/QC Officer · Electrical & RMU Manufacturing</div>
+      <div class="v2-profile-meta">Riyadh, Saudi Arabia · Manufacturing Quality · Inspection · Continuous Improvement</div>
+    </div>
+  </div>
+  <div class="v2-profile-actions">
+    <a href="#contact" class="v2-connect">Connect</a>
+    <a href="Rizwan-Ansari-CV.pdf" download class="v2-follow">Download CV</a>
+  </div>
+</div>
+<div class="v2-profile-summary reveal">
+  <span class="v2-summary-mark">“</span>
+  <p><strong>QA/QC professional focused on practical manufacturing quality.</strong> Experienced in inspection, dimensional verification, drawing compliance, non-conformity follow-up, structured root-cause analysis and corrective action within electrical/RMU manufacturing environments.</p>
+  <div class="v2-specialties">
+    <span>Quality Inspection</span><span>RMU Manufacturing</span><span>8D / RCA</span><span>Powder Coating</span><span>ISO 9001:2015</span><span>7 QC Tools</span>
+  </div>
+</div>
+
+<div class="about-grid">  
 
         <div class="glass about-info reveal tilt">  
 
@@ -3334,7 +3619,7 @@ footer{
         </div>  
 
         <h2 class="section-title">  
-            Skills that <span>Deliver.</span>  
+            Core <span>Competencies.</span>  
         </h2>  
 
     </div>  
@@ -3356,12 +3641,7 @@ footer{
                 control activities.  
             </p>  
 
-            <div class="skill-meter">  
-
-                <div class="meter-head">  
-                    <span>Core Skill</span>  
-                    <span>95%</span>  
-                </div>  
+            <div class="professional-chip" style="margin-top:16px;"><b>Practical Focus</b> • Manufacturing Quality</div>  
 
                 <div class="meter">  
                     <span style="width:95%"></span>  
@@ -3385,12 +3665,7 @@ footer{
                 environments.  
             </p>  
 
-            <div class="skill-meter">  
-
-                <div class="meter-head">  
-                    <span>Specialization</span>  
-                    <span>92%</span>  
-                </div>  
+            <div class="professional-chip" style="margin-top:16px;"><b>Practical Focus</b> • Manufacturing Quality</div>  
 
                 <div class="meter">  
                     <span style="width:92%"></span>  
@@ -3413,12 +3688,7 @@ footer{
                 Manufacturing process and product quality inspection.  
             </p>  
 
-            <div class="skill-meter">  
-
-                <div class="meter-head">  
-                    <span>Capability</span>  
-                    <span>88%</span>  
-                </div>  
+            <div class="professional-chip" style="margin-top:16px;"><b>Practical Focus</b> • Manufacturing Quality</div>  
 
                 <div class="meter">  
                     <span style="width:88%"></span>  
@@ -3441,12 +3711,7 @@ footer{
                 Visual and process quality checks for finished products.  
             </p>  
 
-            <div class="skill-meter">  
-
-                <div class="meter-head">  
-                    <span>Capability</span>  
-                    <span>85%</span>  
-                </div>  
+            <div class="professional-chip" style="margin-top:16px;"><b>Practical Focus</b> • Manufacturing Quality</div>  
 
                 <div class="meter">  
                     <span style="width:85%"></span>  
@@ -3469,12 +3734,7 @@ footer{
                 Quality system awareness and audit support.  
             </p>  
 
-            <div class="skill-meter">  
-
-                <div class="meter-head">  
-                    <span>Knowledge</span>  
-                    <span>82%</span>  
-                </div>  
+            <div class="professional-chip" style="margin-top:16px;"><b>Practical Focus</b> • Manufacturing Quality</div>  
 
                 <div class="meter">  
                     <span style="width:82%"></span>  
@@ -3497,12 +3757,7 @@ footer{
                 Supplier quality communication, inspection and follow-up.  
             </p>  
 
-            <div class="skill-meter">  
-
-                <div class="meter-head">  
-                    <span>Capability</span>  
-                    <span>84%</span>  
-                </div>  
+            <div class="professional-chip" style="margin-top:16px;"><b>Practical Focus</b> • Manufacturing Quality</div>  
 
                 <div class="meter">  
                     <span style="width:84%"></span>  
@@ -3525,12 +3780,7 @@ footer{
                 Process monitoring, inspection and defect prevention.  
             </p>  
 
-            <div class="skill-meter">  
-
-                <div class="meter-head">  
-                    <span>Core Skill</span>  
-                    <span>90%</span>  
-                </div>  
+            <div class="professional-chip" style="margin-top:16px;"><b>Practical Focus</b> • Manufacturing Quality</div>  
 
                 <div class="meter">  
                     <span style="width:90%"></span>  
@@ -3553,12 +3803,7 @@ footer{
                 Quality assurance throughout manufacturing operations.  
             </p>  
 
-            <div class="skill-meter">  
-
-                <div class="meter-head">  
-                    <span>Core Skill</span>  
-                    <span>91%</span>  
-                </div>  
+            <div class="professional-chip" style="margin-top:16px;"><b>Practical Focus</b> • Manufacturing Quality</div>  
 
                 <div class="meter">  
                     <span style="width:91%"></span>  
@@ -3605,9 +3850,204 @@ footer{
 
 </div>
 
-</section>  <!-- =====================================================  
+</section>
+
+<section class="v2-recruiter-section">
+  <div class="container">
+    <div class="v2-recruiter">
+      <div class="v2-recruiter-card glass reveal">
+        <div class="section-label">Recruiter Snapshot</div>
+        <h3>Built around measurable quality thinking.</h3>
+        <p>This portfolio presents practical experience across manufacturing inspection, drawing verification, defect identification, corrective action and cross-functional quality coordination.</p>
+        <div class="v2-checklist">
+          <div class="v2-check">Manufacturing Quality Inspection</div>
+          <div class="v2-check">Dimensional & Visual Verification</div>
+          <div class="v2-check">NCR / Non-Conformity Follow-up</div>
+          <div class="v2-check">RCA / 8D / CAPA Support</div>
+          <div class="v2-check">Powder Coating Quality</div>
+          <div class="v2-check">Quality Documentation</div>
+        </div>
+      </div>
+      <div class="v2-availability glass reveal delay-1">
+        <span class="dot"></span>
+        <strong>Quality First</strong>
+        <span>Requirement → Inspection → Analysis → Corrective Action → Verification</span>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:75px">
+      <div class="section-label">Inspection Instrument Visuals</div>
+      <h2 class="section-title">Measure with the <span>Right Tool.</span></h2>
+      <p class="section-description">A visual instrument map for the dimensional, coating, colour, lighting and clearance checks represented in the portfolio.</p>
+    </div>
+
+    <div class="v2-instrument-grid">
+      <div class="v2-instrument reveal">
+        <svg viewBox="0 0 48 48"><path d="M7 31h29M7 31v-8h29v8M12 23V12h5v11M17 17h19M36 12v27M7 38h34"/></svg>
+        <h3>Vernier Caliper</h3><p>Outside, inside, depth and step measurement.</p>
+      </div>
+      <div class="v2-instrument reveal delay-1">
+        <svg viewBox="0 0 48 48"><circle cx="22" cy="24" r="12"/><path d="M34 24h8M22 12V6M22 36v6M10 24H6M14 16l-5-5M30 16l5-5"/></svg>
+        <h3>Micrometer</h3><p>Precision dimensional verification.</p>
+      </div>
+      <div class="v2-instrument reveal delay-2">
+        <svg viewBox="0 0 48 48"><path d="M9 40h30M14 40V9h14M14 14h15M28 9v25M28 28h9M37 25v9M34 34h6"/></svg>
+        <h3>Height Gauge</h3><p>Height, layout and reference-surface checks.</p>
+      </div>
+      <div class="v2-instrument reveal delay-3">
+        <svg viewBox="0 0 48 48"><rect x="11" y="8" width="26" height="32" rx="4"/><path d="M17 14h14M17 21h14M17 28h7M17 34h14"/></svg>
+        <h3>DFT Meter</h3><p>Dry film thickness verification.</p>
+      </div>
+      <div class="v2-instrument reveal">
+        <svg viewBox="0 0 48 48"><path d="M9 37h30M14 31l8-8 5 5 7-11M10 12h28v25H10z"/></svg>
+        <h3>Cross-Hatch Tester</h3><p>Coating adhesion evaluation.</p>
+      </div>
+      <div class="v2-instrument reveal delay-1">
+        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="15"/><circle cx="24" cy="24" r="6"/><path d="M24 5v5M24 38v5M5 24h5M38 24h5"/></svg>
+        <h3>Lux Meter</h3><p>Lighting-condition verification.</p>
+      </div>
+      <div class="v2-instrument reveal delay-2">
+        <svg viewBox="0 0 48 48"><path d="M10 34h28M14 34V15h20v19M18 15V9h12v6M19 23h10M19 28h10"/></svg>
+        <h3>Spectrometer</h3><p>Colour and finish consistency checks.</p>
+      </div>
+      <div class="v2-instrument reveal delay-3">
+        <svg viewBox="0 0 48 48"><path d="M8 13h32M8 24h32M8 35h32M15 8v32M26 8v32M37 8v32"/></svg>
+        <h3>Surface Plate</h3><p>Stable reference for dimensional inspection.</p>
+      </div>
+      <div class="v2-instrument reveal">
+        <svg viewBox="0 0 48 48"><path d="M9 16h30M9 24h30M9 32h30M15 12v24M23 12v24M31 12v24"/></svg>
+        <h3>Thread Gauge</h3><p>Thread form and fit verification.</p>
+      </div>
+      <div class="v2-instrument reveal delay-1">
+        <svg viewBox="0 0 48 48"><path d="M8 24h32M24 8v32M13 13l22 22M35 13L13 35"/></svg>
+        <h3>Feeler Gauge</h3><p>Clearance and gap verification.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="toolkit">
+<div class="container">
+
+    <div class="section-head reveal">
+        <div class="section-label">Inspection & Measurement</div>
+        <h2 class="section-title">Quality <span>Toolkit.</span></h2>
+        <p class="section-description">
+            Practical inspection and measurement areas relevant to manufacturing quality,
+            dimensional verification, coating control and final product inspection.
+        </p>
+    </div>
+
+    <div class="toolkit-grid">
+
+        <div class="glass toolkit-card reveal tilt">
+            <div class="toolkit-icon">⌖</div>
+            <h3>Dimensional Inspection</h3>
+            <p>Vernier caliper, micrometer, height gauge, surface plate and feeler gauge applications.</p>
+        </div>
+
+        <div class="glass toolkit-card reveal delay-1 tilt">
+            <div class="toolkit-icon">◫</div>
+            <h3>Drawing Verification</h3>
+            <p>Checking dimensions, hole patterns, profiles, tolerances and manufacturing requirements against drawings.</p>
+        </div>
+
+        <div class="glass toolkit-card reveal delay-2 tilt">
+            <div class="toolkit-icon">◈</div>
+            <h3>Coating Inspection</h3>
+            <p>Visual coating quality, dry film thickness, adhesion checks and powder-coating defect identification.</p>
+        </div>
+
+        <div class="glass toolkit-card reveal delay-3 tilt">
+            <div class="toolkit-icon">◎</div>
+            <h3>Colour & Lighting</h3>
+            <p>RAL colour reference, spectrometer and lux-meter related inspection activities.</p>
+        </div>
+
+        <div class="glass toolkit-card reveal tilt">
+            <div class="toolkit-icon">⌗</div>
+            <h3>Thread & Clearance</h3>
+            <p>Thread gauge and clearance verification for manufactured and assembled components.</p>
+        </div>
+
+        <div class="glass toolkit-card reveal delay-1 tilt">
+            <div class="toolkit-icon">✓</div>
+            <h3>Final Inspection</h3>
+            <p>Visual, dimensional and specification-based verification before quality release.</p>
+        </div>
+
+        <div class="glass toolkit-card reveal delay-2 tilt">
+            <div class="toolkit-icon">8D</div>
+            <h3>Problem Solving</h3>
+            <p>Non-conformity investigation, root-cause analysis, corrective action and recurrence prevention.</p>
+        </div>
+
+        <div class="glass toolkit-card reveal delay-3 tilt">
+            <div class="toolkit-icon">QC</div>
+            <h3>Quality Records</h3>
+            <p>NCR follow-up, inspection documentation, quality communication and traceable verification.</p>
+        </div>
+
+    </div>
+</div>
+</section>
+  <!-- =====================================================  
      CASE STUDIES  
-===================================================== -->  <section id="cases">  <div class="container">  
+===================================================== -->  
+<section id="achievements">
+<div class="container">
+
+    <div class="section-head reveal">
+        <div class="section-label">Professional Value</div>
+        <h2 class="section-title">Quality <span>Impact.</span></h2>
+        <p class="section-description">
+            A concise view of the value delivered through inspection, defect prevention,
+            structured problem solving and cross-functional quality coordination.
+        </p>
+    </div>
+
+    <div class="achievement-grid">
+
+        <div class="glass achievement-card reveal tilt">
+            <div class="achievement-number">01 / INSPECTION</div>
+            <h3>Defect Detection & Verification</h3>
+            <p>Identify product and process non-conformities through visual, dimensional and specification-based inspection.</p>
+        </div>
+
+        <div class="glass achievement-card reveal delay-1 tilt">
+            <div class="achievement-number">02 / PROBLEM SOLVING</div>
+            <h3>Structured RCA & 8D</h3>
+            <p>Support systematic investigation of quality issues, corrective action and prevention of recurrence.</p>
+        </div>
+
+        <div class="glass achievement-card reveal delay-2 tilt">
+            <div class="achievement-number">03 / MANUFACTURING</div>
+            <h3>Cross-Functional Quality Support</h3>
+            <p>Coordinate quality follow-up with production, fabrication and supplier teams to support manufacturing requirements.</p>
+        </div>
+
+        <div class="glass achievement-card reveal tilt">
+            <div class="achievement-number">04 / SURFACE QUALITY</div>
+            <h3>Powder Coating Control</h3>
+            <p>Support inspection of coating appearance, thickness and adhesion-related quality requirements.</p>
+        </div>
+
+        <div class="glass achievement-card reveal delay-1 tilt">
+            <div class="achievement-number">05 / CONTINUOUS IMPROVEMENT</div>
+            <h3>Defect Prevention Mindset</h3>
+            <p>Use quality findings and structured analysis to improve process control and reduce repeat issues.</p>
+        </div>
+
+        <div class="glass achievement-card reveal delay-2 tilt">
+            <div class="achievement-number">06 / QUALITY SYSTEMS</div>
+            <h3>Professional Development</h3>
+            <p>Continuous development across ISO 9001:2015, Lean Six Sigma, 7 QC Tools, Gauge R&amp;R and 8D.</p>
+        </div>
+
+    </div>
+</div>
+</section>
+<section id="cases">  <div class="container">  
 
     <div class="section-head reveal">  
 
